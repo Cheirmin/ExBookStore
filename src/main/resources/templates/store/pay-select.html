@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="mall/header::head-fragment('NewBee商城-选择支付方式','pay-select')">
+<head th:replace="store/header::head-fragment('旧生书店-选择支付方式','pay-select')">
 </head>
 <body>
 <div class="page-main">
@@ -37,16 +37,16 @@
                         <ul class="clearfix payment-list J_paymentList J_linksign-customize">
                             <li class="J_alipay">
                                 <input type="radio" name="payOnlineBank" id="alipay" value="alipay">
-                                <img onclick="payOrder(1)" th:src="@{/mall/image/pay/payOnline_zfb.png}" alt="支付宝"
+                                <img onclick="payOrder(1)" th:src="@{/store/image/pay/payOnline_zfb.png}" alt="支付宝"
                                      style="margin-left: 0;"></li>
                             <li id="J_weixin">
                                 <input type="radio" name="payOnlineBank" id="alipay" value="alipay">
-                                <img onclick="payOrder(2)" th:src="@{/mall/image/pay/weixinpay.png}" alt="微信支付"
+                                <img onclick="payOrder(2)" th:src="@{/store/image/pay/weixinpay.png}" alt="微信支付"
                                      style="margin-left: 0;">
                             </li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="unionpay" value="unionpay">
-                                <img th:src="@{/mall/image/pay/unionpay.png}" alt="银联"
+                                <img th:src="@{/store/image/pay/unionpay.png}" alt="银联"
                                      style="margin-left: 0;">
                             </li>
                         </ul>
@@ -61,45 +61,45 @@
                         <ul class="clearfix payment-list payment-list-much J_paymentList J_linksign-customize">
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="CMB" value="CMB">
-                                <img th:src="@{/mall/image/pay/payOnline_zsyh.png}" alt="">
+                                <img th:src="@{/store/image/pay/payOnline_zsyh.png}" alt="">
                             </li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="ICBCB2C" value="ICBCB2C">
-                                <img th:src="@{/mall/image/pay/payOnline_gsyh.png}" alt=""></li>
+                                <img th:src="@{/store/image/pay/payOnline_gsyh.png}" alt=""></li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="CCB" value="CCB">
-                                <img th:src="@{/mall/image/pay/payOnline_jsyh.png}" alt="">
+                                <img th:src="@{/store/image/pay/payOnline_jsyh.png}" alt="">
                             </li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="COMM" value="COMM">
-                                <img th:src="@{/mall/image/pay/payOnline_jtyh.png}" alt="">
+                                <img th:src="@{/store/image/pay/payOnline_jtyh.png}" alt="">
                             </li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="ABC" value="ABC">
-                                <img th:src="@{/mall/image/pay/payOnline_nyyh.png}" alt=""></li>
+                                <img th:src="@{/store/image/pay/payOnline_nyyh.png}" alt=""></li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="BOCB2C" value="BOCB2C">
-                                <img th:src="@{/mall/image/pay/payOnline_zgyh.png}" alt="">
+                                <img th:src="@{/store/image/pay/payOnline_zgyh.png}" alt="">
                             </li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="PSBC-DEBIT" value="PSBC-DEBIT">
-                                <img th:src="@{/mall/image/pay/payOnline_youzheng.png}" alt="">
+                                <img th:src="@{/store/image/pay/payOnline_youzheng.png}" alt="">
                             </li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="GDB" value="GDB">
-                                <img th:src="@{/mall/image/pay/payOnline_gfyh.png}" alt="">
+                                <img th:src="@{/store/image/pay/payOnline_gfyh.png}" alt="">
                             </li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="SPDB" value="SPDB">
-                                <img th:src="@{/mall/image/pay/payOnline_pufa.png}" alt="">
+                                <img th:src="@{/store/image/pay/payOnline_pufa.png}" alt="">
                             </li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="CEBBANK" value="CEBBANK">
-                                <img th:src="@{/mall/image/pay/payOnline_gdyh.png}" alt="">
+                                <img th:src="@{/store/image/pay/payOnline_gdyh.png}" alt="">
                             </li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="CIB" value="CIB">
-                                <img th:src="@{/mall/image/pay/payOnline_xyyh.png}" alt="">
+                                <img th:src="@{/store/image/pay/payOnline_xyyh.png}" alt="">
                             </li>
                         </ul>
                     </div>
@@ -114,34 +114,34 @@
                         <ul class="clearfix payment-list  J_paymentList J_linksign-customize">
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="CMB-KQ" value="CMB-KQ"> <img
-                                    th:src="@{/mall/image/pay/payOnline_zsyh.png}" alt=""></li>
+                                    th:src="@{/store/image/pay/payOnline_zsyh.png}" alt=""></li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="COMM-KQ" value="COMM-KQ"> <img
-                                    th:src="@{/mall/image/pay/payOnline_jtyh.png}" alt=""></li>
+                                    th:src="@{/store/image/pay/payOnline_jtyh.png}" alt=""></li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="CCB-KQ" value="CCB-KQ"> <img
-                                    th:src="@{/mall/image/pay/payOnline_jsyh.png}" alt=""></li>
+                                    th:src="@{/store/image/pay/payOnline_jsyh.png}" alt=""></li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="ICBCB2C-KQ" value="ICBCB2C-KQ"> <img
-                                    th:src="@{/mall/image/pay/payOnline_gsyh.png}" alt=""></li>
+                                    th:src="@{/store/image/pay/payOnline_gsyh.png}" alt=""></li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="CITIC-KQ" value="CITIC-KQ"> <img
-                                    th:src="@{/mall/image/pay/payOnline_zxyh.png}" alt=""></li>
+                                    th:src="@{/store/image/pay/payOnline_zxyh.png}" alt=""></li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="CEBBANK-KQ" value="CEBBANK-KQ"> <img
-                                    th:src="@{/mall/image/pay/payOnline_gdyh.png}" alt=""></li>
+                                    th:src="@{/store/image/pay/payOnline_gdyh.png}" alt=""></li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="BOCB2C-KQ" value="BOCB2C-KQ"> <img
-                                    th:src="@{/mall/image/pay/payOnline_zgyh.png}" alt=""></li>
+                                    th:src="@{/store/image/pay/payOnline_zgyh.png}" alt=""></li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="SRCB-KQ" value="SRCB-KQ"> <img
-                                    th:src="@{/mall/image/pay/payOnline_shncsyyh.png}" alt=""></li>
+                                    th:src="@{/store/image/pay/payOnline_shncsyyh.png}" alt=""></li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="JSB-KQ" value="JSB-KQ"> <img
-                                    th:src="@{/mall/image/pay/payOnline_jiangsshuyh.png}" alt=""></li>
+                                    th:src="@{/store/image/pay/payOnline_jiangsshuyh.png}" alt=""></li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="CIB-KQ" value="CIB-KQ"> <img
-                                    th:src="@{/mall/image/pay/payOnline_xyyh.png}" alt=""></li>
+                                    th:src="@{/store/image/pay/payOnline_xyyh.png}" alt=""></li>
                         </ul>
                     </div>
                 </div>
@@ -150,7 +150,7 @@
     </div>
 </div>
 
-<div th:replace="mall/footer::footer-fragment"></div>
+<div th:replace="store/footer::footer-fragment"></div>
 
 <!-- jQuery -->
 <script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
