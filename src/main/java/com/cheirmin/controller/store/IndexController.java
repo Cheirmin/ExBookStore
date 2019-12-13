@@ -1,4 +1,4 @@
-package com.cheirmin.controller;
+package com.cheirmin.controller.store;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
