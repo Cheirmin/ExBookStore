@@ -1,8 +1,27 @@
-# Compiled class file
+#过滤文件夹target,.idea
+/target
+/.idea
+/out
+.project
+.settings/
+.classpath
+
+# 编译文件
 *.class
 
 # Log file
 *.log
+
+#项目文件
+*.iml
+pom.xml
+
+# 配置文件
+*.properties
+*.yml
+
+# 配置文件
+*.properties
 
 # BlueJ files
 *.ctxt
@@ -10,7 +29,7 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
+# 包文件
 *.jar
 *.war
 *.nar
