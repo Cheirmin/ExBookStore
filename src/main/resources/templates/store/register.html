@@ -21,26 +21,20 @@
             <form id="registerForm" onsubmit="return false;" action="##">
                 <div class="login_main center">
                     <div class="login-info">邮箱账号:&nbsp;
-                        <input class="login-info-input" type="text" name="loginName" id="loginName" placeholder="请输入你的手机号"/>
+                        <input class="login-info-input" type="text" id="registeremail" placeholder="请输入你的邮箱账号"/>
                     </div>
                     <div class="login-info">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:&nbsp;
-                        <input class="login-info-input" id="password" type="password" name="password" placeholder="请输入你的密码"/>
+                        <input class="login-info-input" type="password" name="password" id="password" placeholder="请输入你的密码"/>
                     </div>
                     <div class="login-info">确认密码:&nbsp;
-                        <input class="login-info-input" id="password1" type="password" name="password" placeholder="请再次输入你的密码"/>
-                    </div>
-                    <div class="login-info">
-                        验&nbsp;&nbsp;证&nbsp;&nbsp;码:&nbsp;
-                        <input class="login-info-input verify-code" type="text" name="verifyCode" id="verifyCode"
-                               placeholder="请输入验证码"/>
-                        <img alt="单击图片刷新！" style="top: 14px;position: relative;" th:src="@{/common/store/kaptcha}"
-                             onclick="this.src='/common/store/kaptcha?d='+new Date()*1">
+                        <input class="login-info-input" type="password" name="password1" id="password1" placeholder="请再次输入你的密码"/>
                     </div>
                     <div class="login-info">
                         邮箱验证:&nbsp;
-                        <input class="submit" type="button" onclick="register()" value="立即注册">
-                        <input class="login-info-input verify-code" type="text" name="verifyCode" id="emailVerifyCode"
-                               placeholder="请输入邮箱验证码"/>
+                        <input class="login-info-input verify-code" type="text" id="emailverifycode"
+                               style="width: 140px;" placeholder="请输入邮箱验证码"/>
+                        <button class="codebutton" type="button" onclick="getCode()" id="getcode"
+                                style="width:70px;height:42px;background-color: #1baeae;color: #fff">立即获取</button>
                     </div>
                 </div>
                 <div class="login_submit">
@@ -56,7 +50,6 @@
 <script th:src="@{/admin/dist/js/public.js}"></script>
 <script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
 <script type="text/javascript">
-
     //部署时未开发注册方法
     function register2() {
         swal('未开放，请联系作者获得测试账号', {
@@ -64,31 +57,130 @@
         });
     }
 
-    //注册按钮onclick事件改为register()即可
-    function register() {
-        var loginName = $("#loginName").val();
-        if (!validPhoneNumber(loginName)) {
-            swal('请输入正确的登录名(即邮箱号)', {
+    //邮箱验证码
+    function getCode(){
+        $('#getcode').attr("disabled",true);
+        var registeremail=$('#registeremail').val();//邮箱号
+        if(!registeremail){
+            swal('邮箱号不能为空', {
                 icon: "error",
             });
-            return false;
+            $('#getcode').removeAttr("disabled");
+            return;
+        }
+        if(!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(registeremail)){
+            swal('请输入正确的邮箱号', {
+                icon: "error",
+            });
+            $('#getcode').removeAttr("disabled");
+            return;
         }
         var password = $("#password").val();
+        var password1 = $("#password1").val();
         if (!validPassword(password)) {
-            swal('请输入正确的密码格式(6-20位字符和数字组合)', {
+            swal('请输入正确的密码格式(6-16位字符和数字组合)', {
+                icon: "error",
+            });
+            $('#getcode').removeAttr("disabled");
+            return;
+        }
+        if (password!=password1) {
+            swal('两次密码输入不一致，请重试', {
+                icon: "error",
+            });
+            $('#getcode').removeAttr("disabled");
+            return;
+        }
+
+        countDownTimer();
+
+        var myMap = {};
+        myMap["registeremail"] = registeremail;
+
+        $.ajax({
+            type:"POST",
+            url:"http://localhost/email/verifyCode",
+            contentType: "application/json",
+            data : JSON.stringify(myMap),
+            success: function (data){
+                if(data == "true"){//获取验证码正常，则不进行处理
+
+                }else if(data == "false"){
+                    swal('获取验证码失败，请稍后重试！', {
+                        icon: "error",
+                    });
+                    $('#getcode').removeAttr("disabled");
+                    return;
+                }else{
+                    swal('网络异常，请稍后重试！', {
+                        icon: "error",
+                    });
+                    $('#getcode').removeAttr("disabled");
+                    return;
+                }
+            }
+        });
+    }
+    // 获取验证码
+    function countDownTimer(){
+        second=59;
+        timer = setInterval(function(){
+            second -= 1;
+            if(second >0 ){
+                $('#getcode').attr("disabled",true);
+                $('.codebutton').css('background-color','#777777');
+                $('#getcode').text("重发(" + second + ")");
+            }else{
+                second=60;
+                clearInterval(timer);
+                $('#getcode').removeAttr("disabled");
+                $('.codebutton').css('background-color','#1baeae');
+                $('#getcode').text("立即获取");
+            }
+        },1000);
+    }
+
+    //注册按钮onclick事件改为register()即可
+    function register() {
+        var emailverifycode = $("#emailverifycode").val();
+
+        if (!validEmailVerifyCode(emailverifycode)) {
+            swal('请输入正确的6位邮箱验证码', {
                 icon: "error",
             });
             return false;
         }
-        var verifyCode = $("#verifyCode").val();
-        if (!validLength(verifyCode, 7)) {
-            swal('请输入正确的验证码', {
-                icon: "error",
-            });
-            return false;
-        }
+
+        var myMap = {};
+        myMap["emailverifycode"] = emailverifycode;
+
+        $.ajax({
+            type:"POST",
+            url:"http://localhost/email/getSessionCode",
+            contentType: "application/json",
+            data : JSON.stringify(myMap),
+            success: function (data){
+                if(data == "true"){//获取验证码正常，则不进行处理
+
+                }else if(data == "false"){
+                    swal('验证码错误，请稍后重试！', {
+                        icon: "error",
+                    });
+                    $('#getcode').removeAttr("disabled");
+                    return;
+                }else{
+                    swal('网络异常，请稍后重试！', {
+                        icon: "error",
+                    });
+                    $('#getcode').removeAttr("disabled");
+                    return;
+                }
+            }
+        });
+
         //验证
         var params = $("#registerForm").serialize();
+
         var url = '/register';
         $.ajax({
             type: 'POST',//方法类型

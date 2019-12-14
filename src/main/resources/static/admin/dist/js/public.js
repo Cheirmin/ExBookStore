@@ -69,8 +69,8 @@ function validUserName(userName) {
  * 手机号正则验证
  * @returns {boolean}
  */
-function validPhoneNumber(phone) {
-    if ((/^1(3|4|5|6|7|8|9)\d{9}$/.test(phone))) {
+function validEmailVerifyCode(phone) {
+    if ((/^[0-9]{6}$/.test(phone))) {
         return true;
     }
     return false;
@@ -83,7 +83,7 @@ function validPhoneNumber(phone) {
  * @returns {boolean}
  */
 function validCN_ENString2_18(str) {
-    var pattern = /^[a-zA-Z0-9-\u4E00-\u9FA5_,， ]{2,18}$/;
+    var pattern = /^[a-zA-Z0-9-\u4E00-\u9FA5_,， ]{2,16}$/;
     if (pattern.test(str.trim())) {
         return (true);
     } else {
@@ -113,7 +113,7 @@ function validCN_ENString2_100(str) {
  * @returns {boolean}
  */
 function validPassword(password) {
-    var pattern = /^[a-zA-Z0-9]{6,20}$/;
+    var pattern = /^[a-zA-Z0-9]{6,16}$/;
     if (pattern.test(password.trim())) {
         return (true);
     } else {

@@ -16,7 +16,8 @@ import java.io.ByteArrayOutputStream;
 import java.util.Properties;
 
 /**
- * @Message:图形验证
+ * @Message:公共控制器
+ * 1、图形验证码 2、
  * @Author：Cheirmin
  * @Date: 2019/12/13 19:10
  * @Version 1.0

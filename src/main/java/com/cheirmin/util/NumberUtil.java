@@ -8,7 +8,6 @@ public class NumberUtil {
     private NumberUtil() {
     }
 
-
     /**
      * 判断是否为11位电话号码
      *
@@ -19,6 +18,22 @@ public class NumberUtil {
         Pattern pattern = Pattern.compile("^((13[0-9])|(14[5,7])|(15[^4,\\D])|(17[0-8])|(18[0-9]))\\d{8}$");
         Matcher matcher = pattern.matcher(phone);
         return matcher.matches();
+    }
+
+    /**
+     * 判断是否为邮箱号码，不允许为汉字
+     *
+     * @param emails
+     * @return
+     */
+    public static boolean isEmails(String[] emails) {
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
+        for (String email:emails) {
+            if(!pattern.matcher(email).matches()){
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

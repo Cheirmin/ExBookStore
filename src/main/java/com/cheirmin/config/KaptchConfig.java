@@ -1,4 +1,4 @@
-package com.cheirmin.controller.common;
+package com.cheirmin.config;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;

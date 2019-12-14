@@ -1,7 +1,7 @@
 package com.cheirmin.controller.common;
 
 /**
- * @Message:
+ * @Message:异常处理控制器
  * @Author：Cheirmin
  * @Date: 2019/12/13 19:11
  * @Version 1.0
