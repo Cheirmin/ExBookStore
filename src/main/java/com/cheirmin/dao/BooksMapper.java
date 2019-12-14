@@ -7,4 +7,5 @@ package com.cheirmin.dao;
  * @Version 1.0
  */
 public interface BooksMapper {
+
 }

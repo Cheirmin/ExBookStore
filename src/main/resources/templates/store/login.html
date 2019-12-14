@@ -2,18 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>NewBee商城-登录</title>
+    <title>旧生书店 - 登录</title>
     <link rel="stylesheet" th:href="@{store/css/common.css}">
     <link rel="stylesheet" th:href="@{store/styles/login.css}">
     <link rel="stylesheet" th:href="@{store/styles/header.css}">
     <link rel="stylesheet" th:href="@{/admin/plugins/sweetalert/sweetalert.css}"/>
 </head>
 <body>
-<div class="top center">
-    <div class="logo center">
-
-    </div>
-</div>
 <div class="form center">
     <div class="login">
         <div class="login_center">
@@ -25,17 +20,14 @@
             </div>
             <form id="loginForm" onsubmit="return false;" action="##">
                 <div class="login_main center">
-                    <div class="login-info">手机号:&nbsp;<input class="login-info-input" type="text" name="loginName"
-                                                             id="loginName"
-                                                             placeholder="请输入你的手机号"/>
+                    <div class="login-info">邮箱账号:&nbsp;
+                        <input class="login-info-input" type="text" name="loginName" id="loginName" placeholder="请输入你的手机号"/>
                     </div>
-                    <div class="login-info">密&nbsp;&nbsp;&nbsp;&nbsp;码:&nbsp;<input class="login-info-input"
-                                                                                    id="password"
-                                                                                    type="password"
-                                                                                    name="password"
-                                                                                    placeholder="请输入你的密码"/></div>
+                    <div class="login-info">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:&nbsp;
+                        <input class="login-info-input" id="password" type="password" name="password" placeholder="请输入你的密码"/>
+                    </div>
                     <div class="login-info">
-                        验证码:&nbsp;
+                        验&nbsp;&nbsp;证&nbsp;&nbsp;码:&nbsp;
                         <input class="login-info-input verify-code" type="text" name="verifyCode"
                                placeholder="请输入验证码" id="verifyCode"/>
                         <img alt="单击图片刷新！" style="top: 14px;position: relative;" th:src="@{/common/store/kaptcha}"
@@ -45,6 +37,7 @@
                 <div class="login_submit">
                     <input class="submit" type="submit" onclick="login()" value="立即登录">
                 </div>
+                <div style="margin-left: 110px;margin-top: 10px;font-size: 13px">忘记密码？<a href="#" target="_self" style="color: #1baeae;font-weight: bold">找回密码</a></div>
             </form>
         </div>
     </div>

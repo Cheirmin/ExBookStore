@@ -9,13 +9,8 @@
     <link rel="stylesheet" th:href="@{/admin/plugins/sweetalert/sweetalert.css}"/>
 </head>
 <body>
-<div class="top center">
-    <div class="logo center">
-    </div>
-</div>
-
 <div class="form center">
-    <div class="login">
+    <div class="login"  style="height: 570px">
         <div class="login_center">
             <div class="login_top">
                 <div class="left fl">会员注册</div>
@@ -25,21 +20,27 @@
             </div>
             <form id="registerForm" onsubmit="return false;" action="##">
                 <div class="login_main center">
-                    <div class="login-info">手机号:&nbsp;<input class="login-info-input" type="text" name="loginName"
-                                                             placeholder="请输入你的手机号" id="loginName"/>
+                    <div class="login-info">邮箱账号:&nbsp;
+                        <input class="login-info-input" type="text" name="loginName" id="loginName" placeholder="请输入你的手机号"/>
                     </div>
-                    <div class="login-info">密&nbsp;&nbsp;&nbsp;&nbsp;码:&nbsp;<input class="login-info-input"
-                                                                                    type="password"
-                                                                                    name="password"
-                                                                                    id="password"
-                                                                                    placeholder="请输入你的密码"/>
+                    <div class="login-info">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:&nbsp;
+                        <input class="login-info-input" id="password" type="password" name="password" placeholder="请输入你的密码"/>
+                    </div>
+                    <div class="login-info">确认密码:&nbsp;
+                        <input class="login-info-input" id="password1" type="password" name="password" placeholder="请再次输入你的密码"/>
                     </div>
                     <div class="login-info">
-                        验证码:&nbsp;
+                        验&nbsp;&nbsp;证&nbsp;&nbsp;码:&nbsp;
                         <input class="login-info-input verify-code" type="text" name="verifyCode" id="verifyCode"
                                placeholder="请输入验证码"/>
                         <img alt="单击图片刷新！" style="top: 14px;position: relative;" th:src="@{/common/store/kaptcha}"
                              onclick="this.src='/common/store/kaptcha?d='+new Date()*1">
+                    </div>
+                    <div class="login-info">
+                        邮箱验证:&nbsp;
+                        <input class="submit" type="button" onclick="register()" value="立即注册">
+                        <input class="login-info-input verify-code" type="text" name="verifyCode" id="emailVerifyCode"
+                               placeholder="请输入邮箱验证码"/>
                     </div>
                 </div>
                 <div class="login_submit">
@@ -67,7 +68,7 @@
     function register() {
         var loginName = $("#loginName").val();
         if (!validPhoneNumber(loginName)) {
-            swal('请输入正确的登录名(即手机号)', {
+            swal('请输入正确的登录名(即邮箱号)', {
                 icon: "error",
             });
             return false;

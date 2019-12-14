@@ -1,5 +1,5 @@
 body {
-    background: #14212a;
+    background: #070724;
 }
 
 .top {
@@ -29,10 +29,9 @@ body {
 .form .login {
     width: 400px;
     height: 470px;
-    margin: 30px auto;
+    margin: auto;
     background: #444;
     color: #fff;
-    margin-right: 0px;
     border-radius: 4px;
     font: 12px "宋体", Times New Roman;
 }
