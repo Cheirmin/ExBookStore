@@ -1,7 +1,9 @@
 package com.cheirmin.pojo;
 
+import javax.persistence.Table;
 import java.util.Date;
 
+@Table(name = "tb_books_reviews")
 public class BooksReview {
     private Long reviewsId;
 

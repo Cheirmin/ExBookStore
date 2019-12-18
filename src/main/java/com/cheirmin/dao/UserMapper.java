@@ -1,17 +1,7 @@
 package com.cheirmin.dao;
 
 import com.cheirmin.pojo.User;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface UserMapper {
-    int deleteByPrimaryKey(Long userId);
-
-    int insert(User record);
-
-    int insertSelective(User record);
-
-    User selectByPrimaryKey(Long userId);
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
+public interface UserMapper extends Mapper<User> {
 }

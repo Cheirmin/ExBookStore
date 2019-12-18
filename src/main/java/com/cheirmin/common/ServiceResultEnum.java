@@ -17,7 +17,15 @@ public enum ServiceResultEnum {
 
     SAME_LOGIN_NAME_EXIST("用户名已存在！"),
 
+    SAME_REGISTER_EMAIL_EXIST("该邮箱已经被注册！"),
+
     LOGIN_NAME_NULL("请输入登录名！"),
+
+    REGISTER_EMAIL_NULL("请输入注册邮箱！"),
+
+    VERIFY_CODE_NOT_SEND("验证码未发送！"),
+
+    VERIFY_CODE_NOT_TRUE("验证码不正确！"),
 
     LOGIN_PASSWORD_NULL("请输入密码！"),
 

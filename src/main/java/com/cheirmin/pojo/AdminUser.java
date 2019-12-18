@@ -1,5 +1,8 @@
 package com.cheirmin.pojo;
 
+import javax.persistence.Table;
+
+@Table(name = "tb_user_admin")
 public class AdminUser {
     private Integer adminUserId;
 

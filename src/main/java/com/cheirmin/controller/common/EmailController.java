@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,30 +33,24 @@ public class EmailController {
     public String sendEmail(@RequestBody Map<String, String> myMap, HttpServletRequest request){
         //生产6位随机验证码
         int code = NumberUtil.genRandomNum(6);
-        //存入session
-        request.getSession().setAttribute("verifyCode",code);
-        System.out.println("session存入6位随机码--" + code);
 
         //获取发送邮件参数
         String subject ="ExBookStore 旧生书店验证邮件";
         String body = "【旧生书店】验证码：" + code + "，请您完成验证，若非本人操作，请忽略该邮件。";
         String from = mailUsername;
-        String[] to = {myMap.get("registeremail")};
+        String[] to = {myMap.get("registerEmail")};
+
+        //存入session
+        request.getSession().setAttribute("EmailVerifyCode".concat(to[0]),code);
+        System.out.println("6位随机码--" + code);
 
         try {
-            mailBizService.sendMail( subject, body, from, to);
+//            发送邮件已关闭，打开即可用
+//            mailBizService.sendMail( subject, body, from, to);
         } catch (Exception e) {
             e.printStackTrace();
             return "false";
         }
         return "true";
-    }
-
-    @RequestMapping(value = "getSessionCode", method = RequestMethod.POST,consumes="application/json")
-    @ResponseBody
-    public String getCode(@RequestBody Map<String, String> myMap,HttpServletRequest request){
-        String code = myMap.get("emailverifycode");
-        String sessioncode = (String) request.getSession().getAttribute("verifyCode");
-        return code == sessioncode ? "true" :"false";
     }
 }

@@ -21,7 +21,7 @@
             <form id="registerForm" onsubmit="return false;" action="##">
                 <div class="login_main center">
                     <div class="login-info">邮箱账号:&nbsp;
-                        <input class="login-info-input" type="text" id="registeremail" placeholder="请输入你的邮箱账号"/>
+                        <input class="login-info-input" type="text" name="registerEmail" id="registerEmail" placeholder="请输入你的邮箱账号"/>
                     </div>
                     <div class="login-info">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:&nbsp;
                         <input class="login-info-input" type="password" name="password" id="password" placeholder="请输入你的密码"/>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="login-info">
                         邮箱验证:&nbsp;
-                        <input class="login-info-input verify-code" type="text" id="emailverifycode"
+                        <input class="login-info-input verify-code" type="text" id="verifyCode" name="verifyCode"
                                style="width: 140px;" placeholder="请输入邮箱验证码"/>
                         <button class="codebutton" type="button" onclick="getCode()" id="getcode"
                                 style="width:70px;height:42px;background-color: #1baeae;color: #fff">立即获取</button>
@@ -60,15 +60,15 @@
     //邮箱验证码
     function getCode(){
         $('#getcode').attr("disabled",true);
-        var registeremail=$('#registeremail').val();//邮箱号
-        if(!registeremail){
+        var registerEmail=$('#registerEmail').val();//邮箱号
+        if(!registerEmail){
             swal('邮箱号不能为空', {
                 icon: "error",
             });
             $('#getcode').removeAttr("disabled");
             return;
         }
-        if(!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(registeremail)){
+        if(!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(registerEmail)){
             swal('请输入正确的邮箱号', {
                 icon: "error",
             });
@@ -95,7 +95,7 @@
         countDownTimer();
 
         var myMap = {};
-        myMap["registeremail"] = registeremail;
+        myMap["registerEmail"] = registerEmail;
 
         $.ajax({
             type:"POST",
@@ -142,49 +142,42 @@
 
     //注册按钮onclick事件改为register()即可
     function register() {
-        var emailverifycode = $("#emailverifycode").val();
+        var verifyCode = $("#verifyCode").val();
+        var password = $("#password").val();
+        var password1 = $("#password1").val();
+        var registerEmail=$('#registerEmail').val();//邮箱号
 
-        if (!validEmailVerifyCode(emailverifycode)) {
+        if(!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(registerEmail)){
+            swal('请输入正确的邮箱号', {
+                icon: "error",
+            });
+            return;
+        }
+        if (!validPassword(password)) {
+            swal('请输入正确的密码格式(6-16位字符和数字组合)', {
+                icon: "error",
+            });
+            return;
+        }
+        if (password!=password1) {
+            swal('两次密码输入不一致，请重试', {
+                icon: "error",
+            });
+            return;
+        }
+        if (!validEmailVerifyCode(verifyCode)) {
             swal('请输入正确的6位邮箱验证码', {
                 icon: "error",
             });
-            return false;
+            return;
         }
 
-        var myMap = {};
-        myMap["emailverifycode"] = emailverifycode;
-
-        $.ajax({
-            type:"POST",
-            url:"http://localhost/email/getSessionCode",
-            contentType: "application/json",
-            data : JSON.stringify(myMap),
-            success: function (data){
-                if(data == "true"){//获取验证码正常，则不进行处理
-
-                }else if(data == "false"){
-                    swal('验证码错误，请稍后重试！', {
-                        icon: "error",
-                    });
-                    $('#getcode').removeAttr("disabled");
-                    return;
-                }else{
-                    swal('网络异常，请稍后重试！', {
-                        icon: "error",
-                    });
-                    $('#getcode').removeAttr("disabled");
-                    return;
-                }
-            }
-        });
-
-        //验证
+        //验证开始
         var params = $("#registerForm").serialize();
 
-        var url = '/register';
         $.ajax({
             type: 'POST',//方法类型
-            url: url,
+            url: '/register',
             data: params,
             success: function (result) {
                 if (result.resultCode == 200) {

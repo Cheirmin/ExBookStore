@@ -27,7 +27,7 @@ public class CartNumberInterceptor implements HandlerInterceptor {
             //如果当前为登陆状态，就查询数据库并设置购物车中的数量值
             UserVO userVO = (UserVO) request.getSession().getAttribute(Constants.USER_SESSION_KEY);
             //设置购物车中的数量
-            userVO.setShopCartItemCount(shoppingCartItemMapper.selectCountByUserId(userVO.getUserId()));
+            userVO.setShopCartItemCount(2);
             request.getSession().setAttribute(Constants.USER_SESSION_KEY, userVO);
         }
         return true;

@@ -1,19 +1,15 @@
 package com.cheirmin.dao;
 
 import com.cheirmin.pojo.Book;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface BookMapper {
-    int deleteByPrimaryKey(Long bookId);
+public interface BookMapper extends Mapper<Book> {
 
     int insert(Book record);
 
     int insertSelective(Book record);
 
-    Book selectByPrimaryKey(Long bookId);
-
     int updateByPrimaryKeySelective(Book record);
-
-    int updateByPrimaryKeyWithBLOBs(Book record);
 
     int updateByPrimaryKey(Book record);
 }
