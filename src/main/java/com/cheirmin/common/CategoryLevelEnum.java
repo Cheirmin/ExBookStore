@@ -1,7 +1,7 @@
 package com.cheirmin.common;
 
 /**
- * @Message:
+ * @Message:分类等级
  * @Author：Cheirmin
  * @Date: 2019/12/13 16:04
  * @Version 1.0

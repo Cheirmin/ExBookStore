@@ -1,8 +1,8 @@
 package com.cheirmin;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import tk.mybatis.spring.annotation.MapperScan;
 
 /**
  * @Message:
@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 
 @MapperScan("com.cheirmin.dao")
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.cheirmin"})
 public class RunApplication {
     public static void main(String[] args) {
         SpringApplication.run(RunApplication.class,args);

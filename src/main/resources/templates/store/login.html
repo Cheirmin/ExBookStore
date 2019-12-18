@@ -51,7 +51,7 @@
     function login() {
         var loginName = $("#loginName").val();
         if (!validPhoneNumber(loginName)) {
-            swal('请输入正确的登录名(即手机号)', {
+            swal('请输入正确的登录名(即邮箱号)', {
                 icon: "error",
             });
             return false;

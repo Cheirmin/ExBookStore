@@ -2,10 +2,10 @@ package com.cheirmin.pojo;
 
 import java.util.Date;
 
-public class OrderItem {
-    private Long orderItemId;
+public class RetrieveBookItem {
+    private Long itemId;
 
-    private Long orderId;
+    private Long userId;
 
     private Long bookId;
 
@@ -17,22 +17,24 @@ public class OrderItem {
 
     private Integer bookCount;
 
+    private Integer retievedCount;
+
     private Date createTime;
 
-    public Long getOrderItemId() {
-        return orderItemId;
+    public Long getItemId() {
+        return itemId;
     }
 
-    public void setOrderItemId(Long orderItemId) {
-        this.orderItemId = orderItemId;
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
     }
 
-    public Long getOrderId() {
-        return orderId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Long getBookId() {
@@ -73,6 +75,14 @@ public class OrderItem {
 
     public void setBookCount(Integer bookCount) {
         this.bookCount = bookCount;
+    }
+
+    public Integer getRetievedCount() {
+        return retievedCount;
+    }
+
+    public void setRetievedCount(Integer retievedCount) {
+        this.retievedCount = retievedCount;
     }
 
     public Date getCreateTime() {

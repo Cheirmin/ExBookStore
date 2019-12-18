@@ -55,11 +55,11 @@ public class AdminController {
         if (1 == 1) {
             session.setAttribute("loginUser", "张三");
             session.setAttribute("loginUserId", 1);
-            //session过期时间设置为7200秒 即两小时
-            session.setMaxInactiveInterval(60 * 60 * 2);
+            //session过期时间设置为3600秒 即一小时
+            session.setMaxInactiveInterval(60 * 60 * 1);
             return "redirect:/admin/index";
         } else {
-            session.setAttribute("errorMsg", "登陆失败，请联系作者获得测试账号");
+            session.setAttribute("errorMsg", "登陆失败，请联系超级管理员获得测试账号");
             return "admin/login";
         }
     }

@@ -2,16 +2,20 @@ package com.cheirmin.pojo;
 
 import java.util.Date;
 
-public class Order {
-    private Long orderId;
+public class RetrieveOrder {
+    private Long orderRetrieveId;
 
-    private String orderNo;
+    private String orderRetrieveNo;
 
     private Long userId;
+
+    private String userPhone;
 
     private Integer totalPrice;
 
     private Byte payStatus;
+
+    private String payPhoto;
 
     private Date payTime;
 
@@ -19,32 +23,26 @@ public class Order {
 
     private String extraInfo;
 
-    private String userName;
-
-    private String userPhone;
-
-    private String userAddress;
-
     private Byte isDeleted;
 
     private Date createTime;
 
     private Date updateTime;
 
-    public Long getOrderId() {
-        return orderId;
+    public Long getOrderRetrieveId() {
+        return orderRetrieveId;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setOrderRetrieveId(Long orderRetrieveId) {
+        this.orderRetrieveId = orderRetrieveId;
     }
 
-    public String getOrderNo() {
-        return orderNo;
+    public String getOrderRetrieveNo() {
+        return orderRetrieveNo;
     }
 
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo == null ? null : orderNo.trim();
+    public void setOrderRetrieveNo(String orderRetrieveNo) {
+        this.orderRetrieveNo = orderRetrieveNo == null ? null : orderRetrieveNo.trim();
     }
 
     public Long getUserId() {
@@ -53,6 +51,14 @@ public class Order {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone == null ? null : userPhone.trim();
     }
 
     public Integer getTotalPrice() {
@@ -69,6 +75,14 @@ public class Order {
 
     public void setPayStatus(Byte payStatus) {
         this.payStatus = payStatus;
+    }
+
+    public String getPayPhoto() {
+        return payPhoto;
+    }
+
+    public void setPayPhoto(String payPhoto) {
+        this.payPhoto = payPhoto == null ? null : payPhoto.trim();
     }
 
     public Date getPayTime() {
@@ -93,30 +107,6 @@ public class Order {
 
     public void setExtraInfo(String extraInfo) {
         this.extraInfo = extraInfo == null ? null : extraInfo.trim();
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
-    }
-
-    public String getUserPhone() {
-        return userPhone;
-    }
-
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone == null ? null : userPhone.trim();
-    }
-
-    public String getUserAddress() {
-        return userAddress;
-    }
-
-    public void setUserAddress(String userAddress) {
-        this.userAddress = userAddress == null ? null : userAddress.trim();
     }
 
     public Byte getIsDeleted() {

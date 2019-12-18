@@ -63,7 +63,7 @@ public class CommonController {
         properties.put("kaptcha.textproducer.font.size", "30");
         properties.put("kaptcha.image.width", "110");
         properties.put("kaptcha.image.height", "40");
-        properties.put("kaptcha.session.key", Constants.MALL_VERIFY_CODE_KEY);
+        properties.put("kaptcha.session.key", Constants.VERIFY_CODE_KEY);
         properties.put("kaptcha.textproducer.char.space", "2");
         properties.put("kaptcha.textproducer.char.length", "6");
         Config config = new Config(properties);
@@ -73,7 +73,7 @@ public class CommonController {
         try {
             //生产验证码字符串并保存到session中
             String verifyCode = LoginKaptcha.createText();
-            httpServletRequest.getSession().setAttribute(Constants.MALL_VERIFY_CODE_KEY, verifyCode);
+            httpServletRequest.getSession().setAttribute(Constants.VERIFY_CODE_KEY, verifyCode);
             BufferedImage challenge = LoginKaptcha.createImage(verifyCode);
             ImageIO.write(challenge, "jpg", imgOutputStream);
         } catch (IllegalArgumentException e) {

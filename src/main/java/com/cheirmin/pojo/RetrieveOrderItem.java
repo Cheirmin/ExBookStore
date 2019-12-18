@@ -2,7 +2,7 @@ package com.cheirmin.pojo;
 
 import java.util.Date;
 
-public class OrderItem {
+public class RetrieveOrderItem {
     private Long orderItemId;
 
     private Long orderId;

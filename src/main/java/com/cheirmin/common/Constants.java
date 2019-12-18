@@ -1,7 +1,7 @@
 package com.cheirmin.common;
 
 /**
- * @Message:
+ * @Message:轮播图
  * @Author：Cheirmin
  * @Date: 2019/12/13 16:01
  * @Version 1.0
@@ -24,9 +24,9 @@ public class Constants {
 
     public final static int SHOPPING_CART_ITEM_LIMIT_NUMBER = 5;//购物车中单个商品的最大购买数量(可根据自身需求修改)
 
-    public final static String MALL_VERIFY_CODE_KEY = "VerifyCode";//验证码key
+    public final static String VERIFY_CODE_KEY = "VerifyCode";//验证码key
 
-    public final static String MALL_USER_SESSION_KEY = "User";//session中user的key
+    public final static String USER_SESSION_KEY = "User";//session中user的key
 
     public final static int GOODS_SEARCH_PAGE_LIMIT = 10;//搜索分页的默认条数(每页10条)
 

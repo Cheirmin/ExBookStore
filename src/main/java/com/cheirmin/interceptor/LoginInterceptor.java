@@ -9,19 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * newbee-mall系统身份验证拦截器
- *
- * @author 13
- * @qq交流群 796794009
- * @email 2449207463@qq.com
- * @link https://github.com/newbee-ltd
+ * 系统身份验证拦截器
  */
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        if (null == request.getSession().getAttribute(Constants.MALL_USER_SESSION_KEY)) {
+        if (null == request.getSession().getAttribute(Constants.USER_SESSION_KEY)) {
             response.sendRedirect(request.getContextPath() + "/login");
             return false;
         } else {

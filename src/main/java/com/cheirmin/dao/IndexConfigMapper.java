@@ -1,10 +1,17 @@
 package com.cheirmin.dao;
 
-/**
- * @Message:
- * @Author：Cheirmin
- * @Date: 2019/12/13 19:29
- * @Version 1.0
- */
+import com.cheirmin.pojo.IndexConfig;
+
 public interface IndexConfigMapper {
+    int deleteByPrimaryKey(Long configId);
+
+    int insert(IndexConfig record);
+
+    int insertSelective(IndexConfig record);
+
+    IndexConfig selectByPrimaryKey(Long configId);
+
+    int updateByPrimaryKeySelective(IndexConfig record);
+
+    int updateByPrimaryKey(IndexConfig record);
 }

@@ -2,18 +2,14 @@ package com.cheirmin.pojo;
 
 import java.util.Date;
 
-public class IndexConfig {
-    private Long configId;
+public class IndexCarousel {
+    private Integer carouselId;
 
-    private String configName;
-
-    private Byte configType;
-
-    private Long bookId;
+    private String carouselUrl;
 
     private String redirectUrl;
 
-    private Integer configRank;
+    private Integer carouselRank;
 
     private Byte isDeleted;
 
@@ -25,36 +21,20 @@ public class IndexConfig {
 
     private Integer updateUser;
 
-    public Long getConfigId() {
-        return configId;
+    public Integer getCarouselId() {
+        return carouselId;
     }
 
-    public void setConfigId(Long configId) {
-        this.configId = configId;
+    public void setCarouselId(Integer carouselId) {
+        this.carouselId = carouselId;
     }
 
-    public String getConfigName() {
-        return configName;
+    public String getCarouselUrl() {
+        return carouselUrl;
     }
 
-    public void setConfigName(String configName) {
-        this.configName = configName == null ? null : configName.trim();
-    }
-
-    public Byte getConfigType() {
-        return configType;
-    }
-
-    public void setConfigType(Byte configType) {
-        this.configType = configType;
-    }
-
-    public Long getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
+    public void setCarouselUrl(String carouselUrl) {
+        this.carouselUrl = carouselUrl == null ? null : carouselUrl.trim();
     }
 
     public String getRedirectUrl() {
@@ -65,12 +45,12 @@ public class IndexConfig {
         this.redirectUrl = redirectUrl == null ? null : redirectUrl.trim();
     }
 
-    public Integer getConfigRank() {
-        return configRank;
+    public Integer getCarouselRank() {
+        return carouselRank;
     }
 
-    public void setConfigRank(Integer configRank) {
-        this.configRank = configRank;
+    public void setCarouselRank(Integer carouselRank) {
+        this.carouselRank = carouselRank;
     }
 
     public Byte getIsDeleted() {
