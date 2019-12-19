@@ -2,6 +2,7 @@ package com.cheirmin.controller.store;
 
 import com.cheirmin.common.Constants;
 import com.cheirmin.controller.vo.IndexCategoryVO;
+import com.cheirmin.pojo.IndexCarousel;
 import com.cheirmin.service.CarouselService;
 import com.cheirmin.service.CategoryService;
 import com.cheirmin.service.IndexConfigService;
@@ -31,15 +32,22 @@ public class IndexController {
     @Resource
     private CategoryService categoryService;
 
+    @Resource
+    CarouselService carouselService;
+
     @GetMapping({"/index", "/", "/index.html"})
     public String indexPage(HttpServletRequest request) {
         List<IndexCategoryVO> categories = categoryService.getCategoriesForIndex();
+        List<IndexCarousel> indexCarousels = carouselService.queryCarouselBySort();
         if (CollectionUtils.isEmpty(categories)) {
             return "error/500";
         }
 
+        if (CollectionUtils.isEmpty(indexCarousels)){
+            return "error/500";
+        }
         request.setAttribute("categories", categories);//分类数据
-
+         request.setAttribute("carousels",indexCarousels);
         return "store/index";
     }
 }

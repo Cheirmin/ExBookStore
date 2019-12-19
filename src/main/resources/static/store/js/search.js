@@ -12,6 +12,10 @@ $(function () {
 
 function search() {
     var q = $('#keyword').val();
+    $.ajax({
+        type:"post",
+        url:"",
+    });
     if (q && q != '') {
         window.location.href = '/search?keyword=' + q;
     }

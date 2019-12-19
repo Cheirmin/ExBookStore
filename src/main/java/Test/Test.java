@@ -10,9 +10,11 @@ import com.cheirmin.util.CodecUtils;
  */
 public class Test {
     public static void main(String[] args) {
-        String s = CodecUtils.passwordBcryptEncode("123", "456");
-        System.out.println(s);
-        Boolean aBoolean = CodecUtils.passwordConfirm("123456", s);
-        System.out.println(aBoolean);
+//        String s = CodecUtils.passwordBcryptEncode("123", "456");
+//        System.out.println(s);
+//        Boolean aBoolean = CodecUtils.passwordConfirm("123456", s);
+//        System.out.println(aBoolean);
+
+        System.out.println("-------111111111");
     }
 }
