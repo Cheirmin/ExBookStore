@@ -1,7 +1,7 @@
 package com.cheirmin.common;
 
 /**
- * @Message:
+ * @Message:Service操作结果
  * @Author：Cheirmin
  * @Date: 2019/12/13 16:11
  * @Version 1.0

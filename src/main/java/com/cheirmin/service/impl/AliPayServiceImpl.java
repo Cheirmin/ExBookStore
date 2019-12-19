@@ -1,4 +1,4 @@
-package com.cheirmin.service;
+package com.cheirmin.service.impl;
 
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
@@ -18,7 +18,7 @@ import java.util.UUID;
  * @createTime 2019.12.09.15:45
  */
 @Service
-public class AliPayService implements  InitializingBean {
+public class AliPayServiceImpl implements  InitializingBean {
 
     @Autowired
     AliPayConfig aliPayConfig;

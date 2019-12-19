@@ -50,28 +50,24 @@
 <script type="text/javascript">
     function login() {
         var loginName = $("#loginName").val();
-        if (!validPhoneNumber(loginName)) {
+        var password = $("#password").val();
+        var verifyCode = $("#verifyCode").val();
+        if (!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(loginName)) {
             swal('请输入正确的登录名(即邮箱号)', {
                 icon: "error",
             });
             return false;
         }
-        var password = $("#password").val();
         if (!validPassword(password)) {
             swal('请输入正确的密码格式(6-20位字符和数字组合)', {
                 icon: "error",
             });
             return false;
         }
-        var verifyCode = $("#verifyCode").val();
-        if (!validLength(verifyCode, 7)) {
-            swal('请输入正确的验证码', {
-                icon: "error",
-            });
-            return false;
-        }
+
         //验证
         var params = $("#loginForm").serialize();
+        console.log(params);
         var url = '/login';
         $.ajax({
             type: 'POST',//方法类型
@@ -84,8 +80,7 @@
                     swal(result.message, {
                         icon: "error",
                     });
-                }
-                ;
+                };
             },
             error: function () {
                 swal("操作失败", {

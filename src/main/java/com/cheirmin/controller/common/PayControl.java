@@ -3,7 +3,7 @@ package com.cheirmin.controller.common;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.cheirmin.config.AliPayConfig;
-import com.cheirmin.service.AliPayService;
+import com.cheirmin.service.impl.AliPayServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +32,7 @@ import java.util.Map;
 public class PayControl {
 
     @Autowired
-    AliPayService aliPayService;
+    AliPayServiceImpl aliPayService;
     @Autowired
     AliPayConfig aliPayConfig;
 

@@ -43,6 +43,7 @@ public class PersonalController {
                         @RequestParam("verifyCode") String verifyCode,
                         @RequestParam("password") String password,
                         HttpSession httpSession) {
+
         if (StringUtils.isEmpty(loginName)) {
             return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_NAME_NULL.getResult());
         }
@@ -56,7 +57,14 @@ public class PersonalController {
         if (StringUtils.isEmpty(kaptchaCode) || !verifyCode.equals(kaptchaCode)) {
             return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_VERIFY_CODE_ERROR.getResult());
         }
-        return null;
+
+        String loginResult =userService.login(loginName, password, httpSession);
+        //登录成功
+        if (ServiceResultEnum.SUCCESS.getResult().equals(loginResult)) {
+            return ResultGenerator.genSuccessResult();
+        }
+        //登录失败
+        return ResultGenerator.genFailResult(loginResult);
     }
 
     @GetMapping({"/register", "register.html"})
@@ -96,7 +104,6 @@ public class PersonalController {
             return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_PASSWORD_NULL.getResult());
         }
 
-        //todo 清verifyCode
         String registerResult = userService.register(registerEmail, password);
         //注册成功
         if (ServiceResultEnum.SUCCESS.getResult().equals(registerResult)) {

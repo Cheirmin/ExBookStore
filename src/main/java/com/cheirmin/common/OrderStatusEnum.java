@@ -1,7 +1,7 @@
 package com.cheirmin.common;
 
 /**
- * @Message:
+ * @Message:订单状态
  * @Author：Cheirmin
  * @Date: 2019/12/13 16:09
  * @Version 1.0

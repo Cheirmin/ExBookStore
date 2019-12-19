@@ -180,6 +180,7 @@
             url: '/register',
             data: params,
             success: function (result) {
+                alert(result.resultCode);
                 if (result.resultCode == 200) {
                     swal({
                         title: "注册成功",

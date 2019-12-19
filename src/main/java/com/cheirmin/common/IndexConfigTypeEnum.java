@@ -1,7 +1,7 @@
 package com.cheirmin.common;
 
 /**
- * @Message:
+ * @Message:首页配置
  * @Author：Cheirmin
  * @Date: 2019/12/13 16:03
  * @Version 1.0

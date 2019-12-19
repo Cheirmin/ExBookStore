@@ -1,7 +1,7 @@
 package com.cheirmin.common;
 
 /**
- * @Message:
+ * @Message:自定义异常
  * @Author：Cheirmin
  * @Date: 2019/12/13 16:06
  * @Version 1.0

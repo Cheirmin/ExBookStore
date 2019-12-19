@@ -71,6 +71,9 @@ public class UserServiceImpl implements UserService {
             User user = users.get(0);
 
             System.out.println("password--" + user.getPassword());
+
+            Boolean aBoolean = CodecUtils.passwordConfirm(loginName.concat(password), user.getPassword());
+            System.out.println(aBoolean?"--登录成功--":"--登录失败--");
             if ( user != null && httpSession != null) {
                 if (user.getLockedFlag() == 1) {
                     return ServiceResultEnum.LOGIN_USER_LOCKED.getResult();
@@ -80,9 +83,12 @@ public class UserServiceImpl implements UserService {
                     String tempNickName = user.getNickName().substring(0, 7) + "..";
                     user.setNickName(tempNickName);
                 }
+
                 UserVO userVO = new UserVO();
-                BeanUtil.copyProperties(user, userVO);
                 //设置购物车中的数量
+                userVO.setShopCartItemCount(2);
+                BeanUtil.copyProperties(user, userVO);
+
                 httpSession.setAttribute(Constants.USER_SESSION_KEY, userVO);
                 return ServiceResultEnum.SUCCESS.getResult();
             }
