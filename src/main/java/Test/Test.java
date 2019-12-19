@@ -14,5 +14,6 @@ public class Test {
         System.out.println(s);
         Boolean aBoolean = CodecUtils.passwordConfirm("123456", s);
         System.out.println(aBoolean);
+        System.out.println(123);
     }
 }
