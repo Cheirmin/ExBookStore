@@ -40,21 +40,21 @@
             <div class="container-fluid">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">商品管理</h3>
+                        <h3 class="card-title">在售书籍管理</h3>
                     </div> <!-- /.card-body -->
                     <div class="card-body">
                         <div class="grid-btn">
                             <button class="btn btn-info" onclick="addGoods()"><i
-                                    class="fa fa-plus"></i>&nbsp;添加商品
+                                    class="fa fa-plus"></i>&nbsp;添加书籍
                             </button>
                             <button class="btn btn-info" onclick="editGoods()"><i
-                                    class="fa fa-pencil-square-o"></i>&nbsp;修改商品
+                                    class="fa fa-pencil-square-o"></i>&nbsp;修改书籍信息
                             </button>
                             <button class="btn btn-success" onclick="putUpGoods()"><i
-                                    class="fa fa-arrow-up"></i>&nbsp;上架商品
+                                    class="fa fa-arrow-up"></i>&nbsp;上架书籍
                             </button>
                             <button class="btn btn-danger" onclick="putDownGoods()"><i
-                                    class="fa fa-arrow-down"></i>&nbsp;下架商品
+                                    class="fa fa-arrow-down"></i>&nbsp;下架书籍
                             </button>
                         </div>
                         <table id="jqGrid" class="table table-bordered">
@@ -84,6 +84,6 @@
 <!-- sweetalert -->
 <script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
 <script th:src="@{/admin/dist/js/public.js}"></script>
-<script th:src="@{/admin/dist/js/newbee_mall_goods.js}"></script>
+<script th:src="@{/admin/dist/js/exbookstore_books.js}"></script>
 </body>
 </html>

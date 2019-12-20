@@ -1,20 +1,22 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: '/admin/goods/list',
+        url: '/admin/books/list',
         datatype: "json",
         colModel: [
-            {label: '商品编号', name: 'goodsId', index: 'goodsId', width: 60, key: true},
-            {label: '商品名', name: 'goodsName', index: 'goodsName', width: 120},
-            {label: '商品简介', name: 'goodsIntro', index: 'goodsIntro', width: 120},
-            {label: '商品图片', name: 'goodsCoverImg', index: 'goodsCoverImg', width: 120, formatter: coverImageFormatter},
-            {label: '商品库存', name: 'stockNum', index: 'stockNum', width: 60},
-            {label: '商品售价', name: 'sellingPrice', index: 'sellingPrice', width: 60},
+            {label: '编号', name: 'bookId', index: 'bookId', width: 40, key: true},
+            {label: '书名', name: 'bookName', index: 'bookName', width: 120},
+            {label: '作者', name: 'bookAuthor', index: 'bookAuthor', width: 70},
+            {label: '书籍简介', name: 'bookIntro', index: 'booksIntro', width: 120},
+            {label: '书籍图片', name: 'bookCoverImg', index: 'bookCoverImg', width: 120, formatter: coverImageFormatter},
+            {label: '库存', name: 'stockNum', index: 'stockNum', width: 40},
+            {label: '实售价', name: 'sellingPrice', index: 'sellingPrice', width: 50},
+            {label: '标价', name: 'originalPrice', index: 'originalPrice', width: 50},
             {
                 label: '上架状态',
-                name: 'goodsSellStatus',
-                index: 'goodsSellStatus',
+                name: 'bookSellStatus',
+                index: 'bookSellStatus',
                 width: 80,
-                formatter: goodsSellStatusFormatter
+                formatter: booksSellStatusFormatter
             },
             {label: '创建时间', name: 'createTime', index: 'createTime', width: 60}
         ],
@@ -49,8 +51,8 @@ $(function () {
         $("#jqGrid").setGridWidth($(".card-body").width());
     });
 
-    function goodsSellStatusFormatter(cellvalue) {
-        //商品上架状态 0-上架 1-下架
+    function booksSellStatusFormatter(cellvalue) {
+        //书籍上架状态 0-上架 1-下架
         if (cellvalue == 0) {
             return "<button type=\"button\" class=\"btn btn-block btn-success btn-sm\" style=\"width: 80%;\">销售中</button>";
         }
@@ -60,7 +62,7 @@ $(function () {
     }
 
     function coverImageFormatter(cellvalue) {
-        return "<img src='" + cellvalue + "' height=\"80\" width=\"80\" alt='商品主图'/>";
+        return "<img src='" + cellvalue + "' height=\"80\" width=\"80\" alt='书籍主图'/>";
     }
 
 });
@@ -77,21 +79,21 @@ function reload() {
 }
 
 /**
- * 添加商品
+ * 添加书籍
  */
 function addGoods() {
-    window.location.href = "/admin/goods/edit";
+    window.location.href = "/admin/books/edit";
 }
 
 /**
- * 修改商品
+ * 修改书籍
  */
 function editGoods() {
     var id = getSelectedRow();
     if (id == null) {
         return;
     }
-    window.location.href = "/admin/goods/edit/" + id;
+    window.location.href = "/admin/books/edit/" + id;
 }
 
 /**

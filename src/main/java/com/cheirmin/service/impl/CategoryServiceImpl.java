@@ -148,6 +148,11 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<BooksCategory> selectByLevelAndParentIdsAndNumber(List<Long> parentIds, int categoryLevel) {
-        return null;
+        Example example=new Example(BooksCategory.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andIn("parentId",parentIds);
+        criteria.andEqualTo("categoryLevel",categoryLevel);
+
+        return booksCategoryMapper.selectByExample(example);
     }
 }
