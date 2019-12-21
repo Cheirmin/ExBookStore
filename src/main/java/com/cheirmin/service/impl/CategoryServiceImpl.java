@@ -143,6 +143,30 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public SearchPageCategoryVO getCategoriesForSearch(Long categoryId) {
+        SearchPageCategoryVO searchPageCategoryVO = new SearchPageCategoryVO();
+        BooksCategory thirdLevelBooksCategory = booksCategoryMapper.selectByPrimaryKey(categoryId);
+
+
+        if (thirdLevelBooksCategory != null && thirdLevelBooksCategory.getCategoryLevel() == CategoryLevelEnum.LEVEL_THREE.getLevel()) {
+            //获取当前三级分类的二级分类
+            BooksCategory secondLevelBooksCategory = booksCategoryMapper.selectByPrimaryKey(thirdLevelBooksCategory.getParentId());
+
+            if (secondLevelBooksCategory != null && secondLevelBooksCategory.getCategoryLevel() == CategoryLevelEnum.LEVEL_TWO.getLevel()) {
+                //获取当前二级分类下的三级分类List
+                Example example=new Example(BooksCategory.class);
+                Example.Criteria criteria = example.createCriteria();
+                criteria.andIn("parentId",Collections.singletonList(secondLevelBooksCategory.getCategoryId()));
+                criteria.andEqualTo("categoryLevel",CategoryLevelEnum.LEVEL_THREE.getLevel());
+                example.setOrderByClause("`category_rank` DESC");
+                RowBounds rowBounds = new RowBounds(0, Constants.SEARCH_CATEGORY_NUMBER);
+                List<BooksCategory> thirdLevelCategories = booksCategoryMapper.selectByExampleAndRowBounds(example,rowBounds);
+
+                searchPageCategoryVO.setCurrentCategoryName(thirdLevelBooksCategory.getCategoryName());
+                searchPageCategoryVO.setSecondLevelCategoryName(secondLevelBooksCategory.getCategoryName());
+                searchPageCategoryVO.setThirdLevelCategoryList(thirdLevelCategories);
+                return searchPageCategoryVO;
+            }
+        }
         return null;
     }
 

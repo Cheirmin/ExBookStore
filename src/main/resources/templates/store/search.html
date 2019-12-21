@@ -16,7 +16,7 @@
                     <a href="##" class="qqq" th:text="${searchPageCategoryVO.secondLevelCategoryName}">exbookstore</a>
                     <div>
                         <th:block th:each="thirdLevelCategory : ${searchPageCategoryVO.thirdLevelCategoryList}">
-                            <a th:href="@{${'/search?goodsCategoryId='+thirdLevelCategory.categoryId}}"
+                            <a th:href="@{${'/search?booksCategoryId='+thirdLevelCategory.categoryId}}"
                                th:text="${thirdLevelCategory.categoryName}">exbookstore</a>
                         </th:block>
                     </div>
@@ -42,13 +42,13 @@
 <!--排序-->
 <div class="sort">
     <div class="list">
-        <a th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy=default'}">
+        <a th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&booksCategoryId='+${booksCategoryId==null?'':booksCategoryId}+'&orderBy=default'}">
             <div th:class="${orderBy==null || orderBy=='default'?'active':''}">推荐</div>
         </a>
-        <a th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy=new'}">
+        <a th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&booksCategoryId='+${booksCategoryId==null?'':booksCategoryId}+'&orderBy=new'}">
             <div th:class="${orderBy=='new'?'active':''}">新品</div>
         </a>
-        <a th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy=price'}">
+        <a th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&booksCategoryId='+${booksCategoryId==null?'':booksCategoryId}+'&orderBy=price'}">
             <div th:class="${orderBy=='price'?'active':''}">价格</div>
         </a>
     </div>
@@ -60,14 +60,14 @@
             未查询到商品
         </th:block>
         <th:block th:unless="${#lists.isEmpty(pageResult.list)}">
-            <th:block th:each="goods : ${pageResult.list}">
+            <th:block th:each="book : ${pageResult.list}">
                 <div class="item_card_frame">
-                    <div class="item_card"><a th:href="@{'/goods/detail/'+${goods.goodsId}}" target="_blank"><img
-                            th:src="@{${goods.goodsCoverImg}}" th:alt="${goods.goodsName}"></a></div>
-                    <div class="item_brand"><a th:href="@{'/goods/detail/'+${goods.goodsId}}" target="_blank"
-                                               th:text="${goods.goodsName}">newbee.ltd</a></div>
-                    <div class="item_sub_intro" th:text="${goods.goodsIntro}">newbee.ltd</div>
-                    <div class="item_price" th:text="${goods.sellingPrice+'.00元'}">1299.00元</div>
+                    <div class="item_card"><a th:href="@{'/book/detail/'+${book.bookId}}" target="_blank"><img
+                            th:src="@{${book.bookCoverImg}}" th:alt="${book.bookName}"></a></div>
+                    <div class="item_brand"><a th:href="@{'/book/detail/'+${book.bookId}}" target="_blank"
+                                               th:text="${book.bookName}">newbee.ltd</a></div>
+                    <div class="item_sub_intro" th:text="${book.bookIntro}">newbee.ltd</div>
+                    <div class="item_price" th:text="${book.sellingPrice+'.00元'}">1299.00元</div>
                 </div>
             </th:block>
         </th:block>
@@ -77,23 +77,23 @@
         <div class="page_wrap">
             <th:block th:if="${null != pageResult and !#lists.isEmpty(pageResult.list)}">
             <span class="page_span1">
-                 <a th:href="@{${pageResult.currPage==1}?'##':'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage-1}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}">
+                 <a th:href="@{${pageResult.currPage==1}?'##':'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage-1}+'&booksCategoryId='+${booksCategoryId==null?'':booksCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}">
                                     < 上一页
                                 </a>
                 <th:block th:if="${pageResult.currPage-2 >=1}"><a
-                        th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage-2}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
+                        th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage-2}+'&booksCategoryId='+${booksCategoryId==null?'':booksCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
                         th:text="${pageResult.currPage -2}">1</a></th:block>
                 <th:block th:if="${pageResult.currPage-1 >=1}"><a
-                        th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage-1}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
+                        th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage-1}+'&booksCategoryId='+${booksCategoryId==null?'':booksCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
                         th:text="${pageResult.currPage -1}">1</a></th:block>
                 <a href="##" class="active" th:text="${pageResult.currPage}">1</a>
                 <th:block th:if="${pageResult.currPage+1<=pageResult.totalPage}"><a
-                        th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage+1}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
+                        th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage+1}+'&booksCategoryId='+${booksCategoryId==null?'':booksCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
                         th:text="${pageResult.currPage +1}">1</a></th:block>
                 <th:block th:if="${pageResult.currPage+2<=pageResult.totalPage}"><a
-                        th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage+2}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
+                        th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage+2}+'&booksCategoryId='+${booksCategoryId==null?'':booksCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
                         th:text="${pageResult.currPage +2}">1</a></th:block>
-                 <a th:href="@{${pageResult.currPage>=pageResult.totalPage}?'##':'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage+1}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}">
+                 <a th:href="@{${pageResult.currPage>=pageResult.totalPage}?'##':'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage+1}+'&booksCategoryId='+${booksCategoryId==null?'':booksCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}">
                                     下一页 >
                                 </a>
 					</span>

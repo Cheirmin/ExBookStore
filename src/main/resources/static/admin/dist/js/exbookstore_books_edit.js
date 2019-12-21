@@ -235,6 +235,7 @@ $('#levelOne').on('change', function () {
                     levelTwoSelect += '<option value=\"' + secondLevelCategories[i].categoryId + '\">' + secondLevelCategories[i].categoryName + '</option>';
                 }
                 $('#levelTwo').html(levelTwoSelect);
+
                 var levelThreeSelect = '';
                 var thirdLevelCategories = result.data.thirdLevelCategories;
                 var length3 = thirdLevelCategories.length;
@@ -274,8 +275,7 @@ $('#levelTwo').on('change', function () {
                 swal(result.message, {
                     icon: "error",
                 });
-            }
-            ;
+            };
         },
         error: function () {
             swal("操作失败", {

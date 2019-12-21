@@ -24,7 +24,7 @@
                     <div class="card-body">
                         <form id="goodsForm" onsubmit="return false;">
                             <div class="form-group" style="display:flex;">
-                                <label class="control-label">请选择分类:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <label class="control-label">请选择分类1:&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                 <select class="form-control col-sm-3" id="levelOne"
                                         data-placeholder="请选择分类...">
                                     <th:block th:unless="${null == firstLevelCategories}">
@@ -50,6 +50,82 @@
                                 </select>&nbsp;
                                 <select class="form-control col-sm-3"
                                         id="levelThree"
+                                        data-placeholder="请选择分类...">
+                                    <th:block th:unless="${null == thirdLevelCategories}">
+                                        <th:block th:each="c : ${thirdLevelCategories}">
+                                            <option th:value="${c.categoryId}" th:text="${c.categoryName}"
+                                                    th:selected="${null !=thirdLevelCategoryId and thirdLevelCategoryId==c.categoryId} ?true:false">
+                                                >
+                                            </option>
+                                        </th:block>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div class="form-group" style="display:flex;">
+                                <label class="control-label">请选择分类2:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <select class="form-control col-sm-3" id="levelOne2"
+                                        data-placeholder="请选择分类...">
+                                    <th:block th:unless="${null == firstLevelCategories}">
+                                        <th:block th:each="c : ${firstLevelCategories}">
+                                            <option th:value="${c.categoryId}" th:text="${c.categoryName}"
+                                                    th:selected="${null !=firstLevelCategoryId and firstLevelCategoryId==c.categoryId} ?true:false">
+                                                >
+                                            </option>
+                                        </th:block>
+                                    </th:block>
+                                </select>&nbsp;
+                                <select class="form-control col-sm-3"
+                                        id="levelTwo2"
+                                        data-placeholder="请选择分类...">
+                                    <th:block th:unless="${null == secondLevelCategories}">
+                                        <th:block th:each="c : ${secondLevelCategories}">
+                                            <option th:value="${c.categoryId}" th:text="${c.categoryName}"
+                                                    th:selected="${null !=secondLevelCategoryId and secondLevelCategoryId==c.categoryId} ?true:false">
+                                                >
+                                            </option>
+                                        </th:block>
+                                    </th:block>
+                                </select>&nbsp;
+                                <select class="form-control col-sm-3"
+                                        id="levelThree2"
+                                        data-placeholder="请选择分类...">
+                                    <th:block th:unless="${null == thirdLevelCategories}">
+                                        <th:block th:each="c : ${thirdLevelCategories}">
+                                            <option th:value="${c.categoryId}" th:text="${c.categoryName}"
+                                                    th:selected="${null !=thirdLevelCategoryId and thirdLevelCategoryId==c.categoryId} ?true:false">
+                                                >
+                                            </option>
+                                        </th:block>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div class="form-group" style="display:flex;">
+                                <label class="control-label">请选择分类3:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <select class="form-control col-sm-3" id="levelOne3"
+                                        data-placeholder="请选择分类...">
+                                    <th:block th:unless="${null == firstLevelCategories}">
+                                        <th:block th:each="c : ${firstLevelCategories}">
+                                            <option th:value="${c.categoryId}" th:text="${c.categoryName}"
+                                                    th:selected="${null !=firstLevelCategoryId and firstLevelCategoryId==c.categoryId} ?true:false">
+                                                >
+                                            </option>
+                                        </th:block>
+                                    </th:block>
+                                </select>&nbsp;
+                                <select class="form-control col-sm-3"
+                                        id="levelTwo3"
+                                        data-placeholder="请选择分类...">
+                                    <th:block th:unless="${null == secondLevelCategories}">
+                                        <th:block th:each="c : ${secondLevelCategories}">
+                                            <option th:value="${c.categoryId}" th:text="${c.categoryName}"
+                                                    th:selected="${null !=secondLevelCategoryId and secondLevelCategoryId==c.categoryId} ?true:false">
+                                                >
+                                            </option>
+                                        </th:block>
+                                    </th:block>
+                                </select>&nbsp;
+                                <select class="form-control col-sm-3"
+                                        id="levelThree3"
                                         data-placeholder="请选择分类...">
                                     <th:block th:unless="${null == thirdLevelCategories}">
                                         <th:block th:each="c : ${thirdLevelCategories}">
@@ -190,6 +266,6 @@
 <script th:src="@{/admin/plugins/kindeditor-4.1.10/kindeditor-all.js}"></script>
 <script th:src="@{/admin/plugins/kindeditor-4.1.10/lang/zh_CN.js}"></script>
 <script th:src="@{/admin/dist/js/public.js}"></script>
-<script th:src="@{/admin/dist/js/newbee_mall_goods_edit.js}"></script>
+<script th:src="@{/admin/dist/js/exbookstore_books_edit.js}"></script>
 </body>
 </html>

@@ -70,8 +70,6 @@ public class UserServiceImpl implements UserService {
         }else {
             User user = users.get(0);
 
-            System.out.println("password--" + user.getPassword());
-
             Boolean aBoolean = CodecUtils.passwordConfirm(loginName.concat(password), user.getPassword());
             System.out.println(aBoolean?"--登录成功--":"--登录失败--");
             if ( user != null && httpSession != null) {

@@ -5,6 +5,8 @@ import java.util.Date;
 
 @Table(name = "tb_books_category")
 public class BooksCategory {
+
+    @Id
     private Long categoryId;
 
     private Byte categoryLevel;

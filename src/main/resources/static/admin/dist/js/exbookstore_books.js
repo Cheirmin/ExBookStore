@@ -81,7 +81,7 @@ function reload() {
 /**
  * 添加书籍
  */
-function addGoods() {
+function addBook() {
     window.location.href = "/admin/books/edit";
 }
 
