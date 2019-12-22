@@ -1,10 +1,12 @@
 package com.cheirmin.pojo;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
 @Table(name = "tb_retrieve_books")
 public class RetrieveBook {
+    @Id
     private Long bookId;
 
     private String bookName;

@@ -1,10 +1,12 @@
 package com.cheirmin.pojo;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
 @Table(name = "tb_index_carousel")
 public class IndexCarousel {
+    @Id
     private Integer carouselId;
 
     private String carouselUrl;

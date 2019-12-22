@@ -1,9 +1,12 @@
 package com.cheirmin.controller.store;
 
 import com.cheirmin.common.Constants;
+import com.cheirmin.controller.vo.BooksDetailVO;
 import com.cheirmin.controller.vo.SearchPageCategoryVO;
+import com.cheirmin.pojo.Book;
 import com.cheirmin.service.BooksService;
 import com.cheirmin.service.CategoryService;
+import com.cheirmin.util.BeanUtil;
 import com.cheirmin.util.PageQueryUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -64,8 +67,19 @@ public class StoreBooksController {
         return "store/search";
     }
 
-    @GetMapping("/books/detail/{booksId}")
+    @GetMapping("/book/detail/{booksId}")
     public String detailPage(@PathVariable("booksId") Long booksId, HttpServletRequest request) {
+        if (booksId < 1) {
+            return "error/error_5xx";
+        }
+        Book book = booksService.getBookById(booksId);
+        if (book == null) {
+            return "error/error_404";
+        }
+        BooksDetailVO booksDetailVO = new BooksDetailVO();
+        BeanUtil.copyProperties(book, booksDetailVO);
+        booksDetailVO.setBookCarouselList(book.getBookCarousel().split(","));
+        request.setAttribute("booksDetail", booksDetailVO);
         return "store/detail";
     }
 }

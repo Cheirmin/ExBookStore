@@ -2,11 +2,13 @@ package com.cheirmin.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
 @Table(name = "tb_books")
 public class Book {
+    @Id
     private Long bookId;
 
     private String bookName;

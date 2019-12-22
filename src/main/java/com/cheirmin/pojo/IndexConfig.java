@@ -1,10 +1,12 @@
 package com.cheirmin.pojo;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
 @Table(name = "tb_index_config")
 public class IndexConfig {
+    @Id
     private Long configId;
 
     private String configName;

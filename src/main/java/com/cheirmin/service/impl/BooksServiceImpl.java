@@ -61,7 +61,7 @@ public class BooksServiceImpl implements BooksService {
 
     @Override
     public Book getBookById(Long id) {
-        return null;
+        return bookMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -81,6 +81,9 @@ public class BooksServiceImpl implements BooksService {
         Example example=new Example(Book.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.orLike("bookName",keyword);
+        criteria.orLike("bookAuthor",keyword);
+        criteria.orLike("publishingHouse",keyword);
+
 
         Example example2=new Example(Book.class);
         Example.Criteria criteria2 = example2.createCriteria();
