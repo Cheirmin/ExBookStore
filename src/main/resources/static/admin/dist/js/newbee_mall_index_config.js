@@ -9,7 +9,7 @@ $(function () {
             {label: '配置项名称', name: 'configName', index: 'configName', width: 180},
             {label: '跳转链接', name: 'redirectUrl', index: 'redirectUrl', width: 120},
             {label: '排序值', name: 'configRank', index: 'configRank', width: 120},
-            {label: '商品编号', name: 'goodsId', index: 'goodsId', width: 120},
+            {label: '书籍编号', name: 'bookId', index: 'bookId', width: 120},
             {label: '添加时间', name: 'createTime', index: 'createTime', width: 120}
         ],
         height: 560,
@@ -23,10 +23,11 @@ $(function () {
         multiselect: true,
         pager: "#jqGridPager",
         jsonReader: {
-            root: "data.list",
-            page: "data.currPage",
-            total: "data.totalPage",
-            records: "data.totalCount"
+            root: "list",
+            page: "pageNum",
+            total: "pages",
+            records: "total",
+            repeatitems: false,
         },
         prmNames: {
             page: "page",
@@ -75,7 +76,7 @@ $('#saveButton').click(function () {
             "configName": configName,
             "configType": configType,
             "redirectUrl": redirectUrl,
-            "goodsId": goodsId,
+            "bookId": goodsId,
             "configRank": configRank
         };
         var url = '/admin/indexConfigs/save';
@@ -87,7 +88,7 @@ $('#saveButton').click(function () {
                 "configName": configName,
                 "configType": configType,
                 "redirectUrl": redirectUrl,
-                "goodsId": goodsId,
+                "bookId": goodsId,
                 "configRank": configRank
             };
         }
@@ -97,6 +98,7 @@ $('#saveButton').click(function () {
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function (result) {
+                console.log(result);
                 if (result.resultCode == 200) {
                     $('#indexConfigModal').modal('hide');
                     swal("保存成功", {
@@ -132,7 +134,7 @@ function configEdit() {
     $("#configId").val(id);
     $("#configName").val(rowData.configName);
     $("#redirectUrl").val(rowData.redirectUrl);
-    $("#goodsId").val(rowData.goodsId);
+    $("#goodsId").val(rowData.bookId);
     $("#configRank").val(rowData.configRank);
 }
 
@@ -155,7 +157,7 @@ function deleteConfig () {
                     contentType: "application/json",
                     data: JSON.stringify(ids),
                     success: function (r) {
-                        if (r.resultCode == 200) {
+                        if (r=="success") {
                             swal("删除成功", {
                                 icon: "success",
                             });

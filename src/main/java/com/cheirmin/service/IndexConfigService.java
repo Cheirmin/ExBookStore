@@ -4,6 +4,7 @@ import com.cheirmin.pojo.IndexCarousel;
 import com.cheirmin.pojo.IndexConfig;
 import com.github.pagehelper.PageInfo;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -13,9 +14,10 @@ import java.util.List;
  * @Version 1.0
  */
 public interface IndexConfigService {
-       PageInfo queryallIndexConfig(Integer indexpage,Integer pagesize);
-       boolean updateIndexConfig(IndexConfig indexConfig);
-       boolean addIndexConfig(IndexConfig indexConfig);
+       PageInfo queryallIndexConfig(Integer indexpage,Integer pagesize,String configType);
+       boolean updateIndexConfig(IndexConfig indexConfig,HttpServletRequest request);
+       boolean updateIndexConfigByids(String ids,HttpServletRequest request);
+       boolean addIndexConfig(IndexConfig indexConfig, HttpServletRequest request);
        boolean deleteIndexConfig(IndexConfig indexConfig);
 
        List<IndexConfig> queryIndexConfig();

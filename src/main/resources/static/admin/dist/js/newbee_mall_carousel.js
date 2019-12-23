@@ -1,6 +1,6 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: '/admin/carousels/list',
+        url: '/admin/carousels',
         datatype: "json",
         colModel: [
             {label: 'id', name: 'carouselId', index: 'carouselId', width: 50, key: true, hidden: true},
@@ -11,7 +11,7 @@ $(function () {
         ],
         height: 560,
         rowNum: 10,
-        rowList: [10, 20, 50],
+        rowList: [10, 20, 30],
         styleUI: 'Bootstrap',
         loadtext: '信息读取中...',
         rownumbers: false,
@@ -20,10 +20,11 @@ $(function () {
         multiselect: true,
         pager: "#jqGridPager",
         jsonReader: {
-            root: "data.list",
-            page: "data.currPage",
-            total: "data.totalPage",
-            records: "data.totalCount"
+            root: "list",
+            page: "pageNum",
+            total: "pages",
+            records: "total",
+            repeatitems: false,
         },
         prmNames: {
             page: "page",
@@ -42,10 +43,9 @@ $(function () {
 
     $(window).resize(function () {
         $("#jqGrid").setGridWidth($(".card-body").width());
-    });
-
+    })
     new AjaxUpload('#uploadCarouselImage', {
-        action: '/admin/upload/file',
+        action: '/admin/upload',
         name: 'file',
         autoSubmit: true,
         responseType: "json",
@@ -56,8 +56,8 @@ $(function () {
             }
         },
         onComplete: function (file, r) {
-            if (r != null && r.resultCode == 200) {
-                $("#carouselImg").attr("src", r.data);
+            if (r != null ) {
+                $("#carouselImg").attr("src", r);
                 $("#carouselImg").attr("style", "width: 128px;height: 128px;display:block;");
                 return false;
             } else {
@@ -66,6 +66,9 @@ $(function () {
         }
     });
 });
+
+
+
 
 /**
  * jqGrid重新加载
@@ -88,6 +91,7 @@ $('#saveButton').click(function () {
     var redirectUrl = $("#redirectUrl").val();
     var carouselRank = $("#carouselRank").val();
     var carouselUrl = $('#carouselImg')[0].src;
+    console.log(carouselUrl);
     var data = {
         "carouselUrl": carouselUrl,
         "carouselRank": carouselRank,
@@ -110,7 +114,8 @@ $('#saveButton').click(function () {
         contentType: 'application/json',
         data: JSON.stringify(data),
         success: function (result) {
-            if (result.resultCode == 200) {
+            console.log(result);
+            if (result.resultCode==200) {
                 $('#carouselModal').modal('hide');
                 swal("保存成功", {
                     icon: "success",
@@ -140,12 +145,13 @@ function carouselEdit() {
     }
     //请求数据
     $.get("/admin/carousels/info/" + id, function (r) {
-        if (r.resultCode == 200 && r.data != null) {
+        console.log(r);
+        if (r!= null) {
             //填充数据至modal
-            $("#carouselImg").attr("src", r.data.carouselUrl);
+            $("#carouselImg").attr("src", r.carouselUrl);
             $("#carouselImg").attr("style", "height: 64px;width: 64px;display:block;");
-            $("#redirectUrl").val(r.data.redirectUrl);
-            $("#carouselRank").val(r.data.carouselRank);
+            $("#redirectUrl").val(r.redirectUrl);
+            $("#carouselRank").val(r.carouselRank);
         }
     });
     $('.modal-title').html('轮播图编辑');
@@ -171,7 +177,7 @@ function deleteCarousel() {
                     contentType: "application/json",
                     data: JSON.stringify(ids),
                     success: function (r) {
-                        if (r.resultCode == 200) {
+                        if (r=="success") {
                             swal("删除成功", {
                                 icon: "success",
                             });
@@ -196,4 +202,10 @@ function reset() {
     $("#carouselImg").attr("src", '/admin/dist/img/img-upload.png');
     $("#carouselImg").attr("style", "height: 64px;width: 64px;display:block;");
     $('#edit-error-msg').css("display", "none");
+}
+
+
+function renderTime(date){
+    var da = new Date(parseInt(date.replace("/Date(","").replace(")/","").split("+")[0]));
+    return da.getFullYear()+"-"+ (da.getMonth()+1)+"-" +da.getDate()+" " +da.getHours()+":"+da.getSeconds()+":"+da.getMinutes();
 }

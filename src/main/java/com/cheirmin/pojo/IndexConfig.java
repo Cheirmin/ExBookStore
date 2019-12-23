@@ -1,10 +1,14 @@
 package com.cheirmin.pojo;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
 @Table(name = "tb_index_config")
 public class IndexConfig {
+    @Id
+    @GeneratedValue(generator = "JDBC")
     private Long configId;
 
     private String configName;
@@ -113,5 +117,22 @@ public class IndexConfig {
 
     public void setUpdateUser(Integer updateUser) {
         this.updateUser = updateUser;
+    }
+
+    @Override
+    public String toString() {
+        return "IndexConfig{" +
+                "configId=" + configId +
+                ", configName='" + configName + '\'' +
+                ", configType=" + configType +
+                ", bookId=" + bookId +
+                ", redirectUrl='" + redirectUrl + '\'' +
+                ", configRank=" + configRank +
+                ", isDeleted=" + isDeleted +
+                ", createTime=" + createTime +
+                ", createUser=" + createUser +
+                ", updateTime=" + updateTime +
+                ", updateUser=" + updateUser +
+                '}';
     }
 }
