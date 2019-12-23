@@ -20,24 +20,27 @@
                                              style="color:#1baeae;margin-left: 600px;">更改个人信息</a>
             </div>
             <div class="info_item ml40"><span>昵称</span><span
-                    th:text="${session.newBeeMallUser.nickName}">cheirmin</span>
+                    th:text="${user.nickName}" ></span>
             </div>
             <div class="info_item ml40"><span>手机号</span><span
-                    th:text="${session.newBeeMallUser.loginName}">12300001234</span>
+                    th:text="${user.userPhone}"></span>
             </div>
-            <div class="info_item ml40"><span>密码</span><span>******</span>
+            <div class="info_item ml40"><span>密码</span><span>******</span><span onclick="openpassworfModal()" style="color:#1baeae;">更改密码</span>
             </div>
             <div class="info_item ml40"><span>个性签名</span><span
-                    th:text="${session.newBeeMallUser.introduceSign==''?'无':session.newBeeMallUser.introduceSign}">exbookstore</span>
+                    th:text="${user.introduceSign}"  ></span>
             </div>
             <div class="info_item ml40"><span>收货信息</span><span
-                    th:text="${session.newBeeMallUser.address==''?'无':session.newBeeMallUser.address}">湖南长沙 15600002222</span></span>
+                    th:text="${user.address}"  ></span><span onclick="openAdressModal()" style="color:#1baeae;">收货管理</span> </span>
+
+
             </div>
 
         </div>
         <div class="clear"></div>
     </div>
     <div class="content">
+
         <!-- 模态框（Modal） -->
         <div class="modal fade" id="personalInfoModal" tabindex="-1" role="dialog"
              aria-labelledby="personalInfoModalLabel">
@@ -52,22 +55,22 @@
                         <form id="personalInfoForm">
                             <div class="form-group">
                                 <label for="nickName" class="control-label">昵称:</label>
-                                <input type="hidden" id="userId" th:value="${session.newBeeMallUser.userId}">
+                                <input type="hidden" id="userId" th:value="${user.userId}">
                                 <input type="text" class="form-control" id="nickName" name="nickName"
-                                       placeholder="请输入昵称" th:value="${session.newBeeMallUser.nickName}"
-                                       required="true">
+                                       placeholder="请输入昵称"
+                                       required="true" th:value="${user.nickName}">
                             </div>
                             <div class="form-group">
                                 <label for="introduceSign" class="control-label">个性签名:</label>
                                 <input type="text" class="form-control" id="introduceSign" name="introduceSign"
-                                       placeholder="请输入个性签名" th:value="${session.newBeeMallUser.introduceSign}"
-                                       required="true">
+                                       placeholder="请输入个性签名"
+                                       required="true"  th:value="${user.introduceSign}">
                             </div>
                             <div class="form-group">
-                                <label for="address" class="control-label">收货信息:</label>
-                                <input type="text" class="form-control" id="address" name="address"
-                                       placeholder="请输入收货信息" th:value="${session.newBeeMallUser.address}"
-                                       required="true">
+                                <label for="tel" class="control-label">手机号:</label>
+                                <input type="text" class="form-control" id="tel" name="tel"
+                                       placeholder="请输入电话号码"
+                                       required="true" th:value="${user.userPhone}">
                             </div>
                         </form>
                     </div>
@@ -79,6 +82,91 @@
             </div>
         </div>
         <!-- /.modal -->
+
+        <!--模态框地址-->
+        <div class="modal fade" id="addressModal" tabindex="-1" role="dialog"
+             aria-labelledby="addressModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h6 class="modal-title" id="addressModalLabel">地址管理</h6>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addressModalForm">
+                             <input type="hidden" id="userId4" th:value="${user.userId}">
+
+                            <div id="addressfor">
+
+
+
+
+                            </div>
+
+                                <br><br>
+                                <div class="form-group">
+                                    <label for="nickName" class="control-label">添加地址:</label>
+                                    <input type="text" class="form-control" id="addressName" name="addressName"
+                                           placeholder="请输入地址"
+                                           required="true">
+                                    <button type="button" class="btn btn-primary"  onclick="addAddre()">确认添加</button>
+                                </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" id="fanhui">返回</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--模态框地址end-->
+
+        <!--更改密码模态框地址-->
+        <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog"
+             aria-labelledby="passwordModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h6 class="modal-title" id="passwordModalLabel">更改密码</h6>
+                    </div>
+                    <div class="modal-body">
+                        <form id="passwordModalForm">
+                            <div class="form-group">
+                                <label for="nickName" class="control-label">原密码:</label>
+                                <input type="hidden" id="userId3" th:value="${user.userId}">
+                                <input type="password" class="form-control" id="password1" name="addressName"
+                                       placeholder="请输入原密码"
+                                       required="true">
+                            </div>
+                            <div class="form-group">
+                                <label for="password2" class="control-label">新密码:</label>
+                                <input type="password" class="form-control" id="password2" name="addressName"
+                                       placeholder="请输入新密码"
+                                       required="true">
+                            </div>
+                            <div class="form-group">
+                                <label for="password3" class="control-label">确定新密码:</label>
+                                <input type="password" class="form-control" id="password3" name="addressName"
+                                       placeholder="请确定新密码"
+                                       required="true">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" id="updatepassword">确认</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--更改密码模态框地址end-->
+
+
+
     </div>
 </div>
 
@@ -91,14 +179,184 @@
 <script th:src="@{/store/js/search.js}" type="text/javascript"></script>
 <script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
 <script type="text/javascript">
+
+    var userIdd
     function openUpdateModal() {
         $('#personalInfoModal').modal('show');
     }
 
+    function openpassworfModal() {
+        $("#password1").val("");
+        $('#passwordModal').modal('show');
+    }
+
+   //地址管理
+    function openAdressModal() {
+
+        $('#addressModal').modal('show');
+        getaddress();
+    }
+
+    //获得地址列表
+    function getaddress() {
+        $("#addressfor").empty()
+        var userId = $("#userId4").val();
+        userIdd= $("#userId4").val();
+        var data = {
+            "userId": userId,
+        };
+        $.ajax({
+            type: 'POST',//方法类型
+            url: '/personal/getaddresssbefore',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (result) {
+                if (result.resultCode == 200) {
+                    //循环
+
+                    $.each(result.data, function (index, item) {
+                        if (item.isDefulat==1){
+                            $("<div class=\"form-group\" >\n" +
+                                "                                    <label for=\"nickName\" class=\"control-label\" style=\"color: red\">默认地址:</label>\n" +
+                                "\n" +
+                                "                                    <input type=\"text\" class=\"form-control\" id="+item.id+" style=\"float: left;\"\n" +
+                                "                                           placeholder=\"请输入地址\" value=" +item.address+"\n" +
+                                "                                    >\n" +
+                                "                                     <a  onclick='setdefult("+item.id+")' style=\"color:#1baeae;float: right;\"> 设为默认</a>\n" +
+                                "                                     <nav style=\"color:#1baeae;float: right;\">&nbsp;&nbsp;&nbsp;&nbsp; </nav>\n" +
+                                "                                     <a onclick='updateAddre("+item.id+")' style=\"color:#1baeae;float: right;\">修改</a>\n" +
+                                "                                </div>\n" +
+                                "                                <br><br>").appendTo("#addressfor")
+                        } else {
+                            $("<div class=\"form-group\" >\n" +
+                                "                                    <label for=\"nickName\" class=\"control-label\" >地址:</label>\n" +
+                                "\n" +
+                                "                                    <input type=\"text\" class=\"form-control\" id="+item.id+" style=\"float: left;\"\n" +
+                                "                                           placeholder=\"请输入地址\" value=" +item.address+"\n" +
+                                "                                    >\n" +
+                               "      <a  onclick='setdefult("+item.id+")' style=\"color:#1baeae;float: right;\"> 设为默认</a>\n" +
+                            "                                   <nav style=\"color:#1baeae;float: right;\">&nbsp;&nbsp;&nbsp;&nbsp; </nav>\n" +
+                            "                                     <a onclick='updateAddre("+item.id+")' style=\"color:#1baeae;float: right;\">修改</a>\n" +
+                                "                                </div>\n" +
+                                "                                <br><br>").appendTo("#addressfor")
+                        }
+                        $("<option value=" + item.id + ">" + item.hotelName + "</option>")
+                            .appendTo("#hotle")
+                    })
+
+
+                }
+            },
+            error: function () {
+                alert('操作失败');
+            }
+        });
+    }
+
+    function setdefult(id){
+        var userId = userIdd;
+        var data = {
+            "userId": userId,
+            "id": id
+        };
+        $.ajax({
+            type: 'POST',//方法类型
+            url: '/personal/setdefulat',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (result) {
+                if (result.resultCode == 200) {
+                            getaddress();
+                } else {
+                    //  $('#passwordModal').modal('hide');
+                    alert(result.message);
+                }
+                ;
+            },
+            error: function () {
+                alert('操作失败');
+            }
+        });
+
+
+    }
+
+    function updateAddre(id){
+        var userId = userIdd;
+        var addressValue=$("#"+id).val()
+        alert(addressValue)
+        var data = {
+            "userId": userId,
+            "id": id,
+            "addressValue":addressValue
+        };
+        $.ajax({
+            type: 'POST',//方法类型
+            url: '/personal/updateAddressBefore',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (result) {
+                if (result.resultCode == 200) {
+                    getaddress();
+                } else {
+                    //  $('#passwordModal').modal('hide');
+                    alert(result.message);
+                }
+                ;
+            },
+            error: function () {
+                alert('操作失败');
+            }
+        });
+    }
+
+
+    function addAddre(){
+        var address=$("#addressName").val();
+        var userId = userIdd;
+        if (address.trim().length < 5) {
+            swal("请输入正确的收货信息不少于5", {
+                icon: "error",
+            });
+            return;
+        }
+        var data = {
+            "address": address,
+            "userId":userId
+        };
+        $.ajax({
+            type: 'POST',//方法类型
+            url: '/personal/addAddreBefore',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (result) {
+                if (result.resultCode == 200) {
+                    getaddress();
+                } else {
+                    alert(result.message);
+                }
+                ;
+            },
+            error: function () {
+                alert('操作失败');
+            }
+        });
+
+
+
+    }
+
+    $("#fanhui").click(function () {
+        $('#addressModal').modal('hide');
+        window.location.reload();
+
+
+    })
+
     //绑定modal上的保存按钮
     $('#saveButton').click(function () {
-        var address = $("#address").val();
-        if (address.trim().length < 10) {
+        var tel = $("#tel").val();
+        if (tel.trim().length < 10) {
             swal("请输入正确的收货信息", {
                 icon: "error",
             });
@@ -121,7 +379,7 @@
         var userId = $("#userId").val();
         var data = {
             "userId": userId,
-            "address": address,
+            "tel": tel,
             "introduceSign": introduceSign,
             "nickName": nickName
         };
@@ -132,6 +390,9 @@
             data: JSON.stringify(data),
             success: function (result) {
                 if (result.resultCode == 200) {
+                    swal("修改成功", {
+                        icon: "success",
+                    });
                     $('#personalInfoModal').modal('hide');
                     window.location.reload();
                 } else {
@@ -145,6 +406,72 @@
             }
         });
     });
+
+    //更新密码
+
+    $('#updatepassword').click(function () {
+        var password1 = $("#password1").val();
+        if (password1.trim().length < 3) {
+            swal("请输入正确的原密码", {
+                icon: "error",
+            });
+            return;
+        }
+        var password2 = $("#password2").val();
+        if (password2.trim().length < 3) {
+            swal("请输入正确的密码", {
+                icon: "error",
+            });
+            return;
+        }
+        var password3 = $("#password3").val();
+        if (password3.trim().length < 2) {
+            swal("请输入正确的密码", {
+                icon: "error",
+            });
+            return;
+        }
+        if (password3.trim()!=password2.trim()) {
+            swal("请输入相同的密码", {
+                icon: "error",
+            });
+            return;
+        }
+
+
+        var userId = $("#userId3").val();
+        var data = {
+            "userId": userId,
+            "password1": password1,
+            "password2": password3
+        };
+        $.ajax({
+            type: 'POST',//方法类型
+            url: '/personal/updatepassword',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (result) {
+                if (result.resultCode == 200) {
+                    swal("修改成功", {
+                        icon: "success",
+                    });
+                    $('#passwordModal').modal('hide');
+                    window.location.reload();
+                } else {
+                  //  $('#passwordModal').modal('hide');
+                    alert(result.message);
+                }
+                ;
+            },
+            error: function () {
+                alert('操作失败');
+            }
+        });
+    });
+
+
+
+
 </script>
 </body>
 </html>

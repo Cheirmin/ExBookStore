@@ -2,6 +2,7 @@ package com.cheirmin.controller.store;
 
 import com.cheirmin.common.Constants;
 import com.cheirmin.common.ServiceResultEnum;
+import com.cheirmin.controller.vo.UserVO;
 import com.cheirmin.pojo.User;
 import com.cheirmin.service.UserService;
 import com.cheirmin.util.Result;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  * @Message:
@@ -116,6 +118,8 @@ public class PersonalController {
     @GetMapping("/personal")
     public String personalPage(HttpServletRequest request,
                                HttpSession httpSession) {
+
+        request.setAttribute("user",(UserVO)httpSession.getAttribute("User"));
         request.setAttribute("path", "personal");
         return "store/personal";
     }
@@ -123,7 +127,48 @@ public class PersonalController {
     @PostMapping("/personal/updateInfo")
     @ResponseBody
     public Result updateInfo(@RequestBody User user, HttpSession httpSession) {
-       return null;
+        return   userService.updateUserInfo(user,httpSession);
+
+    }
+
+
+    @PostMapping("/personal/updatepassword")
+    @ResponseBody
+    public Result updatepassword(@RequestBody Map<String,String> map) {
+        return   userService.updatepassword(map);
+
+    }
+
+
+    @PostMapping("/personal/getaddresssbefore")
+    @ResponseBody
+    public Result getaddresssbefore(@RequestBody Map<String,String> map) {
+        return   userService.getaddresssbefore(map);
+
+    }
+
+
+    @PostMapping("/personal/setdefulat")
+    @ResponseBody
+    public Result setdefulat(@RequestBody Map<String,String> map, HttpSession httpSession) {
+        return   userService.setdefulat(map,httpSession);
+
+    }
+
+
+    @PostMapping("/personal/addAddreBefore")
+    @ResponseBody
+    public Result addAddreBefore(@RequestBody Map<String,String> map) {
+        return   userService.addAddreBefore(map);
+
+    }
+
+
+    @PostMapping("/personal/updateAddressBefore")
+    @ResponseBody
+    public Result updateAddressBefore(@RequestBody Map<String,String> map, HttpSession httpSession) {
+        return   userService.updateAddressBefore(map,httpSession);
+
     }
 
     @GetMapping("/personal/addresses")

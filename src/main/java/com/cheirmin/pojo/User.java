@@ -9,6 +9,22 @@ public class User {
     @Id
     private Long userId;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", nickName='" + nickName + '\'' +
+                ", password='" + password + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", introduceSign='" + introduceSign + '\'' +
+                ", address='" + address + '\'' +
+                ", isDeleted=" + isDeleted +
+                ", lockedFlag=" + lockedFlag +
+                ", createTime=" + createTime +
+                '}';
+    }
+
     private String nickName;
 
     private String password;

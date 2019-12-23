@@ -3,19 +3,19 @@ package com.cheirmin.service.impl;
 import com.cheirmin.common.Constants;
 import com.cheirmin.common.ServiceResultEnum;
 import com.cheirmin.controller.vo.UserVO;
+import com.cheirmin.dao.AddressMapper;
 import com.cheirmin.dao.UserMapper;
+import com.cheirmin.pojo.Address;
 import com.cheirmin.pojo.User;
 import com.cheirmin.service.UserService;
-import com.cheirmin.util.BeanUtil;
-import com.cheirmin.util.CodecUtils;
-import com.cheirmin.util.PageQueryUtil;
-import com.cheirmin.util.PageResult;
+import com.cheirmin.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Message:
@@ -29,6 +29,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    AddressMapper addressMapper;
     @Override
     public PageResult getNewBeeMallUsersPage(PageQueryUtil pageUtil) {
         return null;
@@ -98,12 +100,131 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserVO updateUserInfo(User user, HttpSession httpSession) {
-        return null;
+    public Result updateUserInfo(User user, HttpSession httpSession) {
+        if (userMapper.updateByPrimaryKeySelective(user)>0){
+            UserVO userVO = new UserVO();
+            //设置购物车中的数量
+            userVO.setShopCartItemCount(2);
+            BeanUtil.copyProperties(userMapper.selectByPrimaryKey(user.getUserId()), userVO);
+               httpSession.setAttribute(Constants.USER_SESSION_KEY, userVO);
+            return new Result(200,"更新成功");
+        }
+        return new Result(100,"更新失败");
     }
 
     @Override
     public Boolean lockUsers(Integer[] ids, int lockStatus) {
         return null;
     }
+
+
+    @Override
+    public Result updatepassword(Map<String, String> map) {
+        Long userId= Long.valueOf(map.get("userId"));
+        String password1=map.get("password1");
+        String password2=map.get("password2");
+        System.out.println(userId+password1+password2);
+         User user=userMapper.selectByPrimaryKey(userId);
+        if (CodecUtils.passwordConfirm(user.getUserEmail()+password1,user.getPassword())){
+            String newPassword=CodecUtils.passwordBcryptEncode(user.getUserEmail(),password2);
+            user.setPassword(newPassword);
+            if (userMapper.updateByPrimaryKeySelective(user)>0){
+                return new Result(200,"更改成功");
+            }
+            return new Result(100,"更改失败");
+        }
+        return new Result(100,"原密码错误");
+    }
+
+
+    @Override
+    public Result getaddresssbefore(Map<String, String> map) {
+        String userId= map.get("userId");
+        Example example=new Example(Address.class);
+        example.createCriteria().andEqualTo("userId",userId);
+        List<Address> addresses= addressMapper.selectByExample(example);
+        Result<List<Address>> result=new Result(200,"ok");
+        result.setData(addresses);
+        return result;
+    }
+
+    @Override//设定默认地址
+    public Result setdefulat(Map<String, String> map, HttpSession httpSession) {
+        String userId=map.get("userId");
+        String addressId=map.get("id");
+        //更改address表 默认状态
+        addressMapper.updateDefaultTo0();
+        Address address=new Address();
+        address.setId(Integer.valueOf(addressId));
+        address.setIsDefulat(1);
+        addressMapper.updateByPrimaryKeySelective(address);
+
+        Address a=addressMapper.selectByPrimaryKey(addressId);
+        //更新主表的状态
+        User user=new User();
+        user.setUserId(Long.valueOf(userId));
+        user.setAddress(a.getAddress());
+        userMapper.updateByPrimaryKeySelective(user);
+
+        //更新session状态
+        UserVO userVO = new UserVO();
+        //设置购物车中的数量
+        userVO.setShopCartItemCount(2);
+        BeanUtil.copyProperties(userMapper.selectByPrimaryKey(user.getUserId()), userVO);
+        httpSession.setAttribute(Constants.USER_SESSION_KEY, userVO);
+        return new Result(200,"设置成功");
+
+    }
+
+    @Override
+    public Result addAddreBefore(Map<String, String> map) {
+        String address=map.get("address");
+        String userId=map.get("userId");
+        Address a=new Address();
+        a.setAddress(address);
+        a.setUserId(Long.valueOf(userId));
+        Example example=new Example(Address.class);
+        example.createCriteria().andEqualTo("userId",userId);
+        if (addressMapper.selectByExample(example).size()>=3){
+            return new Result(122,"最多3个地址");
+        }
+
+
+        if (addressMapper.insertSelective(a)>0){
+            return new Result(200,"欧了");
+        }
+        return new Result(122,"服务器出错");
+    }
+
+    @Override
+    public Result updateAddressBefore(Map<String, String> map, HttpSession httpSession) {
+        String userId=map.get("userId");
+        String addressId=map.get("id");
+        String addressValue=map.get("addressValue");
+        //更改address表 默认状态
+        Address address=new Address();
+        address.setId(Integer.valueOf(addressId));
+        address.setAddress(addressValue);
+        addressMapper.updateByPrimaryKeySelective(address);
+
+        Address a=addressMapper.selectByPrimaryKey(addressId);
+        User user=new User();
+        if (a.getIsDefulat()==1){
+            //更新主表的状态
+            user.setUserId(Long.valueOf(userId));
+            user.setAddress(a.getAddress());
+            userMapper.updateByPrimaryKeySelective(user);
+        }
+
+        //更新session状态
+        UserVO userVO = new UserVO();
+        //设置购物车中的数量
+        userVO.setShopCartItemCount(2);
+        BeanUtil.copyProperties(userMapper.selectByPrimaryKey(user.getUserId()), userVO);
+        httpSession.setAttribute(Constants.USER_SESSION_KEY, userVO);
+        return new Result(200,"设置成功");
+
+    }
+
+
 }
