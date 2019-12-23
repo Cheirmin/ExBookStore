@@ -4,10 +4,9 @@ import com.cheirmin.common.Constants;
 import com.cheirmin.common.ServiceResultEnum;
 import com.cheirmin.controller.vo.UserVO;
 import com.cheirmin.dao.AddressMapper;
+import com.cheirmin.dao.UserAdminMapper;
 import com.cheirmin.dao.UserMapper;
-import com.cheirmin.pojo.Address;
-import com.cheirmin.pojo.BooksCategory;
-import com.cheirmin.pojo.User;
+import com.cheirmin.pojo.*;
 import com.cheirmin.service.UserService;
 import com.cheirmin.util.*;
 import org.apache.ibatis.session.RowBounds;
@@ -33,6 +32,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     AddressMapper addressMapper;
+
+
+    @Autowired
+    UserAdminMapper userAdminMapper;
     @Override
     public PageResult getNewBeeMallUsersPage(PageQueryUtil pageUtil) {
         return null;
@@ -244,6 +247,61 @@ public class UserServiceImpl implements UserService {
 
     }
 
+
+    @Override
+    public PageResult getAdminUserPage(PageQueryUtil pageUtil) {
+        Example example=new Example(UserAdmin.class);
+        Example.Criteria criteria = example.createCriteria();
+//        criteria.andEqualTo("parentId",pageUtil.get("parentId"));
+        criteria.andEqualTo("super_admin",0);
+        example.setOrderByClause("`admin_user_id` DESC");
+        RowBounds rowBounds = new RowBounds((pageUtil.getPage()-1)*pageUtil.getLimit(), pageUtil.getLimit());
+        List<UserAdmin> users = userAdminMapper.selectByExampleAndRowBounds(example,rowBounds);
+
+        int total = userAdminMapper.selectCountByExample(example);
+        PageResult pageResult = new PageResult(users, total, pageUtil.getLimit(), pageUtil.getPage());
+        return pageResult;
+    }
+
+    @Override
+    public Result setadminlock(Integer lockStatus, List<Integer> ids) {
+        UserAdmin user=new UserAdmin();
+        user.setLocked(lockStatus);//Integer 转byty
+        for (Integer id : ids) {
+            user.setUserId(Long.valueOf(id));
+            if (userAdminMapper.updateByPrimaryKeySelective(user)<1){
+                return ResultGenerator.genFailResult("更新失败");
+            }
+
+        }
+
+        return ResultGenerator.genSuccessResult();
+    }
+
+    @Override
+    public Result addAdminUser(Map<String, String> map) {
+       String loginName=map.get("loginName");
+       String password=map.get("password");
+       String nickName=map.get("nickName");
+       password= CodecUtils.passwordBcryptEncode(loginName,password);
+
+       UserAdmin userAdmin=new UserAdmin();
+       userAdmin.setLocked(0);
+       userAdmin.setUserEmail(loginName);
+       userAdmin.setPassword(password);
+       userAdmin.setNick_name(nickName);
+       try {
+
+
+        if ( userAdminMapper.insertSelective(userAdmin)>0){
+            return ResultGenerator.genSuccessResult();
+        };}catch (Exception e){
+           return ResultGenerator.genFailResult("以存在");
+       }
+
+        return ResultGenerator.genFailResult("添加失败");
+    }
+
     @Override
     public Result setlock(Integer lockStatus, List<Integer> ids) {
             User user=new User();
@@ -259,6 +317,8 @@ public class UserServiceImpl implements UserService {
             return ResultGenerator.genSuccessResult();
 
     }
+
+
 
 
 }

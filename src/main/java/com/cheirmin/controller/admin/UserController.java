@@ -2,6 +2,7 @@ package com.cheirmin.controller.admin;
 
 import com.cheirmin.controller.vo.UserVO;
 import com.cheirmin.pojo.User;
+import com.cheirmin.pojo.UserAdmin;
 import com.cheirmin.service.UserService;
 import com.cheirmin.util.PageQueryUtil;
 import com.cheirmin.util.Result;
@@ -52,6 +53,49 @@ public class UserController {
         return ResultGenerator.genSuccessResult(userService.getCategorisPage(pageUtil));
     }
 
+    @GetMapping("/admins")
+    public String adminlPage(HttpServletRequest request,
+                               HttpSession httpSession) {
+
+        return "admin/exbookstore_admins";
+    }
+
+    @RequestMapping("/users/adminlist")
+    @ResponseBody
+    public Result<List<UserAdmin>> getAdminList(@RequestParam Map<String, Object> params){
+        if (StringUtils.isEmpty(params.get("page")) || StringUtils.isEmpty(params.get("limit"))) {
+            return ResultGenerator.genFailResult("参数异常！");
+        }
+
+        PageQueryUtil pageUtil = new PageQueryUtil(params);
+
+
+        return ResultGenerator.genSuccessResult(userService.getAdminUserPage(pageUtil));
+    }
+
+    @RequestMapping("/users/adminlock/{lockStatus}")
+    @ResponseBody
+    public Result setadminlock(@PathVariable("lockStatus") Integer lockStatus,@RequestBody List<Integer> ids){
+        if (lockStatus==null || ids==null) {
+            return ResultGenerator.genFailResult("参数异常！");
+        }
+
+
+        return userService.setadminlock(lockStatus,ids);
+    }
+
+    @RequestMapping("/users/addAdmin")
+    @ResponseBody
+    public Result addAdminUser(@RequestBody Map<String,String> map){
+
+        if (StringUtils.isEmpty(map.get("loginName")) || StringUtils.isEmpty(map.get("password"))||
+               StringUtils.isEmpty(map.get("nickName") )){
+            return ResultGenerator.genFailResult("参数异常！");
+        }
+        return userService.addAdminUser(map);
+    }
+
+
 
     @RequestMapping("/users/lock/{lockStatus}")
     @ResponseBody
@@ -59,7 +103,7 @@ public class UserController {
         if (lockStatus==null || ids==null) {
             return ResultGenerator.genFailResult("参数异常！");
         }
-        System.out.println(lockStatus+" "+ids);
+
 
      return userService.setlock(lockStatus,ids);
     }
