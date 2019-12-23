@@ -78,4 +78,17 @@ public class UserVO implements Serializable {
     public void setShopCartItemCount(int shopCartItemCount) {
         this.shopCartItemCount = shopCartItemCount;
     }
+
+    @Override
+    public String toString() {
+        return "UserVO{" +
+                "userId=" + userId +
+                ", nickName='" + nickName + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", introduceSign='" + introduceSign + '\'' +
+                ", address='" + address + '\'' +
+                ", shopCartItemCount=" + shopCartItemCount +
+                '}';
+    }
 }

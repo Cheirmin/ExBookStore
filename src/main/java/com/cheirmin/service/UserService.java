@@ -4,8 +4,10 @@ import com.cheirmin.controller.vo.UserVO;
 import com.cheirmin.pojo.User;
 import com.cheirmin.util.PageQueryUtil;
 import com.cheirmin.util.PageResult;
+import com.cheirmin.util.Result;
 
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  * @Message:
@@ -47,7 +49,7 @@ public interface UserService {
      * @param user
      * @return
      */
-    UserVO updateUserInfo(User user, HttpSession httpSession);
+    Result updateUserInfo(User user, HttpSession httpSession);
 
     /**
      * 用户禁用与解除禁用(0-未锁定 1-已锁定)
@@ -58,4 +60,14 @@ public interface UserService {
      */
     Boolean lockUsers(Integer[] ids, int lockStatus);
 
+
+    Result updatepassword(Map<String, String> map);
+
+    Result getaddresssbefore(Map<String, String> map);
+
+    Result setdefulat(Map<String, String> map, HttpSession httpSession);
+
+    Result addAddreBefore(Map<String, String> map);
+
+    Result updateAddressBefore(Map<String, String> map, HttpSession httpSession);
 }
