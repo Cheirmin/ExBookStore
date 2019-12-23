@@ -1,7 +1,6 @@
 package com.cheirmin.service.impl;
 
 import com.cheirmin.dao.IndexConfigMapper;
-import com.cheirmin.pojo.IndexCarousel;
 import com.cheirmin.pojo.IndexConfig;
 import com.cheirmin.service.IndexConfigService;
 import com.github.pagehelper.PageHelper;

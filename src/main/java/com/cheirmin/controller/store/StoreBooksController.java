@@ -62,7 +62,6 @@ public class StoreBooksController {
         params.put("keyword", keyword);
         //封装商品数据
         PageQueryUtil pageUtil = new PageQueryUtil(params);
-
         request.setAttribute("pageResult", booksService.searchBookInfo(pageUtil));
         return "store/search";
     }
