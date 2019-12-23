@@ -1,5 +1,6 @@
 package com.cheirmin.service;
 
+import com.cheirmin.controller.vo.IndexConfigBooksVO;
 import com.cheirmin.pojo.IndexCarousel;
 import com.cheirmin.pojo.IndexConfig;
 import com.github.pagehelper.PageInfo;
@@ -19,6 +20,8 @@ public interface IndexConfigService {
        boolean updateIndexConfigByids(String ids,HttpServletRequest request);
        boolean addIndexConfig(IndexConfig indexConfig, HttpServletRequest request);
        boolean deleteIndexConfig(IndexConfig indexConfig);
+       List<IndexConfigBooksVO> getConfigBooksesForIndex(int configType, int number);
+
 
        List<IndexConfig> queryIndexConfig();
        List<IndexConfig> queryIndexConfig(String hot);

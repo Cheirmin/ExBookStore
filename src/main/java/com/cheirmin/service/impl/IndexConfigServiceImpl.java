@@ -1,24 +1,34 @@
 package com.cheirmin.service.impl;
 
+import com.cheirmin.controller.vo.IndexConfigBooksVO;
+import com.cheirmin.dao.BookMapper;
 import com.cheirmin.dao.IndexConfigMapper;
+import com.cheirmin.pojo.Book;
 import com.cheirmin.pojo.IndexConfig;
 import com.cheirmin.service.IndexConfigService;
+import com.cheirmin.util.BeanUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class IndexConfigServiceImpl implements IndexConfigService {
 
     @Resource
     IndexConfigMapper indexConfigMapper;
+
+    @Resource
+    BookMapper bookMapper;
 
 //    分页查询热销商品
     @Override
@@ -124,8 +134,48 @@ public class IndexConfigServiceImpl implements IndexConfigService {
         return false;
     }
 
+    @Override
+    public List<IndexConfigBooksVO> getConfigBooksesForIndex(int configType, int number) {
+        List<IndexConfigBooksVO> indexConfigBooksVOS = new ArrayList<>(number);
 
-//    热词显示
+        Example example = new Example(IndexConfig.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("configType",configType);
+        example.setOrderByClause("`config_rank` DESC");
+
+        RowBounds bounds=new RowBounds(0, number);
+
+        List<IndexConfig> indexConfigs = indexConfigMapper.selectByExampleAndRowBounds(example,bounds);
+        if (!CollectionUtils.isEmpty(indexConfigs)) {
+            //取出所有的bookIds
+            List<Long> bookIds = indexConfigs.stream().map(IndexConfig::getBookId).collect(Collectors.toList());
+
+            Example example1 = new Example(Book.class);
+            Example.Criteria criteria1 = example1.createCriteria();
+            criteria1.andIn("bookId",bookIds);
+
+            List<Book> books = bookMapper.selectByExample(example1);
+
+            indexConfigBooksVOS = BeanUtil.copyList(books, IndexConfigBooksVO.class);
+            for (IndexConfigBooksVO indexConfigBooksVO : indexConfigBooksVOS) {
+                String booksName = indexConfigBooksVO.getBookName();
+                String booksIntro = indexConfigBooksVO.getBookIntro();
+                // 字符串过长导致文字超出的问题
+                if (booksName.length() > 30) {
+                    booksName = booksName.substring(0, 30) + "...";
+                    indexConfigBooksVO.setBookName(booksName);
+                }
+                if (booksIntro.length() > 22) {
+                    booksIntro = booksIntro.substring(0, 22) + "...";
+                    indexConfigBooksVO.setBookIntro(booksIntro);
+                }
+            }
+        }
+        return indexConfigBooksVOS;
+    }
+
+
+    //    热词显示
 //    Criteria:为example提供多个条件的使用
 //    RowBounds：可以实现分页查询，就是查询第几条到几条
 //    查询热销商品前10
@@ -147,7 +197,6 @@ public class IndexConfigServiceImpl implements IndexConfigService {
     public List<IndexConfig> queryIndexConfig(String hot) {
         Example example=new Example(IndexConfig.class);
         Example.Criteria criteria = example.createCriteria();
-        System.out.println(hot);
         criteria.orLike("configName",hot+"%");
         List<IndexConfig> indexConfigs = indexConfigMapper.selectByExample(example);
         if (indexConfigs!=null){
