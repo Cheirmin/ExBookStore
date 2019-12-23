@@ -1,12 +1,15 @@
 package com.cheirmin.pojo;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
+import tk.mybatis.mapper.annotation.KeySql;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Table(name = "tb_user")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @KeySql(useGeneratedKeys = true)
     private Long userId;
 
     @Override
@@ -25,22 +28,31 @@ public class User {
                 '}';
     }
 
+    @Column(name = "nick_name")
     private String nickName;
 
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "user_email")
     private String userEmail;
 
+    @Column(name = "user_phone")
     private String userPhone;
 
+    @Column(name = "introduce_sign")
     private String introduceSign;
 
+    @Column(name = "address")
     private String address;
 
+    @Column(name = "is_deleted")
     private Byte isDeleted;
 
+    @Column(name = "locked_flag")
     private Byte lockedFlag;
 
+    @Column(name = "create_time")
     private Date createTime;
 
     public Long getUserId() {

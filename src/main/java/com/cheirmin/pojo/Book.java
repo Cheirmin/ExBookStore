@@ -1,51 +1,71 @@
 package com.cheirmin.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import tk.mybatis.mapper.annotation.KeySql;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Table(name = "tb_books")
 public class Book {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @KeySql(useGeneratedKeys = true)
     private Long bookId;
 
+    @Column(name = "book_name")
     private String bookName;
 
+    @Column(name = "book_intro")
     private String bookIntro;
 
+    @Column(name = "book_author")
     private String bookAuthor;
 
+    @Column(name = "publishing_house")
     private String publishingHouse;
 
+    @Column(name = "book_category_id1")
     private Long bookCategoryId1;
 
+    @Column(name = "book_category_id2")
     private Long bookCategoryId2;
 
+    @Column(name = "book_category_id3")
     private Long bookCategoryId3;
 
+    @Column(name = "book_cover_img")
     private String bookCoverImg;
 
+    @Column(name = "book_carousel")
     private String bookCarousel;
 
+    @Column(name = "original_price")
     private Integer originalPrice;
 
+    @Column(name = "selling_price")
     private Integer sellingPrice;
 
+    @Column(name = "stock_num")
     private Integer stockNum;
 
+    @Column(name = "tag")
     private String tag;
 
+    @Column(name = "book_sell_status")
     private Byte bookSellStatus;
 
+    @Column(name = "create_user")
     private Integer createUser;
 
+    @Column(name = "create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
+    @Column(name = "update_user")
     private Integer updateUser;
 
+    @Column(name = "book_detail_content")
     private String bookDetailContent;
 
     public Long getBookId() {
