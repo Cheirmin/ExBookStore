@@ -1,11 +1,29 @@
 package com.cheirmin.pojo;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
 @Table(name = "tb_user")
 public class User {
+    @Id
     private Long userId;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", nickName='" + nickName + '\'' +
+                ", password='" + password + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", introduceSign='" + introduceSign + '\'' +
+                ", address='" + address + '\'' +
+                ", isDeleted=" + isDeleted +
+                ", lockedFlag=" + lockedFlag +
+                ", createTime=" + createTime +
+                '}';
+    }
 
     private String nickName;
 
