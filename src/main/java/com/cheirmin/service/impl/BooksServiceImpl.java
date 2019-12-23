@@ -73,8 +73,16 @@ public class BooksServiceImpl implements BooksService {
     public PageResult searchBookInfo(PageQueryUtil pageUtil) {
 
         String booksCategoryId = (String) pageUtil.get("booksCategoryId");
-        if (booksCategoryId== null) booksCategoryId= "";
+        Example example2=new Example(Book.class);
+        Example.Criteria criteria2 = example2.createCriteria();
+        if (booksCategoryId != null && !booksCategoryId.equals("")) {
+            criteria2.orEqualTo("bookCategoryId1",booksCategoryId);
+            criteria2.orEqualTo("bookCategoryId2",booksCategoryId);
+            criteria2.orEqualTo("bookCategoryId3",booksCategoryId);
+        }
+
         String keyword =  (String) pageUtil.get("keyword");
+
         if (keyword== null) keyword= "";
         keyword = "%" + keyword + "%";
 
@@ -83,13 +91,6 @@ public class BooksServiceImpl implements BooksService {
         criteria.orLike("bookName",keyword);
         criteria.orLike("bookAuthor",keyword);
         criteria.orLike("publishingHouse",keyword);
-
-
-        Example example2=new Example(Book.class);
-        Example.Criteria criteria2 = example2.createCriteria();
-        criteria2.orEqualTo("bookCategoryId1",booksCategoryId);
-        criteria2.orEqualTo("bookCategoryId2",booksCategoryId);
-        criteria2.orEqualTo("bookCategoryId3",booksCategoryId);
 
         example.and(criteria2);
         example.and(criteria);
