@@ -47,16 +47,16 @@
                     <div class="content2 center">
                         <div class="sub_content fl ">
                         </div>
-                        <div class="sub_content cover fl"><img th:src="@{${item.goodsCoverImg}}"></div>
-                        <div class="sub_content fl ft20" th:text="${item.goodsName}">商品名称</div>
+                        <div class="sub_content cover fl"><img th:src="@{${item.bookCoverImg}}"></div>
+                        <div class="sub_content fl ft20" th:text="${item.bookName}">商品名称</div>
                         <div class="sub_content fl" th:text="${item.sellingPrice+'元'}">1299元</div>
                         <div class="sub_content fl">
                             <input class="goods_count" th:id="${'goodsCount'+item.cartItemId}" type="number"
                                    th:onblur="'updateItem('+${item.cartItemId}+')'"
-                                   th:value="${item.goodsCount}" step="1" min="1"
+                                   th:value="${item.bookCount}" step="1" min="1"
                                    max="5">
                         </div>
-                        <div class="sub_content fl" th:text="${item.goodsCount*item.sellingPrice+'元'}">1299元</div>
+                        <div class="sub_content fl" th:text="${item.bookCount*item.sellingPrice+'元'}">1299元</div>
                         <div class="sub_content fl"><a href="##" th:onclick="'deleteItem('+${item.cartItemId}+')'">×</a>
                         </div>
                         <div class="clear"></div>
@@ -69,19 +69,19 @@
                 <ul>
                     <li><a th:href="@{/index}">继续购物</a></li>
                     <li>|</li>
-                    <li>共<span th:text="${itemsTotal}">13</span>件商品</li>
+                    <li>共<span th:text="${booksTotal}">13</span>件商品</li>
                     <div class="clear"></div>
                 </ul>
             </div>
             <div class="order_div fr">
                 <div class="order_total fl">合计（不含运费）：<span th:text="${priceTotal}+'.00元'">1299.00元</span></div>
                 <div class="order_button fr">
-                    <th:block th:if="${itemsTotal == 0}">
+                    <th:block th:if="${booksTotal == 0}">
                         <input class="order_button_c" type="button" name="tip"
                                onclick="tip()"
                                value="去结算"/>
                     </th:block>
-                    <th:block th:unless="${itemsTotal == 0}">
+                    <th:block th:unless="${booksTotal == 0}">
                         <input class="order_button_d" type="button" name="settle"
                                onclick="settle()"
                                value="去结算"/>
