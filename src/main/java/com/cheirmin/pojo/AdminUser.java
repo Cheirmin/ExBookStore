@@ -1,9 +1,11 @@
 package com.cheirmin.pojo;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "tb_user_admin")
 public class AdminUser {
+    @Id
     private Integer adminUserId;
 
     private String loginUserName;

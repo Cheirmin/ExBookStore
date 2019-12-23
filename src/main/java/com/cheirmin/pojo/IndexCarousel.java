@@ -1,7 +1,6 @@
 package com.cheirmin.pojo;
 
 import org.springframework.boot.autoconfigure.quartz.QuartzProperties;
-
 import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;

@@ -1,10 +1,12 @@
 package com.cheirmin.pojo;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
 @Table(name = "tb_order")
 public class Order {
+    @Id
     private Long orderId;
 
     private String orderNo;

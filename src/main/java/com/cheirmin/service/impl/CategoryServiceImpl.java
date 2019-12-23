@@ -7,6 +7,7 @@ import com.cheirmin.controller.vo.SearchPageCategoryVO;
 import com.cheirmin.controller.vo.SecondLevelCategoryVO;
 import com.cheirmin.controller.vo.ThirdLevelCategoryVO;
 import com.cheirmin.dao.BooksCategoryMapper;
+import com.cheirmin.pojo.Book;
 import com.cheirmin.pojo.BooksCategory;
 import com.cheirmin.service.CategoryService;
 import com.cheirmin.util.BeanUtil;
@@ -39,7 +40,20 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public PageResult getCategorisPage(PageQueryUtil pageUtil) {
-        return null;
+        Example example=new Example(BooksCategory.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("parentId",pageUtil.get("parentId"));
+        criteria.andEqualTo("categoryLevel",pageUtil.get("categoryLevel"));
+
+        example.setOrderByClause("`category_rank` DESC");
+
+        RowBounds rowBounds = new RowBounds((pageUtil.getPage()-1)*pageUtil.getLimit(), pageUtil.getLimit());
+        List<BooksCategory> booksCategories = booksCategoryMapper.selectByExampleAndRowBounds(example,rowBounds);
+
+        int total = booksCategoryMapper.selectCountByExample(example);
+
+        PageResult pageResult = new PageResult(booksCategories, total, pageUtil.getLimit(), pageUtil.getPage());
+        return pageResult;
     }
 
     @Override
@@ -53,8 +67,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public BooksCategory getGoodsCategoryById(Long id) {
-        return null;
+    public BooksCategory getBooksCategoryById(Long id) {
+        return booksCategoryMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -143,11 +157,41 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public SearchPageCategoryVO getCategoriesForSearch(Long categoryId) {
+        SearchPageCategoryVO searchPageCategoryVO = new SearchPageCategoryVO();
+        BooksCategory thirdLevelBooksCategory = booksCategoryMapper.selectByPrimaryKey(categoryId);
+
+        if (thirdLevelBooksCategory != null && thirdLevelBooksCategory.getCategoryLevel() == CategoryLevelEnum.LEVEL_THREE.getLevel()) {
+            //获取当前三级分类的二级分类
+            BooksCategory secondLevelBooksCategory = booksCategoryMapper.selectByPrimaryKey(thirdLevelBooksCategory.getParentId());
+
+            if (secondLevelBooksCategory != null && secondLevelBooksCategory.getCategoryLevel() == CategoryLevelEnum.LEVEL_TWO.getLevel()) {
+                //获取当前二级分类下的三级分类List
+                Example example=new Example(BooksCategory.class);
+                Example.Criteria criteria = example.createCriteria();
+                criteria.andIn("parentId",Collections.singletonList(secondLevelBooksCategory.getCategoryId()));
+                criteria.andEqualTo("categoryLevel",CategoryLevelEnum.LEVEL_THREE.getLevel());
+                example.setOrderByClause("`category_rank` DESC");
+                RowBounds rowBounds = new RowBounds(0, Constants.SEARCH_CATEGORY_NUMBER);
+                List<BooksCategory> thirdLevelCategories = booksCategoryMapper.selectByExampleAndRowBounds(example,rowBounds);
+
+                searchPageCategoryVO.setCurrentCategoryName(thirdLevelBooksCategory.getCategoryName());
+                searchPageCategoryVO.setSecondLevelCategoryName(secondLevelBooksCategory.getCategoryName());
+                searchPageCategoryVO.setThirdLevelCategoryList(thirdLevelCategories);
+                return searchPageCategoryVO;
+            }
+        }
         return null;
     }
 
     @Override
     public List<BooksCategory> selectByLevelAndParentIdsAndNumber(List<Long> parentIds, int categoryLevel) {
-        return null;
+        Example example=new Example(BooksCategory.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andIn("parentId",parentIds);
+        criteria.andEqualTo("categoryLevel",categoryLevel);
+
+        return booksCategoryMapper.selectByExample(example);
     }
+
+
 }

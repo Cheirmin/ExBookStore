@@ -27,7 +27,7 @@ public interface CategoryService {
 
     String updateGoodsCategory(BooksCategory booksCategory);
 
-    BooksCategory getGoodsCategoryById(Long id);
+    BooksCategory getBooksCategoryById(Long id);
 
     Boolean deleteBatch(Integer[] ids);
 

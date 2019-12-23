@@ -1,10 +1,14 @@
 package com.cheirmin.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
 @Table(name = "tb_books")
 public class Book {
+    @Id
     private Long bookId;
 
     private String bookName;
@@ -37,6 +41,7 @@ public class Book {
 
     private Integer createUser;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
     private Integer updateUser;

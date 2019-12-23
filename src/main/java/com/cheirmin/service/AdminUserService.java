@@ -1,5 +1,7 @@
 package com.cheirmin.service;
 
+import com.cheirmin.pojo.AdminUser;
+
 /**
  * @Message:
  * @Author：Cheirmin
@@ -7,4 +9,8 @@ package com.cheirmin.service;
  * @Version 1.0
  */
 public interface AdminUserService {
+    //获取一个AdminUser对象
+    AdminUser getUserDetailById(Integer loginUserId);
+    //修改密码
+    boolean updatePassword(Integer loginUserId, String originalPassword, String newPassword);
 }

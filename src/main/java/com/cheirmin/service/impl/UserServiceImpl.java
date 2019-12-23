@@ -70,10 +70,11 @@ public class UserServiceImpl implements UserService {
         }else {
             User user = users.get(0);
 
-            System.out.println("password--" + user.getPassword());
-
             Boolean aBoolean = CodecUtils.passwordConfirm(loginName.concat(password), user.getPassword());
-            System.out.println(aBoolean?"--登录成功--":"--登录失败--");
+            if (aBoolean){
+                //密码错误
+                return ServiceResultEnum.LOGIN_PASSWORD_ERROR.getResult();
+            }
             if ( user != null && httpSession != null) {
                 if (user.getLockedFlag() == 1) {
                     return ServiceResultEnum.LOGIN_USER_LOCKED.getResult();

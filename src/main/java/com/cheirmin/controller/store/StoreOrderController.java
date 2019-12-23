@@ -9,5 +9,5 @@ import org.springframework.stereotype.Controller;
  * @Version 1.0
  */
 //@Controller
-public class OrderController {
+public class StoreOrderController {
 }

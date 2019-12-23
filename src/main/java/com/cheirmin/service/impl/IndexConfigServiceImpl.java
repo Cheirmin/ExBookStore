@@ -1,6 +1,5 @@
 package com.cheirmin.service.impl;
 
-import com.cheirmin.common.Constants;
 import com.cheirmin.dao.IndexConfigMapper;
 import com.cheirmin.pojo.IndexCarousel;
 import com.cheirmin.pojo.IndexConfig;
@@ -17,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class IndexCofigServiceImpl implements IndexConfigService {
+public class IndexConfigServiceImpl implements IndexConfigService {
 
     @Resource
     IndexConfigMapper indexConfigMapper;
@@ -135,7 +134,7 @@ public class IndexCofigServiceImpl implements IndexConfigService {
     public List<IndexConfig> queryIndexConfig() {
         Example example=new Example(IndexConfig.class);
         RowBounds bounds=new RowBounds(0, 10);
-         example.setOrderByClause("config_rank desc");
+        example.setOrderByClause("config_rank desc");
         List<IndexConfig> indexConfigs = indexConfigMapper.selectByExampleAndRowBounds(example, bounds);
         if (indexConfigs!=null){
             return indexConfigs;

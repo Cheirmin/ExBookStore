@@ -52,7 +52,7 @@ public class IndexController {
             return "error/500";
         }
 
-        if (CollectionUtils.isEmpty(indexCarousels)&&indexCarousels.size()<=0){
+        if (CollectionUtils.isEmpty(indexCarousels)||indexCarousels.size()<=0){
             return "error/500";
         }
         request.setAttribute("categories", categories);//分类数据
@@ -61,8 +61,8 @@ public class IndexController {
     }
 
     @RequestMapping("/loadhot")
-    public ResponseEntity<List<IndexConfig>> loadhot(){
-        List<IndexConfig> indexConfigs = indexConfigService.queryIndexConfig();
+    public ResponseEntity<List<IndexConfig>> loadhot(String hot){
+        List<IndexConfig> indexConfigs = indexConfigService.queryIndexConfig(hot);
         return  ResponseEntity.ok(indexConfigs);
 }
 }

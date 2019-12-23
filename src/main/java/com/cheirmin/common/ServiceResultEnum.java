@@ -21,6 +21,8 @@ public enum ServiceResultEnum {
 
     LOGIN_NAME_NULL("请输入登录名！"),
 
+    LOGIN_PASSWORD_ERROR("登录失败，密码错误！"),
+
     REGISTER_EMAIL_NULL("请输入注册邮箱！"),
 
     VERIFY_CODE_NOT_SEND("验证码未发送！"),

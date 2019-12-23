@@ -1,4 +1,4 @@
- $('#keyword').keydown(function (e) {
+ $('#keyword').keyup(function (e) {
      var q = $('#keyword').val();
      var html=[];
         $.ajax({
@@ -7,9 +7,9 @@
             data:{"hot":q},
             success:function (data) {
                 $.each(data,function (index,value) {
-                    console.log(data)
                     html[index]=value.configName;
                 });
+                console.log(html);
                 $("#keyword").autocomplete({
                     source:html
                 });

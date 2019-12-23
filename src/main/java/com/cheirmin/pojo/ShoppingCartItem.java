@@ -1,10 +1,12 @@
 package com.cheirmin.pojo;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
 @Table(name = "tb_shopping_cart_item")
 public class ShoppingCartItem {
+    @Id
     private Long cartItemId;
 
     private Long userId;
