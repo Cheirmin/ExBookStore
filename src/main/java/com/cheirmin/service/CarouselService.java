@@ -3,6 +3,7 @@ package com.cheirmin.service;
 import com.cheirmin.pojo.IndexCarousel;
 import com.github.pagehelper.PageInfo;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -15,8 +16,10 @@ import java.util.List;
 //轮播图的管理
 public interface CarouselService {
     PageInfo queryallCarousel(Integer indexpage, Integer pagesize);
-    boolean updateCarousel(IndexCarousel indexCarousel);
-    boolean deleteCarousel(IndexCarousel indexCarousel);
-    boolean addCarousel(IndexCarousel indexCarousel);
+    IndexCarousel selectoneCarousel(Integer id);
+    boolean updateCarousel(IndexCarousel indexCarousel,HttpServletRequest request);
+    boolean deleteCarousel(String ids);
+    boolean updateCarouselByids(String ids,HttpServletRequest request);
+    boolean addCarousel(IndexCarousel indexCarousel, HttpServletRequest request);
     List<IndexCarousel> queryCarouselBySort();
 }

@@ -1,5 +1,10 @@
 package com.cheirmin.pojo;
 
+import org.springframework.boot.autoconfigure.quartz.QuartzProperties;
+
+import javax.annotation.Generated;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
@@ -7,22 +12,31 @@ import java.util.Date;
 @Table(name = "tb_index_carousel")
 public class IndexCarousel {
     @Id
+    @GeneratedValue(generator = "JDBC")
     private Integer carouselId;
 
+    @Column(name = "carousel_url")
     private String carouselUrl;
 
+    @Column(name ="redirect_url" )
     private String redirectUrl;
 
+    @Column(name = "carousel_rank")
     private Integer carouselRank;
 
+    @Column(name ="is_deleted" )
     private Byte isDeleted;
 
+    @Column(name = "create_time")
     private Date createTime;
 
+    @Column(name = "create_user")
     private Integer createUser;
 
+    @Column(name = "update_time")
     private Date updateTime;
 
+    @Column(name = "update_user")
     private Integer updateUser;
 
     public Integer getCarouselId() {
@@ -95,5 +109,20 @@ public class IndexCarousel {
 
     public void setUpdateUser(Integer updateUser) {
         this.updateUser = updateUser;
+    }
+
+    @Override
+    public String toString() {
+        return "IndexCarousel{" +
+                "carouselId=" + carouselId +
+                ", carouselUrl='" + carouselUrl + '\'' +
+                ", redirectUrl='" + redirectUrl + '\'' +
+                ", carouselRank=" + carouselRank +
+                ", isDeleted=" + isDeleted +
+                ", createTime=" + createTime +
+                ", createUser=" + createUser +
+                ", updateTime=" + updateTime +
+                ", updateUser=" + updateUser +
+                '}';
     }
 }

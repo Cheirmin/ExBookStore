@@ -3,6 +3,7 @@ package com.cheirmin.service.impl;
 import com.cheirmin.common.Constants;
 import com.cheirmin.dao.IndexCarouselMapper;
 import com.cheirmin.pojo.IndexCarousel;
+import com.cheirmin.pojo.User;
 import com.cheirmin.service.CarouselService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -11,6 +12,9 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,27 +31,38 @@ public class CarouseServiceImpl implements CarouselService {
        if (pagesize==null){
            pagesize=10;
        }
+       Example example=new Example(IndexCarousel.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("isDeleted",0);
         PageHelper.startPage(indexpage,pagesize);
-        List<IndexCarousel> indexCarousels = indexCarouselMapper.selectAll();
+        List<IndexCarousel> indexCarousels = indexCarouselMapper.selectByExample(example);
         PageInfo pageInfo=new PageInfo(indexCarousels);
         return pageInfo;
     }
 
     @Override
-    public boolean updateCarousel(IndexCarousel indexCarousel) {
-        if (indexCarousel!=null){
-            int i = indexCarouselMapper.updateByPrimaryKeySelective(indexCarousel);
-            if (i>0){
-                return  true;
+    public IndexCarousel selectoneCarousel(Integer id) {
+        if (id!=null){
+            Example example=new Example(IndexCarousel.class);
+            Example.Criteria criteria = example.createCriteria();
+            criteria.andEqualTo("carouselId",id);
+            IndexCarousel indexCarousel1 = indexCarouselMapper.selectOneByExample(example);
+            if (indexCarousel1!=null){
+                return  indexCarousel1;
             }
         }
-        return false;
+        return null;
     }
 
     @Override
-    public boolean deleteCarousel(IndexCarousel indexCarousel) {
+    public boolean updateCarousel(IndexCarousel indexCarousel,HttpServletRequest request) {
         if (indexCarousel!=null){
-            int i = indexCarouselMapper.delete(indexCarousel);
+            indexCarousel.setUpdateTime(new Date());
+            if (indexCarousel.getUpdateUser()==null){
+                Object userId = request.getSession().getAttribute("loginUserId");
+                indexCarousel.setUpdateUser((Integer) userId);   //如果当前用户没有，默认为1，可从session去取值
+            }
+            int i = indexCarouselMapper.updateByPrimaryKeySelective(indexCarousel);
             if (i>0){
                 return true;
             }
@@ -56,8 +71,65 @@ public class CarouseServiceImpl implements CarouselService {
     }
 
     @Override
-    public boolean addCarousel(IndexCarousel indexCarousel) {
+    public boolean deleteCarousel(String ids) {
+        if (ids!=null&&ids.length()>0){
+            List<Long> id=new ArrayList<>();
+            String replace = ids.replace("[", "");
+            String s1 = replace.replace("]", "");
+            String s = s1.replace("\"", "");
+            String[] strings = s.split(",");
+            for (String str:strings){
+                id.add(Long.valueOf(str));
+            }
+            int i = indexCarouselMapper.deleteByIdList(id);
+            if (i>0){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateCarouselByids(String ids,HttpServletRequest request) {
+        int i=0;
+        if (ids!=null&&ids.length()>0){
+            String replace = ids.replace("[", "");
+            String s1 = replace.replace("]", "");
+            String s = s1.replace("\"", "");
+            String[] strings = s.split(",");
+            for (String str:strings){
+               IndexCarousel indexCarousel=new IndexCarousel();
+               indexCarousel.setCarouselId(Integer.valueOf(str));
+               indexCarousel.setIsDeleted((byte) 1);
+                indexCarousel.setUpdateTime(new Date());
+                if (indexCarousel.getUpdateUser()==null){
+                    Object userId = request.getSession().getAttribute("loginUserId");
+                    indexCarousel.setUpdateUser((Integer) userId);   //如果当前用户没有，默认为1，可从session去取值
+                }
+                i+= indexCarouselMapper.updateByPrimaryKeySelective(indexCarousel);
+            }
+            if (i>=strings.length){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addCarousel(IndexCarousel indexCarousel,HttpServletRequest request) {
         if (indexCarousel!=null){
+            indexCarousel.setCreateTime(new Date());
+            indexCarousel.setUpdateTime(new Date());
+            indexCarousel.setIsDeleted((byte) 0);
+
+//         这里用户需要从session中取值
+            Object loginUserId = request.getSession().getAttribute("loginUserId");
+            if (indexCarousel.getCreateUser()==null){
+                indexCarousel.setCreateUser((Integer) loginUserId);
+            }
+            if (indexCarousel.getUpdateUser()==null){
+                indexCarousel.setUpdateUser((Integer) loginUserId);
+            }
             int i = indexCarouselMapper.insert(indexCarousel);
             if (i>0){
                 return true;
