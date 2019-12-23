@@ -6,9 +6,11 @@ import com.cheirmin.controller.vo.UserVO;
 import com.cheirmin.dao.AddressMapper;
 import com.cheirmin.dao.UserMapper;
 import com.cheirmin.pojo.Address;
+import com.cheirmin.pojo.BooksCategory;
 import com.cheirmin.pojo.User;
 import com.cheirmin.service.UserService;
 import com.cheirmin.util.*;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -223,6 +225,38 @@ public class UserServiceImpl implements UserService {
         BeanUtil.copyProperties(userMapper.selectByPrimaryKey(user.getUserId()), userVO);
         httpSession.setAttribute(Constants.USER_SESSION_KEY, userVO);
         return new Result(200,"设置成功");
+
+    }
+
+    @Override
+    public PageResult getCategorisPage(PageQueryUtil pageUtil) {
+        Example example=new Example(User.class);
+        Example.Criteria criteria = example.createCriteria();
+//        criteria.andEqualTo("parentId",pageUtil.get("parentId"));
+//        criteria.andEqualTo("categoryLevel",pageUtil.get("categoryLevel"));
+        example.setOrderByClause("`user_id` DESC");
+        RowBounds rowBounds = new RowBounds((pageUtil.getPage()-1)*pageUtil.getLimit(), pageUtil.getLimit());
+        List<User> users = userMapper.selectByExampleAndRowBounds(example,rowBounds);
+
+        int total = userMapper.selectCountByExample(example);
+        PageResult pageResult = new PageResult(users, total, pageUtil.getLimit(), pageUtil.getPage());
+        return pageResult;
+
+    }
+
+    @Override
+    public Result setlock(Integer lockStatus, List<Integer> ids) {
+            User user=new User();
+            user.setLockedFlag(Byte.valueOf(lockStatus.toString()));//Integer 转byty
+        for (Integer id : ids) {
+            user.setUserId(Long.valueOf(id));
+            if (userMapper.updateByPrimaryKeySelective(user)<1){
+                return ResultGenerator.genFailResult("更新失败");
+            }
+
+        }
+
+            return ResultGenerator.genSuccessResult();
 
     }
 
