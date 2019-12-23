@@ -29,10 +29,10 @@ public class IndexController {
     private CategoryService categoryService;
 
     @Resource
-    CarouselService carouselService;
+    private CarouselService carouselService;
 
     @Resource
-    IndexConfigService indexConfigService;
+    private IndexConfigService indexConfigService;
 
     @GetMapping({"/index", "/", "/index.html"})
     public String indexPage(HttpServletRequest request) {

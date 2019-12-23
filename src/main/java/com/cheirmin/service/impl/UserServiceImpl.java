@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
             User user = users.get(0);
 
             Boolean aBoolean = CodecUtils.passwordConfirm(loginName.concat(password), user.getPassword());
-            if (aBoolean){
+            if (!aBoolean){
                 //密码错误
                 return ServiceResultEnum.LOGIN_PASSWORD_ERROR.getResult();
             }
