@@ -66,21 +66,21 @@
                                                     <td class="order-items">
                                                         <ul class="goods-list">
                                                             <th:block
-                                                                    th:each="item : ${order.newBeeMallOrderItemVOS}">
+                                                                    th:each="item : ${order.orderItemVOS}">
                                                                 <li>
                                                                     <div class="figure figure-thumb">
                                                                         <a target="_blank"
-                                                                           th:href="@{'/goods/detail/'+${item.goodsId}}">
-                                                                            <img th:src="@{${item.goodsCoverImg}}"
+                                                                           th:href="@{'/book/detail/'+${item.bookId}}">
+                                                                            <img th:src="@{${item.bookCoverImg}}"
                                                                                  width="80" height="80" alt="">
                                                                         </a>
                                                                     </div>
                                                                     <p class="name"><a target="_blank"
-                                                                                       th:href="@{'/goods/detail/'+${item.goodsId}}"
-                                                                                       th:text="${item.goodsName}">newbee</a>
+                                                                                       th:href="@{'/book/detail/'+${item.bookId}}"
+                                                                                       th:text="${item.bookName}">旧生</a>
                                                                     </p>
                                                                     <p class="price"
-                                                                       th:text="${item.sellingPrice+'元 x '+item.goodsCount}">
+                                                                       th:text="${item.sellingPrice+'元 x '+item.bookCount}">
                                                                         13元 × 1</p></li>
                                                             </th:block>
                                                         </ul>
