@@ -1,7 +1,7 @@
 package com.cheirmin.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.boot.autoconfigure.quartz.QuartzProperties;
-
 import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -27,12 +27,14 @@ public class IndexCarousel {
     @Column(name ="is_deleted" )
     private Byte isDeleted;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "create_time")
     private Date createTime;
 
     @Column(name = "create_user")
     private Integer createUser;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "update_time")
     private Date updateTime;
 

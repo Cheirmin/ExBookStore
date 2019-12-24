@@ -7,6 +7,7 @@ import com.cheirmin.util.PageResult;
 import com.cheirmin.util.Result;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -70,4 +71,14 @@ public interface UserService {
     Result addAddreBefore(Map<String, String> map);
 
     Result updateAddressBefore(Map<String, String> map, HttpSession httpSession);
+
+    PageResult getCategorisPage(PageQueryUtil pageUtil);
+
+    Result setlock(Integer lockStatus, List<Integer> ids);
+
+    PageResult getAdminUserPage(PageQueryUtil pageUtil);
+
+    Result setadminlock(Integer lockStatus, List<Integer> ids);
+
+    Result addAdminUser(Map<String, String> map);
 }

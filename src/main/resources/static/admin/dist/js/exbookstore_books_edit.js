@@ -18,7 +18,7 @@ $(function () {
     });
 
     new AjaxUpload('#uploadGoodsCoverImg', {
-        action: '/admin/upload/file',
+        action: '/admin/upload',
         name: 'file',
         autoSubmit: true,
         responseType: "json",
@@ -29,7 +29,7 @@ $(function () {
             }
         },
         onComplete: function (file, r) {
-            if (r != null && r.resultCode == 200) {
+            if (r != null) {
                 $("#goodsCoverImg").attr("src", r.data);
                 $("#goodsCoverImg").attr("style", "width: 128px;height: 128px;display:block;");
                 return false;

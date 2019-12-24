@@ -1,6 +1,7 @@
 package com.cheirmin.controller.admin;
 
 import com.cheirmin.common.CategoryLevelEnum;
+import com.cheirmin.pojo.Book;
 import com.cheirmin.pojo.BooksCategory;
 import com.cheirmin.service.BooksService;
 import com.cheirmin.service.CategoryService;
@@ -75,4 +76,24 @@ public class BooksController {
     }
 
 
+//    添加书籍
+    @RequestMapping("/goods/save")
+    @ResponseBody
+    public Result addbook(@RequestBody Book book){
+        String s = booksService.saveBookInfo(book);
+        return null;
+    }
+
+//    书籍上架
+    @RequestMapping("/goods/status/{status}")
+    @ResponseBody
+    public Result putbook(@RequestBody List<Long> ids,@PathVariable("status") Integer book_sell_status,HttpServletRequest request){
+        System.out.println(ids);
+        Boolean aBoolean = booksService.batchUpdateSellStatus(ids, book_sell_status, request);
+        if (aBoolean){
+            Result result=new Result(200,"success");
+            return result;
+        }
+        return null;
+    }
 }

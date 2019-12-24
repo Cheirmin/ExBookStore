@@ -1,5 +1,7 @@
 package com.cheirmin.controller.admin;
 
+import com.cheirmin.controller.enums.UploadFileTypeEnum;
+import org.apache.commons.io.FileUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.HttpServletRequest;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
@@ -20,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-@Controller()
+@Controller
 @RequestMapping("/admin")
 public class UploadFile {
 
@@ -75,4 +78,39 @@ public class UploadFile {
         url.add("/load/"+imgname);
         return ResponseEntity.ok(url);
     }
+
+
+    @RequestMapping("/file")
+    @ResponseBody
+    public ResponseEntity<String> upExccle(@RequestParam("file") MultipartFile file, HttpServletRequest request){
+
+
+        String type=file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1,file.getOriginalFilename().length());
+        String fileName = null;
+        //*******
+        UploadFileTypeEnum uploadFileTypeEnum = UploadFileTypeEnum.getFileEnumByType(type);
+        if (uploadFileTypeEnum == UploadFileTypeEnum.ERROR_TYPE) {
+            //格式错误则不允许上传，直接返回错误提示
+            return ResponseEntity.status(500).body("格式错误");
+        } else {
+            //生成文件名称通用方法
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmss");
+            Random rd=new Random();
+            StringBuilder stringBuilder=new StringBuilder();
+            stringBuilder.append(sdf.format(new Date())).append(rd.nextInt(100)).append(".").append(type);
+            fileName=stringBuilder.toString();
+        }
+        try {
+            String aStatic = URLDecoder.decode(this.getClass().getClassLoader().getResource("static").getFile(), "utf-8");
+            String dir=aStatic+File.separator+"upload"+File.separator;; //将虚拟路径转化为实际路径并在定位的子目录当中
+            //
+            FileUtils.writeByteArrayToFile(new File(dir, fileName), file.getBytes());
+            return ResponseEntity.ok("/upload/"+fileName);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("文件上传失败");
+        }
+
+    }
+
 }

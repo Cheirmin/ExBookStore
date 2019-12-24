@@ -1,14 +1,14 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: '/admin/users/list',
+        url: '/admin/users/adminlist',
         datatype: "json",
         colModel: [
             {label: 'id', name: 'userId', index: 'userId', width: 50, key: true, hidden: true},
-            {label: '昵称', name: 'nickName', index: 'nickName', width: 180},
+            {label: '昵称', name: 'nick_name', index: 'nick_name', width: 180},
             {label: '登录名', name: 'userEmail', index: 'userEmail', width: 120},
-            {label: '身份状态', name: 'lockedFlag', index: 'lockedFlag', width: 60, formatter: lockedFormatter},
-            {label: '是否注销', name: 'isDeleted', index: 'isDeleted', width: 60, formatter: deletedFormatter},
-            {label: '注册时间', name: 'createTime', index: 'createTime', width: 120}
+            {label: '身份状态', name: 'locked', index: 'locked', width: 60, formatter: lockedFormatter},
+           // {label: '是否注销', name: 'isDeleted', index: 'isDeleted', width: 60, formatter: deletedFormatter},
+           // {label: '注册时间', name: 'createTime', index: 'createTime', width: 120}
         ],
         height: 560,
         rowNum: 10,
@@ -58,6 +58,95 @@ $(function () {
     }
 });
 
+
+function adminAdd() {
+    reset();
+    $('.modal-title').html('店员添加');
+    $('#categoryModal').modal('show');
+}
+function reset() {
+    $("#loginName").val('');
+    $("#password1").val('');
+    $("#password2").val('');
+    $("#nickName").val('');
+    $('#edit-error-msg').css("display", "none");
+}
+
+
+
+//绑定modal上的保存按钮
+$('#saveButton').click(function () {
+   var loginName  = $("#loginName").val();
+    var password1=$("#password1").val();
+    var password2= $("#password2").val();
+    var nickName=$("#nickName").val();
+
+    if(!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(loginName)){
+        swal('请输入正确的邮箱账号', {
+            icon: "error",
+        });
+        return;
+    }
+    if (password1.trim().length < 3) {
+        swal("请输入正确的密码", {
+            icon: "error",
+        });
+        return;
+    }
+    if (password2.trim().length < 3) {
+        swal("请输入正确的密码", {
+            icon: "error",
+        });
+        return;
+    }
+    if (password1.trim()!=password2.trim()) {
+        swal("请输入相同的密码", {
+            icon: "error",
+        });
+        return;
+    }
+    if (nickName.trim().length < 2) {
+        swal("请输入正确的昵称", {
+            icon: "error",
+        });
+        return;
+    }
+        var data = {
+            "loginName": loginName,
+            "password": password1,
+            "nickName": nickName
+        };
+        var url = '/admin/users/addAdmin';
+        $.ajax({
+            type: 'POST',//方法类型
+            url: url,
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (result) {
+                if (result.resultCode == 200) {
+                    $('#categoryModal').modal('hide');
+                    swal("保存成功", {
+                        icon: "success",
+                    });
+                    reload();
+                } else {
+                    $('#categoryModal').modal('hide');
+                    swal(result.message, {
+                        icon: "error",
+                    });
+                }
+                ;
+            },
+            error: function () {
+                swal("操作失败", {
+                    icon: "error",
+                });
+            }
+        });
+
+});
+
+
 /**
  * jqGrid重新加载
  */
@@ -89,7 +178,7 @@ function lockUser(lockStatus) {
             if (flag) {
                 $.ajax({
                     type: "POST",
-                    url: "/admin/users/lock/" + lockStatus,
+                    url: "/admin/users/adminlock/" + lockStatus,
                     contentType: "application/json",
                     data: JSON.stringify(ids),
                     success: function (r) {

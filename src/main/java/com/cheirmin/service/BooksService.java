@@ -4,6 +4,7 @@ import com.cheirmin.pojo.Book;
 import com.cheirmin.util.PageQueryUtil;
 import com.cheirmin.util.PageResult;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -61,7 +62,7 @@ public interface BooksService {
      * @param ids
      * @return
      */
-    Boolean batchUpdateSellStatus(Long[] ids, int sellStatus);
+    Boolean batchUpdateSellStatus(List<Long>  ids, int sellStatus, HttpServletRequest request);
 
     /**
      * 商品搜索

@@ -63,17 +63,17 @@
 
     <div id="sub_banner">
         <!-- 已配置热销商品则显示配置内容 -->
-        <th:block th:unless="${#lists.isEmpty(hotGoodses)}">
-            <th:block th:each="hotGoodse : ${hotGoodses}">
+        <th:block th:unless="${#lists.isEmpty(hotBookses)}">
+            <th:block th:each="hotBookse : ${hotBookses}">
                 <div class="hot-image">
-                    <a th:href="@{'/goods/detail/'+${hotGoodse.goodsId}}">
-                        <img th:src="@{${hotGoodse.goodsCoverImg}}" th:alt="${hotGoodse.goodsName}">
+                    <a th:href="@{'/book/detail/'+${hotBookse.bookId}}">
+                        <img th:src="@{${hotBookse.bookCoverImg}}" th:alt="${hotBookse.bookName}">
                     </a>
                 </div>
             </th:block>
         </th:block>
         <!-- 未配置热销商品则显示默认 -->
-        <th:block th:if="${#lists.isEmpty(hotGoodses)}">
+        <th:block th:if="${#lists.isEmpty(hotBookses)}">
             <div class="hot-image">
                 <a href="##">
                     <img src="./store/image/sub_banner/r4.jpg" alt="">
@@ -101,20 +101,20 @@
         <h2>新品上线</h2>
         <ul>
             <!-- 已配置新品则显示配置内容 -->
-            <th:block th:unless="${#lists.isEmpty(newGoodses)}">
-                <th:block th:each="newGoods : ${newGoodses}">
+            <th:block th:unless="${#lists.isEmpty(newBookses)}">
+                <th:block th:each="newBooks : ${newBookses}">
                     <li>
-                        <a th:href="@{'/goods/detail/'+${newGoods.goodsId}}">
-                            <img th:src="@{${newGoods.goodsCoverImg}}" th:alt="${newGoods.goodsName}">
-                            <p class="name" th:text="${newGoods.goodsName}">ExBookStore</p>
-                            <p class="discount" th:text="${newGoods.goodsIntro}">ExBookStore</p>
-                            <p class="item_price" th:text="${newGoods.sellingPrice}">ExBookStore</p>
+                        <a th:href="@{'/book/detail/'+${newBooks.bookId}}">
+                            <img th:src="@{${newBooks.bookCoverImg}}" th:alt="${newBooks.bookName}">
+                            <p class="name" th:text="${newBooks.bookName}">ExBookStore</p>
+                            <p class="discount" th:text="${newBooks.bookIntro}">ExBookStore</p>
+                            <p class="item_price" th:text="${newBooks.sellingPrice}">ExBookStore</p>
                         </a>
                     </li>
                 </th:block>
             </th:block>
             <!-- 未配置则显示默认 -->
-            <th:block th:if="${#lists.isEmpty(newGoodses)}">
+            <th:block th:if="${#lists.isEmpty(newBookses)}">
                 <li>
                     <a href="##">
                         <img src="./store/image/sub_banner/m6.jpg" alt=""/>
@@ -164,16 +164,16 @@
         <a href="##" class="more">查看更多>></a>
         <ul>
             <!-- 已配置推荐商品则显示配置内容 -->
-            <th:block th:unless="${#lists.isEmpty(recommendGoodses)}">
-                <th:block th:each="recommendGoods : ${recommendGoodses}">
+            <th:block th:unless="${#lists.isEmpty(recommendBookses)}">
+                <th:block th:each="recommendBooks : ${recommendBookses}">
                     <li>
-                        <a th:href="@{'/goods/detail/'+${recommendGoods.goodsId}}">
-                            <div class="info discount" th:text="${recommendGoods.tag}">
+                        <a th:href="@{'/book/detail/'+${recommendBooks.bookId}}">
+                            <div class="info discount" th:text="${recommendBooks.tag}">
                                 新品
                             </div>
-                            <img th:src="@{${recommendGoods.goodsCoverImg}}" th:alt="${recommendGoods.goodsName}">
-                            <p class="name" th:text="${recommendGoods.goodsName}">ExBookStore</p>
-                            <p class="item_price" th:text="${recommendGoods.sellingPrice}">ExBookStore</p>
+                            <img th:src="@{${recommendBooks.bookCoverImg}}" th:alt="${recommendBooks.bookName}">
+                            <p class="name" th:text="${recommendBooks.bookName}">ExBookStore</p>
+                            <p class="item_price" th:text="${recommendBooks.sellingPrice}">ExBookStore</p>
                             <p class="counter">猜你喜欢</p>
                             <div class="comment">
                                 <p>旧生精选</p>
@@ -184,7 +184,7 @@
                 </th:block>
             </th:block>
             <!-- 未配置则显示默认 -->
-            <th:block th:if="${#lists.isEmpty(recommendGoodses)}">
+            <th:block th:if="${#lists.isEmpty(recommendBookses)}">
                 <li>
                     <a href="##">
                         <div class="info discount">
