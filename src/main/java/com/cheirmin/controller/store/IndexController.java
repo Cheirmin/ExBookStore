@@ -42,9 +42,9 @@ public class IndexController {
             return "error/500";
         }
 
-        if (CollectionUtils.isEmpty(indexCarousels)&&indexCarousels.size()<=0){
-            return "error/500";
-        }
+//        if (CollectionUtils.isEmpty(indexCarousels)&&indexCarousels.size()<=0){
+//            return "error/500";
+//        }
         request.setAttribute("categories", categories);//分类数据
          request.setAttribute("carousels",indexCarousels);
         return "store/index";
