@@ -3,7 +3,7 @@ package com.cheirmin.service.impl;
 import com.cheirmin.controller.vo.IndexConfigBooksVO;
 import com.cheirmin.dao.BookMapper;
 import com.cheirmin.dao.IndexConfigMapper;
-import com.cheirmin.pojo.Book;
+import com.cheirmin.pojo.Book;;
 import com.cheirmin.pojo.IndexConfig;
 import com.cheirmin.service.IndexConfigService;
 import com.cheirmin.util.BeanUtil;
@@ -12,6 +12,7 @@ import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
@@ -72,29 +73,15 @@ public class IndexConfigServiceImpl implements IndexConfigService {
 
 //    用户点击删除，修改字段id_deleted
     @Override
-    public boolean updateIndexConfigByids(String ids,HttpServletRequest request) {
-        int i=0;
-        if (ids!=null&&ids.length()>0){
-            String replace = ids.replace("[", "");
-            String s1 = replace.replace("]", "");
-            String s = s1.replace("\"", "");
-            String[] strings = s.split(",");
-            for (String str:strings){
-                IndexConfig indexConfig=new IndexConfig();
-                indexConfig.setConfigId(Long.valueOf(str));
-                indexConfig.setIsDeleted((byte) 1);
-                indexConfig.setUpdateTime(new Date());
-                if (indexConfig.getUpdateUser()==null){
-                    Object userId = request.getSession().getAttribute("loginUserId");
-                    indexConfig.setUpdateUser((Integer) userId);   //如果当前用户没有，默认为1，可从session去取值
-                }
-                i+= indexConfigMapper.updateByPrimaryKeySelective(indexConfig);
-            }
-            if (i>=strings.length){
-                return true;
-            }
-        }
-        return false;
+    public boolean updateIndexConfigByids(List<Long> ids,HttpServletRequest request) {
+        if(StringUtils.isEmpty(ids))
+            throw new RuntimeException("PARAMS ERROR");
+        Example example=new Example(IndexConfig.class);
+        example.createCriteria().andIn("carouselId",ids);
+        IndexConfig indexConfig=new IndexConfig();
+        indexConfig.setIsDeleted((byte)1);
+        int res = indexConfigMapper.updateByExampleSelective(indexConfig, example);
+        return res > 0;
     }
 
 //    增加热销商品

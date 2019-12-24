@@ -11,7 +11,7 @@ $(function () {
         ],
         height: 560,
         rowNum: 10,
-        rowList: [10, 20, 30],
+        rowList: [10, 20, 50],
         styleUI: 'Bootstrap',
         loadtext: '信息读取中...',
         rownumbers: false,

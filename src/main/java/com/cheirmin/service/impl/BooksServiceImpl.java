@@ -11,8 +11,10 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,9 +66,18 @@ public class BooksServiceImpl implements BooksService {
         return bookMapper.selectByPrimaryKey(id);
     }
 
+//    批量更新
     @Override
-    public Boolean batchUpdateSellStatus(Long[] ids, int sellStatus) {
-        return null;
+    public Boolean batchUpdateSellStatus(List<Long> ids, int sellStatus, HttpServletRequest request) {
+
+        if(StringUtils.isEmpty(ids))
+            throw new RuntimeException("PARAMS ERROR");
+        Example example2=new Example(Book.class);
+        example2.createCriteria().andIn("bookId",ids);
+        Book b = new Book();
+        b.setBookSellStatus( ((Integer)sellStatus).byteValue() );
+        int res = bookMapper.updateByExampleSelective(b, example2);
+        return res > 0;
     }
 
     @Override

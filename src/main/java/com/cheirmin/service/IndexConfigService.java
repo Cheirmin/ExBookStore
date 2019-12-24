@@ -17,7 +17,7 @@ import java.util.List;
 public interface IndexConfigService {
        PageInfo queryallIndexConfig(Integer indexpage,Integer pagesize,String configType);
        boolean updateIndexConfig(IndexConfig indexConfig,HttpServletRequest request);
-       boolean updateIndexConfigByids(String ids,HttpServletRequest request);
+       boolean updateIndexConfigByids(List<Long> ids,HttpServletRequest request);
        boolean addIndexConfig(IndexConfig indexConfig, HttpServletRequest request);
        boolean deleteIndexConfig(IndexConfig indexConfig);
        List<IndexConfigBooksVO> getConfigBooksesForIndex(int configType, int number);

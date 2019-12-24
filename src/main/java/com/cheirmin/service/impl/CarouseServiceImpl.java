@@ -2,13 +2,16 @@ package com.cheirmin.service.impl;
 
 import com.cheirmin.common.Constants;
 import com.cheirmin.dao.IndexCarouselMapper;
+import com.cheirmin.pojo.Book;
 import com.cheirmin.pojo.IndexCarousel;
+import com.cheirmin.pojo.IndexConfig;
 import com.cheirmin.pojo.User;
 import com.cheirmin.service.CarouselService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
@@ -90,29 +93,15 @@ public class CarouseServiceImpl implements CarouselService {
     }
 
     @Override
-    public boolean updateCarouselByids(String ids,HttpServletRequest request) {
-        int i=0;
-        if (ids!=null&&ids.length()>0){
-            String replace = ids.replace("[", "");
-            String s1 = replace.replace("]", "");
-            String s = s1.replace("\"", "");
-            String[] strings = s.split(",");
-            for (String str:strings){
-               IndexCarousel indexCarousel=new IndexCarousel();
-               indexCarousel.setCarouselId(Integer.valueOf(str));
-               indexCarousel.setIsDeleted((byte) 1);
-                indexCarousel.setUpdateTime(new Date());
-                if (indexCarousel.getUpdateUser()==null){
-                    Object userId = request.getSession().getAttribute("loginUserId");
-                    indexCarousel.setUpdateUser((Integer) userId);   //如果当前用户没有，默认为1，可从session去取值
-                }
-                i+= indexCarouselMapper.updateByPrimaryKeySelective(indexCarousel);
-            }
-            if (i>=strings.length){
-                return true;
-            }
-        }
-        return false;
+    public boolean updateCarouselByids(List<Integer> ids,HttpServletRequest request) {
+        if(StringUtils.isEmpty(ids))
+            throw new RuntimeException("PARAMS ERROR");
+        Example example=new Example(IndexCarousel.class);
+        example.createCriteria().andIn("carouselId",ids);
+        IndexCarousel indexCarousel=new IndexCarousel();
+        indexCarousel.setIsDeleted((byte)1);
+        int res = indexCarouselMapper.updateByExampleSelective(indexCarousel, example);
+        return res > 0;
     }
 
     @Override
