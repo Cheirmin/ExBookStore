@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -42,17 +43,17 @@ public class IndexController {
             return "error/500";
         }
 
-        if (CollectionUtils.isEmpty(indexCarousels)||indexCarousels.size()<=0){
-            return "error/500";
+        if (!CollectionUtils.isEmpty(indexCarousels)&&indexCarousels.size()>0){
+            request.setAttribute("carousels",indexCarousels);
         }
         request.setAttribute("categories", categories);//分类数据
-         request.setAttribute("carousels",indexCarousels);
         return "store/index";
     }
 
     @RequestMapping("/loadhot")
-    public ResponseEntity<List<IndexConfig>> loadhot(String hot){
-        List<IndexConfig> indexConfigs = indexConfigService.queryIndexConfig(hot);
+    @ResponseBody
+    public ResponseEntity<List<IndexConfig>> loadhot(){
+        List<IndexConfig> indexConfigs = indexConfigService.queryIndexConfig();
         return  ResponseEntity.ok(indexConfigs);
     }
 }

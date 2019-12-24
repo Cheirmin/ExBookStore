@@ -52,11 +52,11 @@ $(function () {
     });
 
     function booksSellStatusFormatter(cellvalue) {
-        //书籍上架状态 0-上架 1-下架
-        if (cellvalue == 0) {
+        //书籍上架状态 0-下架 1-上架
+        if (cellvalue == 1) {
             return "<button type=\"button\" class=\"btn btn-block btn-success btn-sm\" style=\"width: 80%;\">销售中</button>";
         }
-        if (cellvalue == 1) {
+        if (cellvalue == 0) {
             return "<button type=\"button\" class=\"btn btn-block btn-secondary btn-sm\" style=\"width: 80%;\">已下架</button>";
         }
     }
@@ -114,7 +114,7 @@ function putUpGoods() {
             if (flag) {
                 $.ajax({
                     type: "PUT",
-                    url: "/admin/goods/status/0",
+                    url: "/admin/goods/status/1",
                     contentType: "application/json",
                     data: JSON.stringify(ids),
                     success: function (r) {
@@ -154,7 +154,7 @@ function putDownGoods() {
             if (flag) {
                 $.ajax({
                     type: "PUT",
-                    url: "/admin/goods/status/1",
+                    url: "/admin/goods/status/0",
                     contentType: "application/json",
                     data: JSON.stringify(ids),
                     success: function (r) {

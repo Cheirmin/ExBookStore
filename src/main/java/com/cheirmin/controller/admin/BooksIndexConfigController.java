@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @Message:
@@ -68,7 +69,7 @@ public class BooksIndexConfigController {
 
     //    用户点击删除，并批量修改字段is_deleted
     @RequestMapping("/indexConfigs/delete")
-    public ResponseEntity updatecarousels(@RequestBody String ids,HttpServletRequest request){
+    public ResponseEntity updatecarousels(@RequestBody List<Long> ids, HttpServletRequest request){
         boolean b = indexConfigService.updateIndexConfigByids(ids,request);
         if (b){
             return ResponseEntity.ok("success");

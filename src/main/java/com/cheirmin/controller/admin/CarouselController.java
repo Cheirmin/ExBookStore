@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * @Message:
@@ -41,7 +42,6 @@ public class CarouselController {
         if (pageInfo!=null){
             try {
                 String data = objectMapper.writeValueAsString(pageInfo);
-                System.out.println(data);
                 return data;
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
@@ -102,7 +102,7 @@ public class CarouselController {
 
 //    用户点击删除，并批量修改字段is_deleted
     @RequestMapping("/carousels/delete")
-    public ResponseEntity updatecarousels(@RequestBody String ids,HttpServletRequest request){
+    public ResponseEntity updatecarousels(@RequestBody List<Integer> ids, HttpServletRequest request){
         boolean b = carouselService.updateCarouselByids(ids,request);
         if (b){
             return ResponseEntity.ok("success");

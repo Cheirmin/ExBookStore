@@ -19,7 +19,7 @@ public interface CarouselService {
     IndexCarousel selectoneCarousel(Integer id);
     boolean updateCarousel(IndexCarousel indexCarousel,HttpServletRequest request);
     boolean deleteCarousel(String ids);
-    boolean updateCarouselByids(String ids,HttpServletRequest request);
+    boolean updateCarouselByids(List<Integer> ids,HttpServletRequest request);
     boolean addCarousel(IndexCarousel indexCarousel, HttpServletRequest request);
     List<IndexCarousel> queryCarouselBySort();
 }
