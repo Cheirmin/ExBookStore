@@ -60,13 +60,13 @@ public class ShoppingCartController {
     public Result saveShoppingCartItem(@RequestBody ShoppingCartItem shoppingCartItem,HttpSession session){
         UserVO userVO = (UserVO) session.getAttribute(Constants.USER_SESSION_KEY);
         shoppingCartItem.setUserId(userVO.getUserId());
-        String savaResult = shoppingCartService.saveCartItem(shoppingCartItem);
+        String saveResult = shoppingCartService.saveCartItem(shoppingCartItem);
         //添加成功
-        if (ServiceResultEnum.SUCCESS.getResult().equals(savaResult)){
+        if (ServiceResultEnum.SUCCESS.getResult().equals(saveResult)){
             return ResultGenerator.genSuccessResult();
         }
         //添加失败
-        return ResultGenerator.genFailResult(savaResult);
+        return ResultGenerator.genFailResult(saveResult);
     }
 
     @PutMapping("/shop-cart")
@@ -86,7 +86,7 @@ public class ShoppingCartController {
 
     @DeleteMapping("/shop-cart/{shoppingCartItemId}")
     @ResponseBody
-    public Result updateShoppingCartItem(@PathVariable("shoppingCartItemId") Long shoppingCartItemId,HttpSession session){
+    public Result deleteShoppingCartItem(@PathVariable("shoppingCartItemId") Long shoppingCartItemId,HttpSession session){
         UserVO userVO = (UserVO) session.getAttribute(Constants.USER_SESSION_KEY);
         Boolean deleteResult = shoppingCartService.deleteByCartItemId(shoppingCartItemId);
         //删除成功

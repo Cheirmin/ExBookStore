@@ -76,4 +76,16 @@ public class ShoppingCartItem {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override
+    public String toString() {
+        return "ShoppingCartItem{" +
+                "cartItemId=" + cartItemId +
+                ", userId=" + userId +
+                ", bookId=" + bookId +
+                ", bookCount=" + bookCount +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

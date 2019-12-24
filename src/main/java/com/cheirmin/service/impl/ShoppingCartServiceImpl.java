@@ -60,7 +60,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public String updateCartItem(ShoppingCartItem shoppingCartItem) {
-        ShoppingCartItem cartItem = shoppingCartItemMapper.selectByPrimaryKey(shoppingCartItem);
+        ShoppingCartItem cartItem = shoppingCartItemMapper.selectByPrimaryKey(shoppingCartItem.getCartItemId());
         if (cartItem == null){
             return ServiceResultEnum.GOODS_NOT_EXIST.getResult();
         }
@@ -70,8 +70,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         }
         cartItem.setBookCount(shoppingCartItem.getBookCount());
         cartItem.setUpdateTime(new Date());
+
         //保存记录
-        if (shoppingCartItemMapper.updateByPrimaryKeySelective(shoppingCartItem) > 0){
+        if (shoppingCartItemMapper.updateByPrimaryKeySelective(cartItem) > 0){
             return ServiceResultEnum.SUCCESS.getResult();
         }
         return ServiceResultEnum.DB_ERROR.getResult();
