@@ -3,6 +3,7 @@ package com.cheirmin.interceptor;
 import com.cheirmin.common.Constants;
 import com.cheirmin.controller.vo.UserVO;
 import com.cheirmin.dao.ShoppingCartItemMapper;
+import com.cheirmin.pojo.ShoppingCartItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -27,7 +28,9 @@ public class CartNumberInterceptor implements HandlerInterceptor {
             //如果当前为登陆状态，就查询数据库并设置购物车中的数量值
             UserVO userVO = (UserVO) request.getSession().getAttribute(Constants.USER_SESSION_KEY);
             //设置购物车中的数量
-            userVO.setShopCartItemCount(2);
+            ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
+            shoppingCartItem.setUserId(userVO.getUserId());
+            userVO.setShopCartItemCount(shoppingCartItemMapper.selectCount(shoppingCartItem));
             request.getSession().setAttribute(Constants.USER_SESSION_KEY, userVO);
         }
         return true;

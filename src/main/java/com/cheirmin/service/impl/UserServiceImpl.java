@@ -4,6 +4,7 @@ import com.cheirmin.common.Constants;
 import com.cheirmin.common.ServiceResultEnum;
 import com.cheirmin.controller.vo.UserVO;
 import com.cheirmin.dao.AddressMapper;
+import com.cheirmin.dao.ShoppingCartItemMapper;
 import com.cheirmin.dao.UserAdminMapper;
 import com.cheirmin.dao.UserMapper;
 import com.cheirmin.pojo.*;
@@ -33,9 +34,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     AddressMapper addressMapper;
 
-
     @Autowired
     UserAdminMapper userAdminMapper;
+
+    @Autowired
+    ShoppingCartItemMapper shoppingCartItemMapper;
+
     @Override
     public PageResult getNewBeeMallUsersPage(PageQueryUtil pageUtil) {
         return null;
@@ -93,9 +97,11 @@ public class UserServiceImpl implements UserService {
                 }
 
                 UserVO userVO = new UserVO();
-                //设置购物车中的数量
-                userVO.setShopCartItemCount(2);
                 BeanUtil.copyProperties(user, userVO);
+                //设置购物车中的数量
+                ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
+                shoppingCartItem.setUserId(user.getUserId());
+                userVO.setShopCartItemCount(shoppingCartItemMapper.selectCount(shoppingCartItem));
 
                 httpSession.setAttribute(Constants.USER_SESSION_KEY, userVO);
                 return ServiceResultEnum.SUCCESS.getResult();
@@ -109,7 +115,12 @@ public class UserServiceImpl implements UserService {
         if (userMapper.updateByPrimaryKeySelective(user)>0){
             UserVO userVO = new UserVO();
             //设置购物车中的数量
-            userVO.setShopCartItemCount(2);
+            ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
+            shoppingCartItem.setUserId(user.getUserId());
+            int count = shoppingCartItemMapper.selectCount(shoppingCartItem);
+            System.out.println("updateUserInfo--count--"+count);
+            userVO.setShopCartItemCount(count);
+
             BeanUtil.copyProperties(userMapper.selectByPrimaryKey(user.getUserId()), userVO);
                httpSession.setAttribute(Constants.USER_SESSION_KEY, userVO);
             return new Result(200,"更新成功");
@@ -122,13 +133,12 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-
     @Override
     public Result updatepassword(Map<String, String> map) {
         Long userId= Long.valueOf(map.get("userId"));
         String password1=map.get("password1");
         String password2=map.get("password2");
-        System.out.println(userId+password1+password2);
+//        System.out.println(userId+password1+password2);
          User user=userMapper.selectByPrimaryKey(userId);
         if (CodecUtils.passwordConfirm(user.getUserEmail()+password1,user.getPassword())){
             String newPassword=CodecUtils.passwordBcryptEncode(user.getUserEmail(),password2);
@@ -174,7 +184,12 @@ public class UserServiceImpl implements UserService {
         //更新session状态
         UserVO userVO = new UserVO();
         //设置购物车中的数量
-        userVO.setShopCartItemCount(2);
+        ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
+        shoppingCartItem.setUserId(user.getUserId());
+        int count = shoppingCartItemMapper.selectCount(shoppingCartItem);
+        System.out.println("setdefulat--count1--"+count);
+        userVO.setShopCartItemCount(count);
+
         BeanUtil.copyProperties(userMapper.selectByPrimaryKey(user.getUserId()), userVO);
         httpSession.setAttribute(Constants.USER_SESSION_KEY, userVO);
         return new Result(200,"设置成功");
@@ -193,8 +208,6 @@ public class UserServiceImpl implements UserService {
         if (addressMapper.selectByExample(example).size()>=3){
             return new Result(122,"最多3个地址");
         }
-
-
         if (addressMapper.insertSelective(a)>0){
             return new Result(200,"欧了");
         }
@@ -224,7 +237,12 @@ public class UserServiceImpl implements UserService {
         //更新session状态
         UserVO userVO = new UserVO();
         //设置购物车中的数量
-        userVO.setShopCartItemCount(2);
+        ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
+        shoppingCartItem.setUserId(user.getUserId());
+        int count = shoppingCartItemMapper.selectCount(shoppingCartItem);
+        System.out.println("updateAddressBefore--count0--"+count);
+        userVO.setShopCartItemCount(count);
+
         BeanUtil.copyProperties(userMapper.selectByPrimaryKey(user.getUserId()), userVO);
         httpSession.setAttribute(Constants.USER_SESSION_KEY, userVO);
         return new Result(200,"设置成功");
@@ -266,15 +284,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public Result setadminlock(Integer lockStatus, List<Integer> ids) {
         UserAdmin user=new UserAdmin();
-        user.setLocked(lockStatus);//Integer 转byty
+        user.setLocked(lockStatus);//Integer 转byte
         for (Integer id : ids) {
             user.setUserId(Long.valueOf(id));
             if (userAdminMapper.updateByPrimaryKeySelective(user)<1){
                 return ResultGenerator.genFailResult("更新失败");
             }
-
         }
-
         return ResultGenerator.genSuccessResult();
     }
 
@@ -291,14 +307,12 @@ public class UserServiceImpl implements UserService {
        userAdmin.setPassword(password);
        userAdmin.setNick_name(nickName);
        try {
-
-
-        if ( userAdminMapper.insertSelective(userAdmin)>0){
+        if ( userAdminMapper.insertSelective(userAdmin)>0) {
             return ResultGenerator.genSuccessResult();
-        };}catch (Exception e){
-           return ResultGenerator.genFailResult("以存在");
+        }
+       }catch (Exception e){
+           return ResultGenerator.genFailResult("已存在");
        }
-
         return ResultGenerator.genFailResult("添加失败");
     }
 
@@ -311,14 +325,7 @@ public class UserServiceImpl implements UserService {
             if (userMapper.updateByPrimaryKeySelective(user)<1){
                 return ResultGenerator.genFailResult("更新失败");
             }
-
         }
-
             return ResultGenerator.genSuccessResult();
-
     }
-
-
-
-
 }

@@ -119,7 +119,7 @@ public class PersonalController {
     public String personalPage(HttpServletRequest request,
                                HttpSession httpSession) {
 
-        request.setAttribute("user",(UserVO)httpSession.getAttribute("User"));
+        request.setAttribute("user",httpSession.getAttribute("User"));
         request.setAttribute("path", "personal");
         return "store/personal";
     }
@@ -130,7 +130,6 @@ public class PersonalController {
         return   userService.updateUserInfo(user,httpSession);
 
     }
-
 
     @PostMapping("/personal/updatepassword")
     @ResponseBody
