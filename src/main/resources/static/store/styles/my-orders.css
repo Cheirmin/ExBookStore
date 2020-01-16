@@ -34,7 +34,7 @@
 }
 
 #personal .self-info .lfnav .title_list ul li .active {
-    color: #1baeae;
+    color: #ae2f27;
     font-weight: bold;
 }
 
@@ -105,7 +105,7 @@
 }
 
 #personal .self-info .intro .info_item span a:hover {
-    color: #1baeae;
+    color: #ae2f27;
 }
 
 .uc-main-box {
@@ -152,11 +152,11 @@
 }
 
 .uc-content-box .box-hd .filter-list li.tab-active, .uc-content-box .box-hd .filter-list li.active {
-    color: #1baeae;
+    color: #ae2f27;
 }
 
 .box-hd .filter-list li.active a {
-    color: #1baeae;
+    color: #ae2f27;
 }
 
 .uc-content-box .box-hd .filter-list li {
@@ -257,7 +257,7 @@
 }
 
 .uc-order-item-list .order-status-need-pay {
-    color: #1baeae;
+    color: #ae2f27;
 }
 
 .uc-order-item-list .order-status-success {
@@ -399,7 +399,7 @@ a {
 .btn-line-pay {
     border-color: #b0b0b0;
     background: #fff;
-    color: #1baeae;
+    color: #ae2f27;
 }
 
 .btn-small {

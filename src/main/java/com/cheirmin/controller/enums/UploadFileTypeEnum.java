@@ -2,7 +2,7 @@ package com.cheirmin.controller.enums;
 
 /**
  * @Filename
- * @auther 吴星辰;
+ * @auther
  * @data 2019/12/12 15:52;
  * @Descripion允许上传的文件格式 可自行添加
  * @Version 1.1.1

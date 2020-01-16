@@ -23,6 +23,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * @Message:文件上传控制器
+ * @Author：Cheirmin
+ * @Date: 2019/12/13 19:10
+ * @Version 1.0
+ */
+
 @Controller
 @RequestMapping("/admin")
 public class UploadFile {

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Message:
+ * @Message:邮箱通用控制器
  * @Author：Cheirmin
  * @Date: 2019/12/14 12:08
  * @Version 1.0

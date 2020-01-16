@@ -27,7 +27,7 @@
 
 .all-sort-list .item span {
     padding: 0px 5px;
-    color: #1baeae;
+    color: #ae2f27;
     font-family: "\5B8B\4F53";
 }
 
@@ -38,7 +38,7 @@
 
 .all-sort-list .item a:hover {
     font-weight: bold;
-    color: #1baeae;
+    color: #ae2f27;
 }
 
 .all-sort-list .item-list {
@@ -79,11 +79,11 @@
     text-align: left;
     padding: 3px 6px 0px 0px;
     font-weight: 700;
-    color: #1baeae;
+    color: #ae2f27;
 }
 
 .item-list .subitem dt a {
-    color: #1baeae;
+    color: #ae2f27;
     text-decoration: underline;
 }
 
@@ -163,7 +163,7 @@
 }
 
 #content #banner #cate_menu > ul > li:hover {
-    background-color: #1baeae;
+    background-color: #ae2f27;
 }
 
 #content #banner #cate_menu > ul > li a {
@@ -222,7 +222,7 @@
 }
 
 #content #banner #cate_menu > ul > li .pop > li .list li a:hover {
-    color: #1baeae;
+    color: #ae2f27;
 }
 
 #content #banner .swiper-container {
@@ -345,7 +345,7 @@
 }
 
 #content #flash ul li a .item_price {
-    color: #1baeae;
+    color: #ae2f27;
 }
 
 #content #flash ul li a:hover img {
@@ -414,7 +414,7 @@
 }
 
 #content #recommend .more:hover {
-    color: #1baeae;
+    color: #ae2f27;
 }
 
 #content #recommend ul {
@@ -485,7 +485,7 @@
 }
 
 #content #recommend ul li a .item_price {
-    color: #1baeae;
+    color: #ae2f27;
 }
 
 #content #recommend ul li a .counter {
@@ -511,7 +511,7 @@
     box-sizing: border-box;
     height: 70px;
     padding: 10px 0 0 30px;
-    background-color: #1baeae;
+    background-color: #ae2f27;
     color: #fff;
     text-align: left;
 }

@@ -34,7 +34,7 @@
 }
 
 #personal .self-info .lfnav .title_list ul li .active {
-    color: #1baeae;
+    color: #ae2f27;
     font-weight: bold;
 }
 
@@ -106,5 +106,5 @@
 }
 
 #personal .self-info .intro .info_item span a:hover {
-    color: #1baeae;
+    color: #ae2f27;
 }

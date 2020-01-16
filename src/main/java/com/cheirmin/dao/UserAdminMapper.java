@@ -5,7 +5,7 @@ import tk.mybatis.mapper.common.Mapper;
 
 /**
  * @Filename
- * @auther 吴星辰;
+ * @auther
  * @data 2019/12/23 16:22;
  * @Descripion
  * @Version 1.1.1

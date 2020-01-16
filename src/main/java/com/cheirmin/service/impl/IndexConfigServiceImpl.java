@@ -3,7 +3,7 @@ package com.cheirmin.service.impl;
 import com.cheirmin.controller.vo.IndexConfigBooksVO;
 import com.cheirmin.dao.BookMapper;
 import com.cheirmin.dao.IndexConfigMapper;
-import com.cheirmin.pojo.Book;;
+import com.cheirmin.pojo.Book;
 import com.cheirmin.pojo.IndexConfig;
 import com.cheirmin.service.IndexConfigService;
 import com.cheirmin.util.BeanUtil;

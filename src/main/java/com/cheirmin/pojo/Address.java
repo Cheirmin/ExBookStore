@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * @Filename
- * @auther 吴星辰;
+ * @auther
  * @data 2019/12/21 12:10;
  * @Descripion
  * @Version 1.1.1
@@ -15,7 +15,7 @@ import java.io.Serializable;
  * @History
  */
 
-@Table(name = "address")
+@Table(name = "tb_address")
 public class Address implements Serializable {
 
 

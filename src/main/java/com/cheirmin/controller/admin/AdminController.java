@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * @Message:
+ * @Message:管理员通用控制器
  * @Author：Cheirmin
  * @Date: 2019/12/13 19:04
  * @Version 1.0

@@ -38,7 +38,7 @@ public class StoreBooksController {
         if (StringUtils.isEmpty(params.get("page"))) {
             params.put("page", 1);
         }
-        params.put("limit", Constants.BOOKS_SEARCH_PAGE_LIMIT);
+        params.put("limit", Constants.BOOKS_SEARCH_PAGE_LIMIT );
         //封装分类数据
         if (params.containsKey("booksCategoryId") && !StringUtils.isEmpty(params.get("booksCategoryId") + "")) {
             Long categoryId = Long.valueOf(params.get("booksCategoryId") + "");

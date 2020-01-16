@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * @Message:
+ * @Message:首页配置控制器
  * @Author：Cheirmin
  * @Date: 2019/12/13 19:09
  * @Version 1.0

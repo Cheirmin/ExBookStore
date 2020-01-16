@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * @Message:
+ * @Message:轮播图控制器
  * @Author：Cheirmin
  * @Date: 2019/12/13 19:08
  * @Version 1.0
