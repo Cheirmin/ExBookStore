@@ -132,24 +132,24 @@
                                 </div>
                                 <table class="order-items-table">
                                     <tbody>
-                                    <th:block th:each="item : ${orderDetailVO.newBeeMallOrderItemVOS}">
+                                    <th:block th:each="item : ${orderDetailVO.orderItemVOS}">
                                         <tr>
                                             <td class="col col-thumb">
                                                 <div class="figure figure-thumb">
-                                                    <a target="_blank" th:href="@{'/goods/detail/'+${item.goodsId}}">
-                                                        <img th:src="@{${item.goodsCoverImg}}"
+                                                    <a target="_blank" th:href="@{'/book/detail/'+${item.bookId}}">
+                                                        <img th:src="@{${item.bookCoverImg}}"
                                                              width="80" height="80" alt="">
                                                     </a>
                                                 </div>
                                             </td>
                                             <td class="col col-name">
                                                 <p class="name">
-                                                    <a target="_blank" th:href="@{'/goods/detail/'+${item.goodsId}}"
-                                                       th:text="${item.goodsName}">newbee</a>
+                                                    <a target="_blank" th:href="@{'/book/detail/'+${item.bookId}}"
+                                                       th:text="${item.bookName}">书名</a>
                                                 </p>
                                             </td>
                                             <td class="col col-price"><p class="price"
-                                                                         th:text="${item.sellingPrice+'元 x '+item.goodsCount}">
+                                                                         th:text="${item.sellingPrice+'元 x '+item.bookCount}">
                                                 1299元 × 1</p></td>
                                             <td class="col col-actions">
                                             </td>

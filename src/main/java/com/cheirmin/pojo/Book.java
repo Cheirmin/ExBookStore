@@ -219,4 +219,29 @@ public class Book {
     public void setBookDetailContent(String bookDetailContent) {
         this.bookDetailContent = bookDetailContent == null ? null : bookDetailContent.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookId=" + bookId +
+                ", bookName='" + bookName + '\'' +
+                ", bookIntro='" + bookIntro + '\'' +
+                ", bookAuthor='" + bookAuthor + '\'' +
+                ", publishingHouse='" + publishingHouse + '\'' +
+                ", bookCategoryId1=" + bookCategoryId1 +
+                ", bookCategoryId2=" + bookCategoryId2 +
+                ", bookCategoryId3=" + bookCategoryId3 +
+                ", bookCoverImg='" + bookCoverImg + '\'' +
+                ", bookCarousel='" + bookCarousel + '\'' +
+                ", originalPrice=" + originalPrice +
+                ", sellingPrice=" + sellingPrice +
+                ", stockNum=" + stockNum +
+                ", tag='" + tag + '\'' +
+                ", bookSellStatus=" + bookSellStatus +
+                ", createUser=" + createUser +
+                ", createTime=" + createTime +
+                ", updateUser=" + updateUser +
+                ", bookDetailContent='" + bookDetailContent + '\'' +
+                '}';
+    }
 }

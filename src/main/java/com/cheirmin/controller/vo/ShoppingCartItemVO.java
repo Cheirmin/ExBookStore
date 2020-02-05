@@ -80,4 +80,17 @@ public class ShoppingCartItemVO implements Serializable {
     public void setSellingPrice(Integer sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
+
+    @Override
+    public String toString() {
+        return "ShoppingCartItemVO{" +
+                "cartItemId=" + cartItemId +
+                ", userId=" + userId +
+                ", bookId=" + bookId +
+                ", bookCoverImg='" + bookCoverImg + '\'' +
+                ", bookName='" + bookName + '\'' +
+                ", bookCount=" + bookCount +
+                ", sellingPrice=" + sellingPrice +
+                '}';
+    }
 }

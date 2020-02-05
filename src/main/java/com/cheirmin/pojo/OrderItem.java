@@ -86,4 +86,18 @@ public class OrderItem {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+    @Override
+    public String toString() {
+        return "OrderItem{" +
+                "orderItemId=" + orderItemId +
+                ", orderId=" + orderId +
+                ", bookId=" + bookId +
+                ", bookName='" + bookName + '\'' +
+                ", bookCoverImg='" + bookCoverImg + '\'' +
+                ", sellingPrice=" + sellingPrice +
+                ", bookCount=" + bookCount +
+                ", createTime=" + createTime +
+                '}';
+    }
 }

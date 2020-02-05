@@ -39,9 +39,9 @@
                                 <input type="radio" name="payOnlineBank" id="alipay" value="alipay">
                                 <img onclick="payOrder(1)" th:src="@{/store/image/pay/payOnline_zfb.png}" alt="支付宝"
                                      style="margin-left: 0;"></li>
-                            <li id="J_weixin">
-                                <input type="radio" name="payOnlineBank" id="alipay" value="alipay">
-                                <img onclick="payOrder(2)" th:src="@{/store/image/pay/weixinpay.png}" alt="微信支付"
+                            <li class="J_bank">
+                                <input type="radio" name="payOnlineBank" id="wechat" value="alipay">
+                                <img th:src="@{/store/image/pay/weixinpay.png}" alt="微信支付"
                                      style="margin-left: 0;">
                             </li>
                             <li class="J_bank">
@@ -162,7 +162,7 @@
 
     function payOrder(payType) {
         var orderNo = $("#orderNoValue").val();
-        window.location.href = '/payPage?orderNo=' + orderNo + "&payType=" + payType;
+        window.location.href = '/payPage?orderNo=' + orderNo;
     }
 </script>
 </body>

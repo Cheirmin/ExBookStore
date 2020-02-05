@@ -23,17 +23,13 @@ public class AliPayServiceImpl implements  InitializingBean {
     @Autowired
     AliPayConfig aliPayConfig;
 
-
-
     public String genPayPic() {
         return null;
     }
 
-
     public void updateById(String id) {
         System.out.println("修改订单 状态 ！");
     }
-
 
     public String genPage() {
         Random r=new Random();
