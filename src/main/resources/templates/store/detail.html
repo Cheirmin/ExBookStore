@@ -79,14 +79,14 @@
      * 添加到购物车
      */
     function saveToCart(id) {
-        var goodsCount = 1;
+        var bookCount = 1;
         var data = {
-            "booksId": id,
-            "booksCount": goodsCount
+            "bookId": id,
+            "bookCount": bookCount
         };
         $.ajax({
             type: 'POST',
-            url: '/shop-cart',
+            url: 'http://localhost/shop-cart',
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function (result) {
@@ -119,14 +119,14 @@
      * 添加到购物车并跳转至购物车页面
      */
     function saveAndGoCart(id) {
-        var goodsCount = 1;
+        var bookCount = 1;
         var data = {
-            "goodsId": id,
-            "goodsCount": goodsCount
+            "bookId": id,
+            "bookCount": bookCount
         };
         $.ajax({
             type: 'POST',
-            url: '/shop-cart',
+            url: 'http://localhost/shop-cart',
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function (result) {
