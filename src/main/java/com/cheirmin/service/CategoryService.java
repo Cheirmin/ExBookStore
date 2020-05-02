@@ -1,7 +1,7 @@
 package com.cheirmin.service;
 
-import com.cheirmin.controller.vo.IndexCategoryVO;
-import com.cheirmin.controller.vo.SearchPageCategoryVO;
+import com.cheirmin.vo.IndexCategoryVO;
+import com.cheirmin.vo.SearchPageCategoryVO;
 import com.cheirmin.pojo.BooksCategory;
 import com.cheirmin.util.PageQueryUtil;
 import com.cheirmin.util.PageResult;

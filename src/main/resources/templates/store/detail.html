@@ -32,11 +32,13 @@
         </div>
         <div class="right fr">
             <div class="h3 ml20 mt20" th:text="${booksDetail.bookName}">ExBookStore</div>
-            <div class="sub_title mr40 ml20 mt10" th:text="${booksDetail.bookIntro}">ExBookStore</div>
+            <div class="ml20 mt20" th:text="${'ISBN : '+booksDetail.bookIsbn}">ISBN:null</div>
+            <div class="ml20 mt20" th:text="${'简要 : '+booksDetail.bookAbstract}">简要:null</div>
+            <div class="sub_title mr40 ml20 mt10" th:text="'内容 ：'+${booksDetail.bookIntro}">内容:null</div>
             <div class="item_price mr40 ml20 mt10">
-                <th:block th:text="${booksDetail.sellingPrice}+'.00 元'"></th:block>
+                <th:block th:text="${booksDetail.sellingPrice}+' 元'"></th:block>
                 <del>
-                    <th:block th:text="${booksDetail.originalPrice}+'.00 元'"></th:block>
+                    <th:block th:text="${booksDetail.originalPrice}+' 元'"></th:block>
                 </del>
             </div>
 

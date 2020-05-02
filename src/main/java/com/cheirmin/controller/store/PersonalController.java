@@ -2,7 +2,6 @@ package com.cheirmin.controller.store;
 
 import com.cheirmin.common.Constants;
 import com.cheirmin.common.ServiceResultEnum;
-import com.cheirmin.controller.vo.UserVO;
 import com.cheirmin.pojo.User;
 import com.cheirmin.service.UserService;
 import com.cheirmin.util.Result;

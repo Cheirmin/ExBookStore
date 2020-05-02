@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Table(name = "tb_books")
@@ -16,14 +17,14 @@ public class Book {
     @Column(name = "book_name")
     private String bookName;
 
+    @Column(name = "book_isbn")
+    private String bookIsbn;
+
     @Column(name = "book_intro")
     private String bookIntro;
 
-    @Column(name = "book_author")
-    private String bookAuthor;
-
-    @Column(name = "publishing_house")
-    private String publishingHouse;
+    @Column(name = "book_abstract")
+    private String bookAbstract;
 
     @Column(name = "book_category_id1")
     private Long bookCategoryId1;
@@ -41,16 +42,13 @@ public class Book {
     private String bookCarousel;
 
     @Column(name = "original_price")
-    private Integer originalPrice;
+    private BigDecimal originalPrice;
 
     @Column(name = "selling_price")
-    private Integer sellingPrice;
+    private BigDecimal  sellingPrice;
 
     @Column(name = "stock_num")
     private Integer stockNum;
-
-    @Column(name = "tag")
-    private String tag;
 
     @Column(name = "book_sell_status")
     private Byte bookSellStatus;
@@ -84,6 +82,14 @@ public class Book {
         this.bookName = bookName == null ? null : bookName.trim();
     }
 
+    public String getBookIsbn() {
+        return bookIsbn;
+    }
+
+    public void setBookIsbn(String bookIsbn) {
+        this.bookIsbn = bookIsbn;
+    }
+
     public String getBookIntro() {
         return bookIntro;
     }
@@ -92,20 +98,12 @@ public class Book {
         this.bookIntro = bookIntro == null ? null : bookIntro.trim();
     }
 
-    public String getBookAuthor() {
-        return bookAuthor;
+    public String getBookAbstract() {
+        return bookAbstract;
     }
 
-    public void setBookAuthor(String bookAuthor) {
-        this.bookAuthor = bookAuthor == null ? null : bookAuthor.trim();
-    }
-
-    public String getPublishingHouse() {
-        return publishingHouse;
-    }
-
-    public void setPublishingHouse(String publishingHouse) {
-        this.publishingHouse = publishingHouse == null ? null : publishingHouse.trim();
+    public void setBookAbstract(String bookAbstract) {
+        this.bookAbstract = bookAbstract;
     }
 
     public Long getBookCategoryId1() {
@@ -148,19 +146,19 @@ public class Book {
         this.bookCarousel = bookCarousel == null ? null : bookCarousel.trim();
     }
 
-    public Integer getOriginalPrice() {
+    public BigDecimal  getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(Integer originalPrice) {
+    public void setOriginalPrice(BigDecimal  originalPrice) {
         this.originalPrice = originalPrice;
     }
 
-    public Integer getSellingPrice() {
+    public BigDecimal  getSellingPrice() {
         return sellingPrice;
     }
 
-    public void setSellingPrice(Integer sellingPrice) {
+    public void setSellingPrice(BigDecimal  sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
 
@@ -170,14 +168,6 @@ public class Book {
 
     public void setStockNum(Integer stockNum) {
         this.stockNum = stockNum;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag == null ? null : tag.trim();
     }
 
     public Byte getBookSellStatus() {
@@ -225,9 +215,9 @@ public class Book {
         return "Book{" +
                 "bookId=" + bookId +
                 ", bookName='" + bookName + '\'' +
+                ", bookIsbn='" + bookIsbn + '\'' +
                 ", bookIntro='" + bookIntro + '\'' +
-                ", bookAuthor='" + bookAuthor + '\'' +
-                ", publishingHouse='" + publishingHouse + '\'' +
+                ", bookAbstract='" + bookAbstract + '\'' +
                 ", bookCategoryId1=" + bookCategoryId1 +
                 ", bookCategoryId2=" + bookCategoryId2 +
                 ", bookCategoryId3=" + bookCategoryId3 +
@@ -236,7 +226,6 @@ public class Book {
                 ", originalPrice=" + originalPrice +
                 ", sellingPrice=" + sellingPrice +
                 ", stockNum=" + stockNum +
-                ", tag='" + tag + '\'' +
                 ", bookSellStatus=" + bookSellStatus +
                 ", createUser=" + createUser +
                 ", createTime=" + createTime +

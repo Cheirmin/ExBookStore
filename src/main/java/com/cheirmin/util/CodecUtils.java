@@ -3,7 +3,7 @@ package com.cheirmin.util;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
- * @Author: 吴星辰
+ * @Author:
  * @Time: 2018-10-23 10:49
  * @Feature: 密码加密
  */

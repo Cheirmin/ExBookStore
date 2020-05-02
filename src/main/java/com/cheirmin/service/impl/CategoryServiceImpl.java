@@ -2,12 +2,11 @@ package com.cheirmin.service.impl;
 
 import com.cheirmin.common.CategoryLevelEnum;
 import com.cheirmin.common.Constants;
-import com.cheirmin.controller.vo.IndexCategoryVO;
-import com.cheirmin.controller.vo.SearchPageCategoryVO;
-import com.cheirmin.controller.vo.SecondLevelCategoryVO;
-import com.cheirmin.controller.vo.ThirdLevelCategoryVO;
+import com.cheirmin.vo.IndexCategoryVO;
+import com.cheirmin.vo.SearchPageCategoryVO;
+import com.cheirmin.vo.SecondLevelCategoryVO;
+import com.cheirmin.vo.ThirdLevelCategoryVO;
 import com.cheirmin.dao.BooksCategoryMapper;
-import com.cheirmin.pojo.Book;
 import com.cheirmin.pojo.BooksCategory;
 import com.cheirmin.service.CategoryService;
 import com.cheirmin.util.BeanUtil;

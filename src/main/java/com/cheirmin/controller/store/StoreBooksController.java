@@ -1,8 +1,8 @@
 package com.cheirmin.controller.store;
 
 import com.cheirmin.common.Constants;
-import com.cheirmin.controller.vo.BooksDetailVO;
-import com.cheirmin.controller.vo.SearchPageCategoryVO;
+import com.cheirmin.vo.BooksDetailVO;
+import com.cheirmin.vo.SearchPageCategoryVO;
 import com.cheirmin.pojo.Book;
 import com.cheirmin.service.BooksService;
 import com.cheirmin.service.CategoryService;

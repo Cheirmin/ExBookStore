@@ -3,7 +3,7 @@ package com.cheirmin.service.impl;
 import com.cheirmin.common.ExBookStoreException;
 import com.cheirmin.common.OrderStatusEnum;
 import com.cheirmin.common.ServiceResultEnum;
-import com.cheirmin.controller.vo.*;
+import com.cheirmin.vo.*;
 import com.cheirmin.dao.BookMapper;
 import com.cheirmin.dao.OrderItemMapper;
 import com.cheirmin.dao.OrderMapper;
@@ -21,6 +21,7 @@ import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -114,7 +115,7 @@ public class OrderServiceImpl implements OrderService {
                 //生成订单号
                 String orderNo = NumberUtil.genOrderNo();
 
-                int priceTotal = 0;
+                BigDecimal priceTotal = new BigDecimal(0);
                 //保存订单
                 Order order = new Order();
                 order.setOrderNo(orderNo);
@@ -122,9 +123,9 @@ public class OrderServiceImpl implements OrderService {
                 order.setUserAddress(user.getAddress());
                 //总价
                 for (ShoppingCartItemVO shoppingCartItemVO : myShoppingCartItems) {
-                    priceTotal += shoppingCartItemVO.getBookCount() * shoppingCartItemVO.getSellingPrice();
+                    priceTotal = priceTotal.add(shoppingCartItemVO.getSellingPrice().multiply(BigDecimal.valueOf(shoppingCartItemVO.getBookCount())));
                 }
-                if (priceTotal < 1) {
+                if (priceTotal.compareTo(BigDecimal.valueOf(1)) ==-1) {
                     ExBookStoreException.fail(ServiceResultEnum.ORDER_PRICE_ERROR.getResult());
                 }
                 order.setTotalPrice(priceTotal);

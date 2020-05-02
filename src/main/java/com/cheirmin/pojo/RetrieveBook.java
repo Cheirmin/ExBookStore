@@ -11,6 +11,8 @@ public class RetrieveBook {
 
     private String bookName;
 
+    private String isbn;
+
     private String bookIntro;
 
     private String bookAuthor;
@@ -59,6 +61,14 @@ public class RetrieveBook {
 
     public void setBookName(String bookName) {
         this.bookName = bookName == null ? null : bookName.trim();
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getBookIntro() {

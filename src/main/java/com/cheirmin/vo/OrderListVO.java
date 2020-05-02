@@ -1,6 +1,7 @@
-package com.cheirmin.controller.vo;
+package com.cheirmin.vo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class OrderListVO implements Serializable {
 
     private String orderNo;
 
-    private Integer totalPrice;
+    private BigDecimal totalPrice;
 
     private Byte payType;
 
@@ -45,11 +46,11 @@ public class OrderListVO implements Serializable {
         this.orderNo = orderNo;
     }
 
-    public Integer getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Integer totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 

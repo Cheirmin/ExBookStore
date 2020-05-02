@@ -2,8 +2,8 @@ package com.cheirmin.controller.store;
 
 import com.cheirmin.common.Constants;
 import com.cheirmin.common.IndexConfigTypeEnum;
-import com.cheirmin.controller.vo.IndexCategoryVO;
-import com.cheirmin.controller.vo.IndexConfigBooksVO;
+import com.cheirmin.vo.IndexCategoryVO;
+import com.cheirmin.vo.IndexConfigBooksVO;
 import com.cheirmin.pojo.IndexCarousel;
 import com.cheirmin.pojo.IndexConfig;
 import com.cheirmin.service.CarouselService;

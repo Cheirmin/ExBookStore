@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="store/header::head-fragment('旧生书店-商品详情','detail')">
+</head>
+<body>
+<header th:replace="store/header::header-fragment"></header>
+
+<div id="detail">
+    <!-- nav -->
+    <nav th:replace="store/header::nav-fragment"></nav>
+    <div style="text-align: center;height: 200px">
+        <form style="margin-top: 100px;" th:action="@{/retrieveBook/retrieveBookDetail}" method="get">
+            请输入书本ISBN：<input id="isbn" name="isbn" type="text">
+            <input type="submit" value="提交">
+        </form>
+    </div>
+</div>
+
+<div th:replace="store/footer::footer-fragment"></div>
+
+<!-- jQuery -->
+<script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+<script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
+<script th:src="@{/store/js/search.js}" type="text/javascript"></script>
+</body>
+</html>

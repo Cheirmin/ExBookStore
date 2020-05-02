@@ -1,6 +1,5 @@
 package com.cheirmin.controller.admin;
 
-import com.cheirmin.controller.vo.UserVO;
 import com.cheirmin.pojo.User;
 import com.cheirmin.pojo.UserAdmin;
 import com.cheirmin.service.UserService;

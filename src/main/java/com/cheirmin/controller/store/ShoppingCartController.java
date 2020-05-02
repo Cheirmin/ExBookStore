@@ -2,8 +2,8 @@ package com.cheirmin.controller.store;
 
 import com.cheirmin.common.Constants;
 import com.cheirmin.common.ServiceResultEnum;
-import com.cheirmin.controller.vo.ShoppingCartItemVO;
-import com.cheirmin.controller.vo.UserVO;
+import com.cheirmin.vo.ShoppingCartItemVO;
+import com.cheirmin.vo.UserVO;
 import com.cheirmin.pojo.ShoppingCartItem;
 import com.cheirmin.service.ShoppingCartService;
 import com.cheirmin.util.Result;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -33,7 +34,7 @@ public class ShoppingCartController {
     public String cartListPage(HttpServletRequest request,HttpSession session){
         UserVO userVO = (UserVO) session.getAttribute(Constants.USER_SESSION_KEY);
         int booksTotal = 0;
-        int priceTotal = 0;
+        BigDecimal priceTotal = new BigDecimal(0);
         List<ShoppingCartItemVO> myShoppingCartItems = shoppingCartService.getMyShoppingCartItems(userVO.getUserId());
         if (!CollectionUtils.isEmpty(myShoppingCartItems)){
             //订单项总数
@@ -43,9 +44,9 @@ public class ShoppingCartController {
             }
             //总价
             for (ShoppingCartItemVO shoppingCartItemVO : myShoppingCartItems){
-                priceTotal += shoppingCartItemVO.getBookCount() * shoppingCartItemVO.getSellingPrice();
+                priceTotal = priceTotal.add(shoppingCartItemVO.getSellingPrice().multiply(BigDecimal.valueOf(shoppingCartItemVO.getBookCount())));
             }
-            if (priceTotal < 1){
+            if (priceTotal.compareTo(BigDecimal.valueOf(1)) == -1){
                 return "error/500";
             }
             request.setAttribute("booksTotal",booksTotal);
@@ -99,7 +100,7 @@ public class ShoppingCartController {
 
     @GetMapping("/shop-cart/settle")
     public String settlePage(HttpServletRequest request,HttpSession session){
-        int priceTotal = 0;
+        BigDecimal priceTotal = new BigDecimal(0);
         UserVO userVO = (UserVO) session.getAttribute(Constants.USER_SESSION_KEY);
         List<ShoppingCartItemVO> myShoppingCartItems = shoppingCartService.getMyShoppingCartItems(userVO.getUserId());
         if (CollectionUtils.isEmpty(myShoppingCartItems)) {
@@ -108,9 +109,9 @@ public class ShoppingCartController {
         }else {
             //总价
             for (ShoppingCartItemVO shoppingCartItemVO : myShoppingCartItems){
-                priceTotal += shoppingCartItemVO.getBookCount() * shoppingCartItemVO.getSellingPrice();
+                priceTotal = priceTotal.add(shoppingCartItemVO.getSellingPrice().multiply(BigDecimal.valueOf(shoppingCartItemVO.getBookCount())));
             }
-            if (priceTotal < 1){
+            if (priceTotal.compareTo(BigDecimal.valueOf(1)) == -1){
                 return "error/500";
             }
         }

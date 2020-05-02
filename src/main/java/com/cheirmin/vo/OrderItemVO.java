@@ -1,6 +1,7 @@
-package com.cheirmin.controller.vo;
+package com.cheirmin.vo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @Message:订单详情页页面订单项VO
@@ -17,7 +18,7 @@ public class OrderItemVO implements Serializable {
 
     private String bookCoverImg;
 
-    private Integer sellingPrice;
+    private BigDecimal sellingPrice;
 
     public Long getBookId() {
         return bookId;
@@ -51,11 +52,11 @@ public class OrderItemVO implements Serializable {
         this.bookCoverImg = bookCoverImg;
     }
 
-    public Integer getSellingPrice() {
+    public BigDecimal getSellingPrice() {
         return sellingPrice;
     }
 
-    public void setSellingPrice(Integer sellingPrice) {
+    public void setSellingPrice(BigDecimal sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
 }

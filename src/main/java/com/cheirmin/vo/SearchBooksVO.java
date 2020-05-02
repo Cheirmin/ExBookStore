@@ -1,14 +1,14 @@
-package com.cheirmin.controller.vo;
+package com.cheirmin.vo;
 
 import java.io.Serializable;
 
 /**
- * @Message:首页配置商品VO
+ * @Message:搜索列表页商品VO
  * @Author：Cheirmin
- * @Date: 2019/12/13 19:14
+ * @Date: 2019/12/13 19:19
  * @Version 1.0
  */
-public class IndexConfigBooksVO implements Serializable {
+public class SearchBooksVO implements Serializable {
 
     private Long bookId;
 
@@ -16,51 +16,17 @@ public class IndexConfigBooksVO implements Serializable {
 
     private String bookIntro;
 
+    private String bookAuthor;
+
     private String bookCoverImg;
 
     private Integer sellingPrice;
 
-    private String tag;
-
-    private String bookAuthor;
-
     private String publishingHouse;
-
-    private Integer originalPrice;
 
     private Integer stockNum;
 
-    public String getBookAuthor() {
-        return bookAuthor;
-    }
-
-    public void setBookAuthor(String bookAuthor) {
-        this.bookAuthor = bookAuthor;
-    }
-
-    public String getPublishingHouse() {
-        return publishingHouse;
-    }
-
-    public void setPublishingHouse(String publishingHouse) {
-        this.publishingHouse = publishingHouse;
-    }
-
-    public Integer getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public void setOriginalPrice(Integer originalPrice) {
-        this.originalPrice = originalPrice;
-    }
-
-    public Integer getStockNum() {
-        return stockNum;
-    }
-
-    public void setStockNum(Integer stockNum) {
-        this.stockNum = stockNum;
-    }
+    private Integer originalPrice;
 
     public Long getBookId() {
         return bookId;
@@ -86,6 +52,14 @@ public class IndexConfigBooksVO implements Serializable {
         this.bookIntro = bookIntro;
     }
 
+    public String getBookAuthor() {
+        return bookAuthor;
+    }
+
+    public void setBookAuthor(String bookAuthor) {
+        this.bookAuthor = bookAuthor;
+    }
+
     public String getBookCoverImg() {
         return bookCoverImg;
     }
@@ -102,11 +76,27 @@ public class IndexConfigBooksVO implements Serializable {
         this.sellingPrice = sellingPrice;
     }
 
-    public String getTag() {
-        return tag;
+    public String getPublishingHouse() {
+        return publishingHouse;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setPublishingHouse(String publishingHouse) {
+        this.publishingHouse = publishingHouse;
+    }
+
+    public Integer getStockNum() {
+        return stockNum;
+    }
+
+    public void setStockNum(Integer stockNum) {
+        this.stockNum = stockNum;
+    }
+
+    public Integer getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(Integer originalPrice) {
+        this.originalPrice = originalPrice;
     }
 }

@@ -1,9 +1,7 @@
-package com.cheirmin.controller.vo;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+package com.cheirmin.vo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.math.BigDecimal;
 
 /**
  * @Message:书本详情页VO
@@ -15,7 +13,7 @@ public class BooksDetailVO implements Serializable {
 
     private Integer stockNum;
 
-    private String tag;
+    private String bookIsbn;
 
     private Long bookId;
 
@@ -23,11 +21,9 @@ public class BooksDetailVO implements Serializable {
 
     private String bookIntro;
 
-    private String publishingHouse;
+    private String bookAbstract;
 
     private String bookCoverImg;
-
-    private String bookAuthor;
 
     private Long bookCategoryId1;
 
@@ -37,9 +33,9 @@ public class BooksDetailVO implements Serializable {
 
     private String[] bookCarouselList;
 
-    private Integer sellingPrice;
+    private BigDecimal sellingPrice;
 
-    private Integer originalPrice;
+    private BigDecimal  originalPrice;
 
     private String bookDetailContent;
 
@@ -51,12 +47,12 @@ public class BooksDetailVO implements Serializable {
         this.stockNum = stockNum;
     }
 
-    public String getTag() {
-        return tag;
+    public String getBookIsbn() {
+        return bookIsbn;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setBookIsbn(String bookIsbn) {
+        this.bookIsbn = bookIsbn;
     }
 
     public Long getBookId() {
@@ -83,14 +79,6 @@ public class BooksDetailVO implements Serializable {
         this.bookIntro = bookIntro;
     }
 
-    public String getPublishingHouse() {
-        return publishingHouse;
-    }
-
-    public void setPublishingHouse(String publishingHouse) {
-        this.publishingHouse = publishingHouse;
-    }
-
     public String getBookCoverImg() {
         return bookCoverImg;
     }
@@ -99,12 +87,12 @@ public class BooksDetailVO implements Serializable {
         this.bookCoverImg = bookCoverImg;
     }
 
-    public String getBookAuthor() {
-        return bookAuthor;
+    public String getBookAbstract() {
+        return bookAbstract;
     }
 
-    public void setBookAuthor(String bookAuthor) {
-        this.bookAuthor = bookAuthor;
+    public void setBookAbstract(String bookAbstract) {
+        this.bookAbstract = bookAbstract;
     }
 
     public Long getBookCategoryId1() {
@@ -139,19 +127,19 @@ public class BooksDetailVO implements Serializable {
         this.bookCarouselList = bookCarouselList;
     }
 
-    public Integer getSellingPrice() {
+    public BigDecimal  getSellingPrice() {
         return sellingPrice;
     }
 
-    public void setSellingPrice(Integer sellingPrice) {
+    public void setSellingPrice(BigDecimal  sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
 
-    public Integer getOriginalPrice() {
+    public BigDecimal  getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(Integer originalPrice) {
+    public void setOriginalPrice(BigDecimal originalPrice) {
         this.originalPrice = originalPrice;
     }
 

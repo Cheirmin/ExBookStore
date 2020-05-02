@@ -2,7 +2,7 @@ package com.cheirmin.service.impl;
 
 import com.cheirmin.common.Constants;
 import com.cheirmin.common.ServiceResultEnum;
-import com.cheirmin.controller.vo.UserVO;
+import com.cheirmin.vo.UserVO;
 import com.cheirmin.dao.AddressMapper;
 import com.cheirmin.dao.ShoppingCartItemMapper;
 import com.cheirmin.dao.UserAdminMapper;

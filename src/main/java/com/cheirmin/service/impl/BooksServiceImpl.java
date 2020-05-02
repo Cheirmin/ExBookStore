@@ -1,6 +1,6 @@
 package com.cheirmin.service.impl;
 
-import com.cheirmin.controller.vo.SearchBooksVO;
+import com.cheirmin.vo.SearchBooksVO;
 import com.cheirmin.dao.BookMapper;
 import com.cheirmin.pojo.Book;
 import com.cheirmin.service.BooksService;
@@ -100,8 +100,7 @@ public class BooksServiceImpl implements BooksService {
         Example example=new Example(Book.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.orLike("bookName",keyword);
-        criteria.orLike("bookAuthor",keyword);
-        criteria.orLike("publishingHouse",keyword);
+        criteria.orLike("bookAbstract",keyword);
 
         example.and(criteria2);
         example.and(criteria);

@@ -1,6 +1,6 @@
 package com.cheirmin.service.impl;
 
-import com.cheirmin.controller.vo.IndexConfigBooksVO;
+import com.cheirmin.vo.IndexConfigBooksVO;
 import com.cheirmin.dao.BookMapper;
 import com.cheirmin.dao.IndexConfigMapper;
 import com.cheirmin.pojo.Book;

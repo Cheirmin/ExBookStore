@@ -2,6 +2,7 @@ package com.cheirmin.pojo;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Table(name = "tb_order_item")
@@ -17,7 +18,7 @@ public class OrderItem {
 
     private String bookCoverImg;
 
-    private Integer sellingPrice;
+    private BigDecimal sellingPrice;
 
     private Integer bookCount;
 
@@ -63,11 +64,11 @@ public class OrderItem {
         this.bookCoverImg = bookCoverImg == null ? null : bookCoverImg.trim();
     }
 
-    public Integer getSellingPrice() {
+    public BigDecimal getSellingPrice() {
         return sellingPrice;
     }
 
-    public void setSellingPrice(Integer sellingPrice) {
+    public void setSellingPrice(BigDecimal sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
 

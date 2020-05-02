@@ -1,7 +1,6 @@
 package com.cheirmin.service;
 
-import com.cheirmin.controller.vo.IndexConfigBooksVO;
-import com.cheirmin.pojo.IndexCarousel;
+import com.cheirmin.vo.IndexConfigBooksVO;
 import com.cheirmin.pojo.IndexConfig;
 import com.github.pagehelper.PageInfo;
 

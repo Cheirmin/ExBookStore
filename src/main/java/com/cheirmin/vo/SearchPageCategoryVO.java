@@ -1,4 +1,4 @@
-package com.cheirmin.controller.vo;
+package com.cheirmin.vo;
 
 import com.cheirmin.pojo.BooksCategory;
 

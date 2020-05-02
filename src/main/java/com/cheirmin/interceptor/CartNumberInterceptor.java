@@ -1,7 +1,7 @@
 package com.cheirmin.interceptor;
 
 import com.cheirmin.common.Constants;
-import com.cheirmin.controller.vo.UserVO;
+import com.cheirmin.vo.UserVO;
 import com.cheirmin.dao.ShoppingCartItemMapper;
 import com.cheirmin.pojo.ShoppingCartItem;
 import org.springframework.beans.factory.annotation.Autowired;

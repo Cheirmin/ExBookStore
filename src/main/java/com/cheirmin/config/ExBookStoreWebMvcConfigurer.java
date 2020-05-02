@@ -44,7 +44,7 @@ public class ExBookStoreWebMvcConfigurer implements WebMvcConfigurer {
                 .excludePathPatterns("/register")
                 .excludePathPatterns("/login")
                 .excludePathPatterns("/logout")
-                .addPathPatterns("/goods/detail/**")
+                .addPathPatterns("/book/detail/**")
                 .addPathPatterns("/shop-cart")
                 .addPathPatterns("/shop-cart/**")
                 .addPathPatterns("/saveOrder")

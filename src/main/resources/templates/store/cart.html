@@ -74,7 +74,7 @@
                 </ul>
             </div>
             <div class="order_div fr">
-                <div class="order_total fl">合计（不含运费）：<span th:text="${priceTotal}+'.00元'">1299.00元</span></div>
+                <div class="order_total fl">合计（不含运费）：<span th:text="${priceTotal}+'元'">1299.00元</span></div>
                 <div class="order_button fr">
                     <th:block th:if="${booksTotal == 0}">
                         <input class="order_button_c" type="button" name="tip"

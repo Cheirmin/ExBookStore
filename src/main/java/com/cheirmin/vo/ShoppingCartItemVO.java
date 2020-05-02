@@ -1,7 +1,7 @@
-package com.cheirmin.controller.vo;
+package com.cheirmin.vo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.math.BigDecimal;
 
 /**
  * @Message:购物车页面购物项VO
@@ -23,7 +23,7 @@ public class ShoppingCartItemVO implements Serializable {
 
     private Integer bookCount;
 
-    private Integer sellingPrice;
+    private BigDecimal sellingPrice;
 
     public Long getCartItemId() {
         return cartItemId;
@@ -73,11 +73,11 @@ public class ShoppingCartItemVO implements Serializable {
         this.bookCount = bookCount;
     }
 
-    public Integer getSellingPrice() {
+    public BigDecimal getSellingPrice() {
         return sellingPrice;
     }
 
-    public void setSellingPrice(Integer sellingPrice) {
+    public void setSellingPrice(BigDecimal sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
 

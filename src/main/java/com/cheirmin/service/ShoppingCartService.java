@@ -1,12 +1,9 @@
 package com.cheirmin.service;
 
-import com.cheirmin.controller.vo.ShoppingCartItemVO;
+import com.cheirmin.vo.ShoppingCartItemVO;
 import com.cheirmin.pojo.ShoppingCartItem;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**

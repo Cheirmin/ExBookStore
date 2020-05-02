@@ -1,6 +1,5 @@
 package com.cheirmin.service;
 
-import com.cheirmin.controller.vo.UserVO;
 import com.cheirmin.pojo.User;
 import com.cheirmin.util.PageQueryUtil;
 import com.cheirmin.util.PageResult;
