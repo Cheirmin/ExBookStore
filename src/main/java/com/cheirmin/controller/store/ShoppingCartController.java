@@ -62,6 +62,21 @@ public class ShoppingCartController {
     public Result saveShoppingCartItem(@RequestBody ShoppingCartItem shoppingCartItem,HttpSession session){
         UserVO userVO = (UserVO) session.getAttribute(Constants.USER_SESSION_KEY);
         shoppingCartItem.setUserId(userVO.getUserId());
+
+        //判断购物车中是否已经存在该书籍
+        List<ShoppingCartItemVO> myShoppingCartItems = shoppingCartService.getMyShoppingCartItems(userVO.getUserId());
+        for (ShoppingCartItemVO s :myShoppingCartItems){
+            if(s.getBookId().equals(shoppingCartItem.getBookId())){
+                //判断是否超过5本
+                if (s.getBookCount()>=5){
+                    return ResultGenerator.genFailResult("可够数量超过上限");
+                }else{
+                    //购物车内数量进行加一操作
+                    shoppingCartItem.setBookCount(s.getBookCount()+1);
+                }
+            }
+        }
+
         String saveResult = shoppingCartService.saveCartItem(shoppingCartItem);
         //添加成功
         if (ServiceResultEnum.SUCCESS.getResult().equals(saveResult)){
