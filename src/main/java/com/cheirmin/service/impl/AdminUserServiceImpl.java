@@ -5,6 +5,7 @@ import com.cheirmin.pojo.AdminUser;
 import com.cheirmin.service.AdminUserService;
 import com.cheirmin.util.CodecUtils;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 
@@ -43,6 +44,14 @@ public class AdminUserServiceImpl implements AdminUserService {
             }
         }
         return false;
+    }
+
+    @Override
+    public AdminUser findAdminByUsername(String username) {
+        Example example = new Example(AdminUser.class);
+        example.createCriteria().andEqualTo("loginUserName",username);
+
+        return adminUserMapper.selectOneByExample(example);
     }
 
 }
