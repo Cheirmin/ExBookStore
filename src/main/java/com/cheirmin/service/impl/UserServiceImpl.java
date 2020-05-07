@@ -181,7 +181,7 @@ public class UserServiceImpl implements UserService {
         ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
         shoppingCartItem.setUserId(user.getUserId());
         int count = shoppingCartItemMapper.selectCount(shoppingCartItem);
-        System.out.println("setdefulat--count1--"+count);
+//        System.out.println("setdefulat--count1--"+count);
         userVO.setShopCartItemCount(count);
 
         BeanUtil.copyProperties(userMapper.selectByPrimaryKey(user.getUserId()), userVO);

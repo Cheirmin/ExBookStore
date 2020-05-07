@@ -20,6 +20,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     @Resource
     private AdminUserMapper adminUserMapper;
 
+    @Override
     public AdminUser getUserDetailById(Integer loginUserId){
         return adminUserMapper.selectByPrimaryKey(loginUserId);
     }

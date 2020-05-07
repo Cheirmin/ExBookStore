@@ -3,6 +3,8 @@ package com.cheirmin.controller.store;
 import com.cheirmin.common.Constants;
 import com.cheirmin.common.ExBookStoreException;
 import com.cheirmin.common.ServiceResultEnum;
+import com.cheirmin.config.AliPayConfig;
+import com.cheirmin.service.impl.AliPayServiceImpl;
 import com.cheirmin.vo.OrderDetailVO;
 import com.cheirmin.vo.ShoppingCartItemVO;
 import com.cheirmin.vo.UserVO;
@@ -10,6 +12,7 @@ import com.cheirmin.pojo.Order;
 import com.cheirmin.service.OrderService;
 import com.cheirmin.service.ShoppingCartService;
 import com.cheirmin.util.PageQueryUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -19,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +39,13 @@ public class StoreOrderController {
 
     @Resource
     private OrderService orderService;
+
+    @Autowired
+    AliPayServiceImpl aliPayService;
+
+    @Autowired
+    AliPayConfig aliPayConfig;
+
     @Resource
     private ShoppingCartService shoppingCartService;
 
@@ -94,13 +106,21 @@ public class StoreOrderController {
     }
 
     @GetMapping("/payPage")
-    public String payOrder(HttpServletRequest request, @RequestParam("orderNo") String orderNo, HttpSession httpSession) {
-        UserVO user = (UserVO) httpSession.getAttribute(Constants.USER_SESSION_KEY);
+    public void payOrder(HttpServletResponse httpResponse, @RequestParam("orderNo") String orderNo, HttpSession httpSession) {
         Order order = orderService.getOrderByOrderNo(orderNo);
         //todo 判断订单userId
         //todo 判断订单状态
-        request.setAttribute("orderNo", orderNo);
-        request.setAttribute("totalPrice", order.getTotalPrice());
-        return "store/alipay";
+
+        String form = aliPayService.orderPay(orderNo,order.getTotalPrice());
+
+        httpResponse.setContentType("text/html;charset=" + aliPayConfig.CHARSET);
+        try{
+            // 直接将完整的表单html输出到页面
+            httpResponse.getWriter().write(form);
+            httpResponse.getWriter().flush();
+            httpResponse.getWriter().close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

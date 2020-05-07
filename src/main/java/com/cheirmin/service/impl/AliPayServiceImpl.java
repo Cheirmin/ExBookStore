@@ -10,6 +10,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Random;
 import java.util.UUID;
 
@@ -23,16 +24,11 @@ public class AliPayServiceImpl implements  InitializingBean {
     @Autowired
     AliPayConfig aliPayConfig;
 
-    public String genPayPic() {
+    public String PayPic() {
         return null;
     }
 
-    public void updateById(String id) {
-        System.out.println("修改订单 状态 ！");
-    }
-
-    public String genPage() {
-        Random r=new Random();
+    public String orderPay(String orderNo, BigDecimal totalPrice) {
         //实例化客户端,填入所需参数
         AlipayClient alipayClient = new DefaultAlipayClient(aliPayConfig.GATEWAY_URL
                 , aliPayConfig.APP_ID,aliPayConfig.APP_PRIVATE_KEY, aliPayConfig.FORMAT
@@ -44,13 +40,13 @@ public class AliPayServiceImpl implements  InitializingBean {
 
         //商户订单号，商户网站订单系统中唯一订单号，必填
         //生成随机Id
-        String out_trade_no = UUID.randomUUID().toString();
+        String out_trade_no = orderNo;
         //付款金额，必填
-        String total_amount =Integer.toString(239999);
+        String total_amount = String.valueOf(totalPrice);
         //订单名称，必填
-        String subject ="王国纪元三爹 金绝号 108张机票";
+        String subject ="旧生书店";
         //商品描述，可空
-        String body = "王国纪元三爹 金绝号 108张机票 随意飞 飞新区直接当老大";
+        String body = "书本购买";
         request.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\","
                 + "\"total_amount\":\""+ total_amount +"\","
                 + "\"subject\":\""+ subject +"\","
@@ -58,7 +54,8 @@ public class AliPayServiceImpl implements  InitializingBean {
                 + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
         String form = "";
         try {
-            form = alipayClient.pageExecute(request).getBody(); // 调用SDK生成表单
+            // 调用SDK生成表单
+            form = alipayClient.pageExecute(request).getBody();
         } catch (AlipayApiException e) {
             e.printStackTrace();
         }
@@ -89,6 +86,7 @@ public class AliPayServiceImpl implements  InitializingBean {
     }
 
 
+    @Override
     public void afterPropertiesSet() throws Exception {
 
     }

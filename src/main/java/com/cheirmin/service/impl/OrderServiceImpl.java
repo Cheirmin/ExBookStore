@@ -254,8 +254,19 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public String paySuccess(String orderNo, int payType) {
-        return null;
+    public String payResult(String orderNo,int status) {
+        Example example = new Example(Order.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("orderNo",orderNo);
+
+        Order order = new Order();
+        order.setOrderNo(orderNo);
+        order.setPayStatus((byte) status);
+        if (status == 1){
+            order.setOrderStatus((byte) 1);
+        }
+
+        return orderMapper.updateByExampleSelective(order, example)>0?"true":"false";
     }
 
     @Override

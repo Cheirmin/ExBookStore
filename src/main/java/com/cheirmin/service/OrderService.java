@@ -109,7 +109,18 @@ public interface OrderService {
      */
     String finishOrder(String orderNo, Long userId);
 
-    String paySuccess(String orderNo, int payType);
+    /**
+     * 订单支付
+     * @param orderNo
+     * @param status 成功 - 1 失败 - -1
+     * @return
+     */
+    String payResult(String orderNo,int status);
 
+    /**
+     * 获取订单列表
+     * @param id
+     * @return
+     */
     List<OrderItemVO> getOrderItems(Long id);
 }
