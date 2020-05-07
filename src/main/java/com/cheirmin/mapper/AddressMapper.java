@@ -16,6 +16,6 @@ import tk.mybatis.mapper.common.Mapper;
 
 public interface AddressMapper extends Mapper<Address> {
 
-    @Update("update  address set is_defulet=0")
+    @Update("update  tb_address set is_defulet=0")
     int updateDefaultTo0();
 }

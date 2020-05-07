@@ -18,7 +18,6 @@ import java.io.Serializable;
 @Table(name = "tb_address")
 public class Address implements Serializable {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @KeySql(useGeneratedKeys = true)

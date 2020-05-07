@@ -62,6 +62,7 @@ public class PersonalController {
 //        }
 
         String loginResult =userService.login(loginName, password, httpSession);
+
         //登录成功
         if (ServiceResultEnum.SUCCESS.getResult().equals(loginResult)) {
             return ResultGenerator.genSuccessResult();

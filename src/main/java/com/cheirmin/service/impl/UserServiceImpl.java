@@ -90,11 +90,6 @@ public class UserServiceImpl implements UserService {
                 if (user.getLockedFlag() == 1) {
                     return ServiceResultEnum.LOGIN_USER_LOCKED.getResult();
                 }
-                //昵称太长 影响页面展示
-                if (user.getNickName() != null && user.getNickName().length() > 15) {
-                    String tempNickName = user.getNickName().substring(0, 15) + "..";
-                    user.setNickName(tempNickName);
-                }
 
                 UserVO userVO = new UserVO();
                 BeanUtil.copyProperties(user, userVO);

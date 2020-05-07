@@ -32,10 +32,8 @@
             <div class="info_item ml40"><span>个性签名</span><span
                     th:text="${user.introduceSign}"  ></span>
             </div>
-            <div class="info_item ml40"><span>收货信息</span><span
-                    th:text="${user.address}"  ></span><span onclick="openAdressModal()" style="color:#1baeae;">收货管理</span> </span>
-
-
+            <div class="info_item ml40"><span>收货信息</span>
+                <span onclick="openAdressModal()" style="color:#1baeae;">地址管理</span>
             </div>
 
         </div>
@@ -69,8 +67,8 @@
                                        required="true"  th:value="${user.introduceSign}">
                             </div>
                             <div class="form-group">
-                                <label for="tel" class="control-label">手机号:</label>
-                                <input type="text" class="form-control" id="tel" name="tel"
+                                <label for="userPhone" class="control-label">手机号:</label>
+                                <input type="text" class="form-control" id="userPhone" name="userPhone"
                                        placeholder="请输入电话号码"
                                        required="true" th:value="${user.userPhone}">
                             </div>
@@ -137,19 +135,19 @@
                             <div class="form-group">
                                 <label for="nickName" class="control-label">原密码:</label>
                                 <input type="hidden" id="userId3" th:value="${user.userId}">
-                                <input type="password" class="form-control" id="password1" name="addressName"
+                                <input type="password" class="form-control" id="password1" name="password1"
                                        placeholder="请输入原密码"
                                        required="true">
                             </div>
                             <div class="form-group">
                                 <label for="password2" class="control-label">新密码:</label>
-                                <input type="password" class="form-control" id="password2" name="addressName"
+                                <input type="password" class="form-control" id="password2" name="password2"
                                        placeholder="请输入新密码"
                                        required="true">
                             </div>
                             <div class="form-group">
                                 <label for="password3" class="control-label">确定新密码:</label>
-                                <input type="password" class="form-control" id="password3" name="addressName"
+                                <input type="password" class="form-control" id="password3" name="password3"
                                        placeholder="请确定新密码"
                                        required="true">
                             </div>
@@ -348,8 +346,8 @@
 
     //绑定modal上的保存按钮
     $('#saveButton').click(function () {
-        var tel = $("#tel").val();
-        if (tel.trim().length < 10) {
+        var userPhone = $("#userPhone").val();
+        if (userPhone.trim().length < 10) {
             swal("请输入正确的收货信息", {
                 icon: "error",
             });
@@ -372,7 +370,7 @@
         var userId = $("#userId").val();
         var data = {
             "userId": userId,
-            "tel": tel,
+            "userPhone": userPhone,
             "introduceSign": introduceSign,
             "nickName": nickName
         };
