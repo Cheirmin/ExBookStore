@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * @Message:个人信息控制器
@@ -26,6 +27,8 @@ public class PersonalController {
 
     @Resource
     private UserService userService;
+
+    private Logger logger;
 
     @GetMapping("/logout")
     public String logout(HttpSession httpSession) {
@@ -90,19 +93,22 @@ public class PersonalController {
             return ResultGenerator.genFailResult(ServiceResultEnum.VERIFY_CODE_NOT_SEND.getResult());
         }
         String sessioncode = Integer.toString((Integer) verifyCode1);
-
+        logger.info("邮箱验证码已发送："+sessioncode);
         if (!verifyCode.equals(sessioncode)){
             //验证码不正确
             return ResultGenerator.genFailResult(ServiceResultEnum.VERIFY_CODE_NOT_TRUE.getResult());
         }
-
+        //注册邮箱为空
         if (StringUtils.isEmpty(registerEmail)) {
-            //注册邮箱为空
             return ResultGenerator.genFailResult(ServiceResultEnum.REGISTER_EMAIL_NULL.getResult());
         }
+        //注册密码为空
         if (StringUtils.isEmpty(password)) {
-            //注册密码为空
             return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_PASSWORD_NULL.getResult());
+        }
+        //两次密码不一致
+        if (!password.equals(password1)) {
+            return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_PASSWORD_NOT_SAME.getResult());
         }
 
         String registerResult = userService.register(registerEmail, password);
@@ -137,14 +143,12 @@ public class PersonalController {
 
     }
 
-
     @PostMapping("/personal/getaddresssbefore")
     @ResponseBody
     public Result getaddresssbefore(@RequestBody Map<String,String> map) {
         return   userService.getaddresssbefore(map);
 
     }
-
 
     @PostMapping("/personal/setdefulat")
     @ResponseBody
@@ -158,9 +162,7 @@ public class PersonalController {
     @ResponseBody
     public Result addAddreBefore(@RequestBody Map<String,String> map) {
         return   userService.addAddreBefore(map);
-
     }
-
 
     @PostMapping("/personal/updateAddressBefore")
     @ResponseBody

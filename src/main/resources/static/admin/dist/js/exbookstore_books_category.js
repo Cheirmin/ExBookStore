@@ -212,7 +212,6 @@ function deleteCagegory() {
     ;
 }
 
-
 function reset() {
     $("#categoryName").val('');
     $("#categoryRank").val(0);

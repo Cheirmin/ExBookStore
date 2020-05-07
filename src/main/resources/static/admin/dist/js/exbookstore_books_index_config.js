@@ -175,7 +175,6 @@ function deleteConfig () {
     ;
 }
 
-
 function reset() {
     $("#configName").val('');
     $("#redirectUrl").val('##');

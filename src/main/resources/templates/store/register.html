@@ -99,7 +99,7 @@
 
         $.ajax({
             type:"POST",
-            url:"http://localhost/email/verifyCode",
+            url:"/email/verifyCode",
             contentType: "application/json",
             data : JSON.stringify(myMap),
             success: function (data){

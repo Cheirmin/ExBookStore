@@ -42,11 +42,9 @@ public class EmailController {
 
         //存入session
         request.getSession().setAttribute("EmailVerifyCode".concat(to[0]),code);
-        System.out.println("6位随机码--" + code);
 
         try {
-//            发送邮件已关闭，打开即可用
-//            mailBizService.sendMail( subject, body, from, to);
+            mailBizService.sendMail( subject, body, from, to);
         } catch (Exception e) {
             e.printStackTrace();
             return "false";
