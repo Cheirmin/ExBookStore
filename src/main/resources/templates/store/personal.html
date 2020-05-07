@@ -19,13 +19,15 @@
             <div class="grzlbt ml40">我的资料 <a href="javascript:openUpdateModal();"
                                              style="color:#1baeae;margin-left: 600px;">更改个人信息</a>
             </div>
-            <div class="info_item ml40"><span>昵称</span><span
-                    th:text="${user.nickName}" ></span>
+            <div class="info_item ml40"><span>昵称</span>
+                <span th:text="${user.nickName}"></span>
             </div>
-            <div class="info_item ml40"><span>手机号</span><span
-                    th:text="${user.userPhone}"></span>
+            <div class="info_item ml40"><span>手机号</span>
+                <span th:text="${user.userPhone}"></span>
             </div>
-            <div class="info_item ml40"><span>密码</span><span>******</span><span onclick="openpassworfModal()" style="color:#1baeae;">更改密码</span>
+            <div class="info_item ml40"><span>密码</span>
+                <span>******</span>
+                <span onclick="openpassworfModal()" style="color:#1baeae;">更改密码</span>
             </div>
             <div class="info_item ml40"><span>个性签名</span><span
                     th:text="${user.introduceSign}"  ></span>
@@ -98,7 +100,6 @@
                              <input type="hidden" id="userId4" th:value="${user.userId}">
 
                             <div id="addressfor">
-
 
                             </div>
 

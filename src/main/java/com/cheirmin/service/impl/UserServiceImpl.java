@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
         User registerUser = new User();
         registerUser.setUserEmail(email);
         registerUser.setPassword(passwordCode);
-        registerUser.setNickName(email);
+        registerUser.setNickName("暂无");
 
         if (userMapper.insertSelective(registerUser) > 0) {
             return ServiceResultEnum.SUCCESS.getResult();
@@ -91,8 +91,8 @@ public class UserServiceImpl implements UserService {
                     return ServiceResultEnum.LOGIN_USER_LOCKED.getResult();
                 }
                 //昵称太长 影响页面展示
-                if (user.getNickName() != null && user.getNickName().length() > 7) {
-                    String tempNickName = user.getNickName().substring(0, 7) + "..";
+                if (user.getNickName() != null && user.getNickName().length() > 15) {
+                    String tempNickName = user.getNickName().substring(0, 15) + "..";
                     user.setNickName(tempNickName);
                 }
 
@@ -114,15 +114,15 @@ public class UserServiceImpl implements UserService {
     public Result updateUserInfo(User user, HttpSession httpSession) {
         if (userMapper.updateByPrimaryKeySelective(user)>0){
             UserVO userVO = new UserVO();
+
             //设置购物车中的数量
             ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
             shoppingCartItem.setUserId(user.getUserId());
-            int count = shoppingCartItemMapper.selectCount(shoppingCartItem);
-            System.out.println("updateUserInfo--count--"+count);
-            userVO.setShopCartItemCount(count);
+            userVO.setShopCartItemCount(shoppingCartItemMapper.selectCount(shoppingCartItem));
 
             BeanUtil.copyProperties(userMapper.selectByPrimaryKey(user.getUserId()), userVO);
-               httpSession.setAttribute(Constants.USER_SESSION_KEY, userVO);
+
+            httpSession.setAttribute(Constants.USER_SESSION_KEY, userVO);
             return new Result(200,"更新成功");
         }
         return new Result(100,"更新失败");
@@ -138,7 +138,6 @@ public class UserServiceImpl implements UserService {
         Long userId= Long.valueOf(map.get("userId"));
         String password1=map.get("password1");
         String password2=map.get("password2");
-//        System.out.println(userId+password1+password2);
          User user=userMapper.selectByPrimaryKey(userId);
         if (CodecUtils.passwordConfirm(user.getUserEmail()+password1,user.getPassword())){
             String newPassword=CodecUtils.passwordBcryptEncode(user.getUserEmail(),password2);

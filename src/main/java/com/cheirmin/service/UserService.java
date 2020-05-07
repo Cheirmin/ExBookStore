@@ -60,7 +60,6 @@ public interface UserService {
      */
     Boolean lockUsers(Integer[] ids, int lockStatus);
 
-
     Result updatepassword(Map<String, String> map);
 
     Result getaddresssbefore(Map<String, String> map);

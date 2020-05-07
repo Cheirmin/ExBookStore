@@ -21,7 +21,7 @@
             <form id="loginForm" onsubmit="return false;" action="##">
                 <div class="login_main center">
                     <div class="login-info">邮箱账号:&nbsp;
-                        <input class="login-info-input" type="text" name="loginName" id="loginName" placeholder="请输入你的手机号"/>
+                        <input class="login-info-input" type="text" name="loginName" id="loginName" placeholder="请输入你的邮箱号"/>
                     </div>
                     <div class="login-info">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:&nbsp;
                         <input class="login-info-input" id="password" type="password" name="password" placeholder="请输入你的密码"/>
@@ -53,7 +53,7 @@
         var password = $("#password").val();
         var verifyCode = $("#verifyCode").val();
         if (!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(loginName)) {
-            swal('请输入正确的登录名(即邮箱号)', {
+            swal('请输入正确的邮箱号', {
                 icon: "error",
             });
             return false;

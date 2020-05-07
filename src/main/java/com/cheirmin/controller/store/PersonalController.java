@@ -6,6 +6,7 @@ import com.cheirmin.pojo.User;
 import com.cheirmin.service.UserService;
 import com.cheirmin.util.Result;
 import com.cheirmin.util.ResultGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +28,6 @@ public class PersonalController {
 
     @Resource
     private UserService userService;
-
-    private Logger logger;
 
     @GetMapping("/logout")
     public String logout(HttpSession httpSession) {
@@ -93,7 +92,7 @@ public class PersonalController {
             return ResultGenerator.genFailResult(ServiceResultEnum.VERIFY_CODE_NOT_SEND.getResult());
         }
         String sessioncode = Integer.toString((Integer) verifyCode1);
-        logger.info("邮箱验证码已发送："+sessioncode);
+
         if (!verifyCode.equals(sessioncode)){
             //验证码不正确
             return ResultGenerator.genFailResult(ServiceResultEnum.VERIFY_CODE_NOT_TRUE.getResult());
