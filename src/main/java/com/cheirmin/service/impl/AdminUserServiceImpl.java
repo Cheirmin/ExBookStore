@@ -47,6 +47,21 @@ public class AdminUserServiceImpl implements AdminUserService {
     }
 
     @Override
+    public boolean updateAdmin(Integer loginUserId, String loginAdminUser, String loginAdminNickName) {
+        AdminUser adminUser = adminUserMapper.selectByPrimaryKey(loginUserId);
+
+        if (adminUser != null) {
+            adminUser.setLoginUserName(loginAdminUser);
+            adminUser.setNickName(loginAdminNickName);
+            if ( adminUserMapper.updateByPrimaryKeySelective(adminUser)> 0) {
+                //修改成功则返回true
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public AdminUser findAdminByUsername(String username) {
         Example example = new Example(AdminUser.class);
         example.createCriteria().andEqualTo("loginUserName",username);

@@ -26,6 +26,15 @@ public interface AdminUserService {
     boolean updatePassword(Integer loginUserId, String originalPassword, String newPassword);
 
     /**
+     * 修改个人信息
+     * @param loginUserId
+     * @param loginAdminUser
+     * @param loginAdminNickName
+     * @return
+     */
+    boolean updateAdmin(Integer loginUserId, String loginAdminUser, String loginAdminNickName);
+
+    /**
      * 管理员登陆
      * @param username
      * @return

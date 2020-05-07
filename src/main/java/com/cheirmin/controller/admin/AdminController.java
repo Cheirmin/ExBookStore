@@ -142,4 +142,29 @@ public class AdminController {
             return "修改失败";
         }
     }
+
+    /**
+     * 修改个人信息
+     * @param request
+     * @param loginAdminUser
+     * @param loginAdminNickName
+     * @return
+     */
+    @PostMapping("/profile/name")
+    @ResponseBody
+    public String nameUpdate(HttpServletRequest request, @RequestParam("loginAdminUser") String loginAdminUser,
+                                 @RequestParam("loginAdminNickName") String loginAdminNickName) {
+        if (StringUtils.isEmpty(loginAdminUser) || StringUtils.isEmpty(loginAdminNickName)) {
+            return "参数不能为空";
+        }
+
+        Integer loginUserId = (int) request.getSession().getAttribute("loginAdminId");
+
+        if (adminUserService.updateAdmin(loginUserId,loginAdminUser,loginAdminNickName)){
+            return ServiceResultEnum.SUCCESS.getResult();
+        } else {
+            return "修改失败";
+        }
+    }
+
 }
