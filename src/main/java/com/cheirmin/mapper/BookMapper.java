@@ -1,13 +1,11 @@
-package com.cheirmin.dao;
+package com.cheirmin.mapper;
 
 import com.cheirmin.pojo.Book;
 import com.cheirmin.pojo.StockNumDTO;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.additional.idlist.IdListMapper;
-import tk.mybatis.mapper.additional.idlist.IdListProvider;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;

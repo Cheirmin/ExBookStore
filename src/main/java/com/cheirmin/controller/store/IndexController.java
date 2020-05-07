@@ -49,12 +49,17 @@ public class IndexController {
         List<IndexConfigBooksVO> hotBookses = indexConfigService.getConfigBooksesForIndex(IndexConfigTypeEnum.INDEX_BOOKS_HOT.getType(), Constants.INDEX_GOODS_HOT_NUMBER);
         List<IndexConfigBooksVO> newBookses = indexConfigService.getConfigBooksesForIndex(IndexConfigTypeEnum.INDEX_BOOKS_NEW.getType(), Constants.INDEX_GOODS_NEW_NUMBER);
         List<IndexConfigBooksVO> recommendBookses = indexConfigService.getConfigBooksesForIndex(IndexConfigTypeEnum.INDEX_BOOKS_RECOMMOND.getType(), Constants.INDEX_GOODS_RECOMMOND_NUMBER);
-        
-        request.setAttribute("newBookses", newBookses);//新品
-        request.setAttribute("recommendBookses", recommendBookses);//推荐商品
-        request.setAttribute("hotBookses", hotBookses);//热销书籍
-        request.setAttribute("categories", categories);//分类数据
-        request.setAttribute("carousels",indexCarousels);//轮播图
+
+        //新品
+        request.setAttribute("newBookses", newBookses);
+        //推荐商品
+        request.setAttribute("recommendBookses", recommendBookses);
+        //热销书籍
+        request.setAttribute("hotBookses", hotBookses);
+        //分类数据
+        request.setAttribute("categories", categories);
+        //轮播图
+        request.setAttribute("carousels",indexCarousels);
         return "store/index";
     }
 

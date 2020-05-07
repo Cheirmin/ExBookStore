@@ -1,11 +1,8 @@
 package com.cheirmin.service.impl;
 
 import com.cheirmin.common.Constants;
-import com.cheirmin.dao.IndexCarouselMapper;
-import com.cheirmin.pojo.Book;
+import com.cheirmin.mapper.IndexCarouselMapper;
 import com.cheirmin.pojo.IndexCarousel;
-import com.cheirmin.pojo.IndexConfig;
-import com.cheirmin.pojo.User;
 import com.cheirmin.service.CarouselService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -20,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author 11479
+ */
 @Service
 public class CarouseServiceImpl implements CarouselService {
 
@@ -63,7 +63,8 @@ public class CarouseServiceImpl implements CarouselService {
             indexCarousel.setUpdateTime(new Date());
             if (indexCarousel.getUpdateUser()==null){
                 Object userId = request.getSession().getAttribute("loginUserId");
-                indexCarousel.setUpdateUser((Integer) userId);   //如果当前用户没有，默认为1，可从session去取值
+                //如果当前用户没有，默认为1，可从session去取值
+                indexCarousel.setUpdateUser((Integer) userId);
             }
             int i = indexCarouselMapper.updateByPrimaryKeySelective(indexCarousel);
             if (i>0){
@@ -94,8 +95,9 @@ public class CarouseServiceImpl implements CarouselService {
 
     @Override
     public boolean updateCarouselByids(List<Integer> ids,HttpServletRequest request) {
-        if(StringUtils.isEmpty(ids))
+        if(StringUtils.isEmpty(ids)){
             throw new RuntimeException("PARAMS ERROR");
+        }
         Example example=new Example(IndexCarousel.class);
         example.createCriteria().andIn("carouselId",ids);
         IndexCarousel indexCarousel=new IndexCarousel();
@@ -127,7 +129,10 @@ public class CarouseServiceImpl implements CarouselService {
         return false;
     }
 
-//    首页显示排序在前五的轮播图
+    /**
+     * 首页显示排序在前五的轮播图
+     * @return
+     */
     @Override
     public List<IndexCarousel> queryCarouselBySort() {
         Example example=new Example(IndexCarousel.class);

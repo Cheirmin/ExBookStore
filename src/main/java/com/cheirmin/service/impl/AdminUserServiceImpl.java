@@ -1,6 +1,6 @@
 package com.cheirmin.service.impl;
 
-import com.cheirmin.dao.AdminUserMapper;
+import com.cheirmin.mapper.AdminUserMapper;
 import com.cheirmin.pojo.AdminUser;
 import com.cheirmin.service.AdminUserService;
 import com.cheirmin.util.CodecUtils;

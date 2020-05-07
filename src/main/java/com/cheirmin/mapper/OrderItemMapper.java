@@ -1,7 +1,6 @@
-package com.cheirmin.dao;
+package com.cheirmin.mapper;
 
 import com.cheirmin.pojo.OrderItem;
-import com.cheirmin.pojo.StockNumDTO;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;

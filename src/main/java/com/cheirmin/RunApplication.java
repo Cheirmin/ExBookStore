@@ -11,8 +11,8 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @Version 1.0
  */
 
-@MapperScan("com.cheirmin.dao")
-@SpringBootApplication(scanBasePackages = {"com.cheirmin"})
+@MapperScan(basePackages = "com.cheirmin.mapper")
+@SpringBootApplication
 public class RunApplication {
     public static void main(String[] args) {
         SpringApplication.run(RunApplication.class,args);

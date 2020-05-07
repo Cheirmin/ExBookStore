@@ -1,4 +1,4 @@
-package com.cheirmin.dao;
+package com.cheirmin.mapper;
 
 import com.cheirmin.pojo.Address;
 import org.apache.ibatis.annotations.Update;
@@ -13,6 +13,7 @@ import tk.mybatis.mapper.common.Mapper;
  * @Function
  * @History
  */
+
 public interface AddressMapper extends Mapper<Address> {
 
     @Update("update  address set is_defulet=0")

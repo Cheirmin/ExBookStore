@@ -1,4 +1,4 @@
-package com.cheirmin.dao;
+package com.cheirmin.mapper;
 
 import com.cheirmin.pojo.BooksCategory;
 import tk.mybatis.mapper.common.Mapper;

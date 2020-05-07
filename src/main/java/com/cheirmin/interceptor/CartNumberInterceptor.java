@@ -2,7 +2,7 @@ package com.cheirmin.interceptor;
 
 import com.cheirmin.common.Constants;
 import com.cheirmin.vo.UserVO;
-import com.cheirmin.dao.ShoppingCartItemMapper;
+import com.cheirmin.mapper.ShoppingCartItemMapper;
 import com.cheirmin.pojo.ShoppingCartItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

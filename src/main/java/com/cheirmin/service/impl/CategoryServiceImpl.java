@@ -6,7 +6,7 @@ import com.cheirmin.vo.IndexCategoryVO;
 import com.cheirmin.vo.SearchPageCategoryVO;
 import com.cheirmin.vo.SecondLevelCategoryVO;
 import com.cheirmin.vo.ThirdLevelCategoryVO;
-import com.cheirmin.dao.BooksCategoryMapper;
+import com.cheirmin.mapper.BooksCategoryMapper;
 import com.cheirmin.pojo.BooksCategory;
 import com.cheirmin.service.CategoryService;
 import com.cheirmin.util.BeanUtil;

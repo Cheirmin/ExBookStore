@@ -1,7 +1,7 @@
 package com.cheirmin.service.impl;
 
 import com.cheirmin.vo.SearchBooksVO;
-import com.cheirmin.dao.BookMapper;
+import com.cheirmin.mapper.BookMapper;
 import com.cheirmin.pojo.Book;
 import com.cheirmin.service.BooksService;
 import com.cheirmin.util.BeanUtil;

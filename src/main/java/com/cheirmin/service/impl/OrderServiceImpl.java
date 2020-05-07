@@ -4,10 +4,10 @@ import com.cheirmin.common.ExBookStoreException;
 import com.cheirmin.common.OrderStatusEnum;
 import com.cheirmin.common.ServiceResultEnum;
 import com.cheirmin.vo.*;
-import com.cheirmin.dao.BookMapper;
-import com.cheirmin.dao.OrderItemMapper;
-import com.cheirmin.dao.OrderMapper;
-import com.cheirmin.dao.ShoppingCartItemMapper;
+import com.cheirmin.mapper.BookMapper;
+import com.cheirmin.mapper.OrderItemMapper;
+import com.cheirmin.mapper.OrderMapper;
+import com.cheirmin.mapper.ShoppingCartItemMapper;
 import com.cheirmin.pojo.*;
 import com.cheirmin.service.OrderService;
 import com.cheirmin.util.BeanUtil;
@@ -208,7 +208,7 @@ public class OrderServiceImpl implements OrderService {
         Example example = new Example(Order.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("userId",pageUtil.get("userId"));
-        
+
         RowBounds rowBounds = new RowBounds((pageUtil.getPage()-1)*pageUtil.getLimit(), pageUtil.getLimit());
         List<Order> orders = orderMapper.selectByExampleAndRowBounds(example,rowBounds);
 

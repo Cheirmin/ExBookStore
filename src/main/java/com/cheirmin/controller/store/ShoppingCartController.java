@@ -39,6 +39,7 @@ public class ShoppingCartController {
         if (!CollectionUtils.isEmpty(myShoppingCartItems)){
             //订单项总数
             booksTotal = myShoppingCartItems.stream().mapToInt(ShoppingCartItemVO::getBookCount).sum();
+
             if (booksTotal < 1){
                 return "error/500";
             }
@@ -49,10 +50,10 @@ public class ShoppingCartController {
             if (priceTotal.compareTo(BigDecimal.valueOf(1)) == -1){
                 return "error/500";
             }
-            request.setAttribute("booksTotal",booksTotal);
-            request.setAttribute("priceTotal",priceTotal);
-            request.setAttribute("myShoppingCartItems",myShoppingCartItems);
         }
+        request.setAttribute("booksTotal",booksTotal);
+        request.setAttribute("priceTotal",priceTotal);
+        request.setAttribute("myShoppingCartItems",myShoppingCartItems);
         return "store/cart";
     }
 
