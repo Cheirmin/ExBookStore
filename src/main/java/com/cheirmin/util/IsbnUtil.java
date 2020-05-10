@@ -16,14 +16,18 @@ public class IsbnUtil {
 
     public static Book getBookInfoByISBN(String isbn){
         String url = "https://book.feelyou.top/isbn/"+isbn;
+
         HttpUtil httpUtil = new HttpUtil();
         //获取响应体
         String body = httpUtil.GetHttp(url,1);
 
-//        System.out.println("body--"+body);
-
         //json字符串转对象
         Map<String,Object> data = JSON.parseObject(body,Map.class);
+
+        //查询出错
+        if (data.get("error")!=null){
+            return null;
+        }
 
         String title = (String) data.get("title");
         String cover_url =  (String) data.get("cover_url");

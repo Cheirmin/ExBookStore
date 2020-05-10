@@ -38,6 +38,12 @@ public class RetrieveController {
 
         Book bookInfoByISBN = IsbnUtil.getBookInfoByISBN(isbn);
 
+        //查询书籍为空
+        if (bookInfoByISBN == null){
+            request.setAttribute("booksMessage", "抱歉，您输入的ISBN没有匹配到相关书籍！");
+            return "store/retrieve/message";
+        }
+
         if (bookInfoByISBN.getBookIntro().length()>200){
             bookInfoByISBN.setBookIntro(bookInfoByISBN.getBookIntro().substring(0,264).concat("..."));
         }

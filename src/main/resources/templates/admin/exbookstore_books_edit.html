@@ -19,13 +19,14 @@
             <div class="container-fluid">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">商品信息编辑</h3>
+                        <h3 class="card-title">书本信息编辑</h3>
                     </div>
                     <div class="card-body">
                         <form id="goodsForm" onsubmit="return false;">
                             <div class="form-group" style="display:flex;">
                                 <label class="control-label">请选择分类1:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                <select class="form-control col-sm-3" id="levelOne"
+                                <select class="form-control col-sm-3"
+                                        id="levelOne"
                                         data-placeholder="请选择分类...">
                                     <th:block th:unless="${null == firstLevelCategories}">
                                         <th:block th:each="c : ${firstLevelCategories}">
@@ -63,7 +64,8 @@
                             </div>
                             <div class="form-group" style="display:flex;">
                                 <label class="control-label">请选择分类2:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                <select class="form-control col-sm-3" id="levelOne2"
+                                <select class="form-control col-sm-3"
+                                        id="levelOne2"
                                         data-placeholder="请选择分类...">
                                     <th:block th:unless="${null == firstLevelCategories}">
                                         <th:block th:each="c : ${firstLevelCategories}">
@@ -101,7 +103,8 @@
                             </div>
                             <div class="form-group" style="display:flex;">
                                 <label class="control-label">请选择分类3:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                <select class="form-control col-sm-3" id="levelOne3"
+                                <select class="form-control col-sm-3"
+                                        id="levelOne3"
                                         data-placeholder="请选择分类...">
                                     <th:block th:unless="${null == firstLevelCategories}">
                                         <th:block th:each="c : ${firstLevelCategories}">
@@ -140,32 +143,35 @@
                             <div class="form-group" style="display:flex;">
                                 <input type="hidden" id="goodsId" name="goodsId"
                                        th:value="${goods!=null and goods.goodsId!=null }?${goods.goodsId}: 0">
-                                <input type="text" class="form-control col-sm-6" id="goodsName" name="goodsName"
-                                       placeholder="*请输入商品名称(必填)"
+                                <input type="text" class="form-control col-sm-6" id="goodsName"
+                                       name="goodsName"
+                                       placeholder="*请输入书本名称名称(必填)"
                                        th:value="${goods!=null and goods.goodsName!=null }?${goods.goodsName}: ''"
                                        required="true">
                                 &nbsp;&nbsp;
-                                <input type="text" class="form-control col-sm-6" id="goodsIntro" name="goodsIntro"
-                                       placeholder="*请输入商品简介(100字以内)"
+                                <input type="text" class="form-control col-sm-6" id="goodsIntro"
+                                       name="goodsIntro"
+                                       placeholder="*请输入书本ISBN(必填)"
                                        th:value="${goods!=null and goods.goodsIntro!=null }?${goods.goodsIntro}: ''"
                                        required="true">
                             </div>
                             <div class="form-group" style="display:flex;">
-                                <input type="number" class="form-control col-sm-6" id="originalPrice"
+                                <input type="text" class="form-control col-sm-6" id="originalPrice"
                                        name="originalPrice"
-                                       placeholder="*请输入商品价格"
-                                       th:value="${goods!=null and goods.originalPrice!=null }?${goods.originalPrice}: 1"
+                                       placeholder="*请输入书本原价(必填)"
+                                       th:value="${goods!=null and goods.originalPrice!=null }?${goods.originalPrice}: ''"
                                        required="true">
                                 &nbsp;&nbsp;
-                                <input type="number" class="form-control col-sm-6" id="sellingPrice"
+                                <input type="text" class="form-control col-sm-6" id="sellingPrice"
                                        name="sellingPrice"
-                                       placeholder="*请输入商品售卖价"
-                                       th:value="${goods!=null and goods.sellingPrice!=null }?${goods.sellingPrice}: 1"
+                                       placeholder="请输入书本售价(必填)"
+                                       th:value="${goods!=null and goods.sellingPrice!=null }?${goods.sellingPrice}: ''"
                                        required="true">
                             </div>
                             <div class="form-group" style="display:flex;">
-                                <input type="number" class="form-control col-sm-6" id="stockNum" name="stockNum"
-                                       placeholder="*请输入商品库存数"
+                                <span>书本库存：</span>
+                                <input type="number" class="form-control col-sm-5" id="stockNum" name="stockNum"
+                                       placeholder="*请输入商品库存数(必填)"
                                        th:value="${goods!=null and goods.stockNum!=null }?${goods.stockNum}: 0"
                                        required="true">
                                 &nbsp;&nbsp;
