@@ -36,6 +36,12 @@ public class RetrieveController {
     @GetMapping("/retrieveBookDetail")
     public String bookDetail(HttpServletRequest request, @RequestParam("isbn")String isbn){
 
+        //查询书籍为空
+        if (isbn.trim()==null||isbn.trim().isEmpty()){
+            request.setAttribute("booksMessage", "抱歉，您输入的ISBN为空！");
+            return "store/retrieve/message";
+        }
+
         Book bookInfoByISBN = IsbnUtil.getBookInfoByISBN(isbn);
 
         //查询书籍为空
