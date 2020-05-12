@@ -25,19 +25,33 @@ public class AdminController {
     @Resource
     private AdminUserService adminUserService;
 
-    //跳转登陆页面
+    /**
+     * 跳转登陆页面
+     * @return
+     */
     @GetMapping({"/login"})
     public String login() {
         return "admin/login";
     }
 
-    //跳转主页
+    /**
+     * 跳转主页
+     * @param request
+     * @return
+     */
     @GetMapping({"", "/", "/index", "/index.html"})
     public String index(HttpServletRequest request) {
         return "admin/index";
     }
 
-    //完成一半的登陆
+    /**
+     * 登陆
+     * @param userName
+     * @param password
+     * @param verifyCode
+     * @param session
+     * @return
+     */
     @PostMapping(value = "/login")
     public String login(@RequestParam("userName") String userName,
                         @RequestParam("password") String password,

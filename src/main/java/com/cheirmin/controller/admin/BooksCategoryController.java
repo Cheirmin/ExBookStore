@@ -32,6 +32,14 @@ public class BooksCategoryController {
     @Resource
     private CategoryService categoryService;
 
+    /**
+     * 加载分类
+     * @param request
+     * @param categoryLevel
+     * @param parentId
+     * @param backParentId
+     * @return
+     */
     @GetMapping("/categories")
     public String categoriesPage(HttpServletRequest request, @RequestParam("categoryLevel") Byte categoryLevel, @RequestParam("parentId") Long parentId, @RequestParam("backParentId") Long backParentId) {
         if (categoryLevel == null || categoryLevel < 1 || categoryLevel > 3) {
@@ -59,7 +67,7 @@ public class BooksCategoryController {
     }
 
     /**
-     * 列表
+     * 选中的列表
      */
     @RequestMapping(value = "/categories/listForSelect", method = RequestMethod.GET)
     @ResponseBody

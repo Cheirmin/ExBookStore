@@ -27,13 +27,21 @@ public class CarouselController {
     @Resource
     CarouselService carouselService;
 
-//    当用户访问轮播图时，加载页面
+    /**
+     * 当用户访问轮播图时，加载页面
+     * @return
+     */
     @RequestMapping("loadcarousels")
     public String loadcarousels(){
         return "admin/exbookstore_carousel";
     }
 
-//    加载页面时，请求数据
+    /**
+     * 加载页面时，请求数据
+     * @param limit
+     * @param page
+     * @return
+     */
     @RequestMapping("carousels")
     @ResponseBody
     public String loadCarouselsinfo(Integer limit, Integer page){
@@ -50,11 +58,15 @@ public class CarouselController {
         return null;
     }
 
-//    用户点击增加时，增加轮播图配置---完成
+    /**
+     * 用户点击增加时，增加轮播图配置---完成
+     * @param indexCarousel
+     * @param request
+     * @return
+     */
     @RequestMapping("/carousels/save")
     @ResponseBody
     public Result addcarousels(@RequestBody IndexCarousel indexCarousel,HttpServletRequest request){
-        System.out.println(indexCarousel);
         boolean b = carouselService.addCarousel(indexCarousel,request);
         if (b){
             Result result=new Result(200,"success");
@@ -63,8 +75,11 @@ public class CarouselController {
         return null;
     }
 
-
-//    用户修改图片时，先根据当前的id，查询相关信息---完成
+    /**
+     * 用户修改图片时，先根据当前的id，查询相关信息---完成
+     * @param id
+     * @return
+     */
     @GetMapping("/carousels/info/{id}")
     @ResponseBody
     public ResponseEntity selectone(@PathVariable("id") Integer id){
@@ -75,8 +90,12 @@ public class CarouselController {
         return ResponseEntity.ok("failed");
     }
 
-
-//    用户点击修改后，保存----完成
+    /**
+     * 用户点击修改后，保存----完成
+     * @param indexCarousel
+     * @param request
+     * @return
+     */
     @RequestMapping("/carousels/update")
     @ResponseBody
     public Result renewcarousels(@RequestBody IndexCarousel indexCarousel,HttpServletRequest request){
@@ -100,7 +119,12 @@ public class CarouselController {
 //        return ResponseEntity.ok("failed");
 //    }
 
-//    用户点击删除，并批量修改字段is_deleted
+    /**
+     * 用户点击删除，并批量修改字段is_deleted
+     * @param ids
+     * @param request
+     * @return
+     */
     @RequestMapping("/carousels/delete")
     public ResponseEntity updatecarousels(@RequestBody List<Integer> ids, HttpServletRequest request){
         boolean b = carouselService.updateCarouselByids(ids,request);

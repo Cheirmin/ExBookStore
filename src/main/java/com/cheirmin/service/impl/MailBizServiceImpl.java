@@ -33,47 +33,49 @@ public class MailBizServiceImpl implements MailBizService {
     private JavaMailSender javaMailSender;
 
     /**
-     * 发送邮件
-     *
+     *发送邮件
      * @param subject 主题
      * @param body    内容
      * @param from    发件人
      * @param to      收件人[多个]
+     * @throws Exception
      */
+    @Override
     public void sendMail(String subject, String body, String from, String[] to) throws Exception {
         sendMail(subject, body, from, null, to);
     }
 
     /**
      * 发送邮件
-     *
      * @param subject 主题
      * @param body    内容
      * @param from    发件人
      * @param cc      抄送人[多个]
      * @param to      收件人[多个]
+     * @throws Exception
      */
+    @Override
     public void sendMail(String subject, String body, String from, String[] cc, String[] to) throws Exception {
         sendMail(subject, body, false, from, cc, to);
     }
 
     /**
      * 发送邮件
-     *
      * @param subject 主题
      * @param body    内容
      * @param html    是否为html格式
      * @param from    发件人
      * @param cc      抄送人[多个]
      * @param to      收件人[多个]
+     * @throws Exception
      */
+    @Override
     public void sendMail(String subject, String body, boolean html, String from, String[] cc, String[] to) throws Exception {
         sendMail(subject, body, html, from, cc, to, null);
     }
 
     /**
      * 发送邮件
-     *
      * @param subject        主题
      * @param body           内容
      * @param html           是否为html格式
@@ -81,7 +83,9 @@ public class MailBizServiceImpl implements MailBizService {
      * @param cc             抄送人[多个]
      * @param to             收件人[多个]
      * @param attachPathList 附件路径
+     * @throws Exception
      */
+    @Override
     public void sendMail(String subject, String body, boolean html, String from, String[] cc, String[] to, List<String> attachPathList) throws Exception {
         try {
             MimeMessage parentMimeMessage = javaMailSender.createMimeMessage();
