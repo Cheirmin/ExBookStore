@@ -3,12 +3,8 @@
 <head th:replace="store/header::head-fragment('旧生书店-商品详情','detail')">
 </head>
 <body>
-<header th:replace="store/header::header-fragment"></header>
 
 <div id="detail">
-    <!-- nav -->
-    <nav th:replace="store/header::nav-fragment"></nav>
-
     <div class="dc">
         <div class="content w">
             <div class="title fl">书籍详情</div>
@@ -50,17 +46,20 @@
 <script th:src="@{/store/js/search.js}" type="text/javascript"></script>
 <script type="text/javascript">
     /**
-     * 添加到购物车并跳转至购物车页面
+     * 添加到回收清单
      */
-    function saveAndGoCart(id) {
+    function saveBook(id) {
         var bookCount = 1;
+
+        var booksDetail =
+
         var data = {
             "bookId": id,
             "bookCount": bookCount
         };
         $.ajax({
             type: 'POST',
-            url: 'http://localhost/shop-cart',
+            url: '/retrieveBook/save',
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function (result) {

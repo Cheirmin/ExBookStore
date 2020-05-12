@@ -1,51 +1,65 @@
 package com.cheirmin.pojo;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import tk.mybatis.mapper.annotation.KeySql;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Table(name = "tb_retrieve_books")
 public class RetrieveBook {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @KeySql(useGeneratedKeys = true)
     private Long bookId;
 
+    @Column(name = "book_name")
     private String bookName;
 
-    private String isbn;
+    @Column(name = "book_isbn")
+    private String bookIsbn;
 
+    @Column(name = "book_intro")
     private String bookIntro;
 
-    private String bookAuthor;
+    @Column(name = "book_abstract")
+    private String bookAbstract;
 
-    private String publishingHouse;
-
+    @Column(name = "book_category_id1")
     private Long bookCategoryId1;
 
+    @Column(name = "book_category_id2")
     private Long bookCategoryId2;
 
+    @Column(name = "book_category_id3")
     private Long bookCategoryId3;
 
+    @Column(name = "book_cover_img")
     private String bookCoverImg;
 
+    @Column(name = "book_carousel")
     private String bookCarousel;
 
-    private Integer originalPrice;
+    @Column(name = "original_price")
+    private BigDecimal originalPrice;
 
-    private Integer sellingPrice;
+    @Column(name = "selling_price")
+    private BigDecimal  sellingPrice;
 
-    private Integer stockNum;
-
-    private String tag;
-
-    private Byte bookSellStatus;
-
+    @Column(name = "create_user")
     private Integer createUser;
 
+    @Column(name = "create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
+    @Column(name = "update_user")
     private Integer updateUser;
 
+    @Column(name = "book_detail_content")
     private String bookDetailContent;
+
 
     public Long getBookId() {
         return bookId;
@@ -60,15 +74,15 @@ public class RetrieveBook {
     }
 
     public void setBookName(String bookName) {
-        this.bookName = bookName == null ? null : bookName.trim();
+        this.bookName = bookName;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public String getBookIsbn() {
+        return bookIsbn;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setBookIsbn(String bookIsbn) {
+        this.bookIsbn = bookIsbn;
     }
 
     public String getBookIntro() {
@@ -76,23 +90,15 @@ public class RetrieveBook {
     }
 
     public void setBookIntro(String bookIntro) {
-        this.bookIntro = bookIntro == null ? null : bookIntro.trim();
+        this.bookIntro = bookIntro;
     }
 
-    public String getBookAuthor() {
-        return bookAuthor;
+    public String getBookAbstract() {
+        return bookAbstract;
     }
 
-    public void setBookAuthor(String bookAuthor) {
-        this.bookAuthor = bookAuthor == null ? null : bookAuthor.trim();
-    }
-
-    public String getPublishingHouse() {
-        return publishingHouse;
-    }
-
-    public void setPublishingHouse(String publishingHouse) {
-        this.publishingHouse = publishingHouse == null ? null : publishingHouse.trim();
+    public void setBookAbstract(String bookAbstract) {
+        this.bookAbstract = bookAbstract;
     }
 
     public Long getBookCategoryId1() {
@@ -124,7 +130,7 @@ public class RetrieveBook {
     }
 
     public void setBookCoverImg(String bookCoverImg) {
-        this.bookCoverImg = bookCoverImg == null ? null : bookCoverImg.trim();
+        this.bookCoverImg = bookCoverImg;
     }
 
     public String getBookCarousel() {
@@ -132,47 +138,23 @@ public class RetrieveBook {
     }
 
     public void setBookCarousel(String bookCarousel) {
-        this.bookCarousel = bookCarousel == null ? null : bookCarousel.trim();
+        this.bookCarousel = bookCarousel;
     }
 
-    public Integer getOriginalPrice() {
+    public BigDecimal getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(Integer originalPrice) {
+    public void setOriginalPrice(BigDecimal originalPrice) {
         this.originalPrice = originalPrice;
     }
 
-    public Integer getSellingPrice() {
+    public BigDecimal getSellingPrice() {
         return sellingPrice;
     }
 
-    public void setSellingPrice(Integer sellingPrice) {
+    public void setSellingPrice(BigDecimal sellingPrice) {
         this.sellingPrice = sellingPrice;
-    }
-
-    public Integer getStockNum() {
-        return stockNum;
-    }
-
-    public void setStockNum(Integer stockNum) {
-        this.stockNum = stockNum;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag == null ? null : tag.trim();
-    }
-
-    public Byte getBookSellStatus() {
-        return bookSellStatus;
-    }
-
-    public void setBookSellStatus(Byte bookSellStatus) {
-        this.bookSellStatus = bookSellStatus;
     }
 
     public Integer getCreateUser() {
@@ -204,6 +186,28 @@ public class RetrieveBook {
     }
 
     public void setBookDetailContent(String bookDetailContent) {
-        this.bookDetailContent = bookDetailContent == null ? null : bookDetailContent.trim();
+        this.bookDetailContent = bookDetailContent;
+    }
+
+    @Override
+    public String toString() {
+        return "RetrieveBook{" +
+                "bookId=" + bookId +
+                ", bookName='" + bookName + '\'' +
+                ", bookIsbn='" + bookIsbn + '\'' +
+                ", bookIntro='" + bookIntro + '\'' +
+                ", bookAbstract='" + bookAbstract + '\'' +
+                ", bookCategoryId1=" + bookCategoryId1 +
+                ", bookCategoryId2=" + bookCategoryId2 +
+                ", bookCategoryId3=" + bookCategoryId3 +
+                ", bookCoverImg='" + bookCoverImg + '\'' +
+                ", bookCarousel='" + bookCarousel + '\'' +
+                ", originalPrice=" + originalPrice +
+                ", sellingPrice=" + sellingPrice +
+                ", createUser=" + createUser +
+                ", createTime=" + createTime +
+                ", updateUser=" + updateUser +
+                ", bookDetailContent='" + bookDetailContent + '\'' +
+                '}';
     }
 }

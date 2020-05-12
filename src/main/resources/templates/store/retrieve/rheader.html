@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head-fragment(title,path)">
+    <meta charset="UTF-8">
+    <title>旧生书店-回收专区</title>
+    <link rel="stylesheet" th:href="@{store/css/iconfont.css}">
+    <link rel="stylesheet" th:href="@{store/css/common.css}">
+
+    <link rel="stylesheet" th:href="@{store/styles/cart.css}">
+</head>
+<body>
+
+<rheader id="rheader" th:fragment="rheader-fragment">
+<div id="cart">
+    <div class="banner_x center">
+        <a th:href="@{/index}">
+            <div class="logo fl">
+                <img src="store/image/login-logo.png"/>
+            </div>
+        </a>
+        <div class="wdgwc fl ml20">旧生书店--回收专区</div>
+        <div class="wxts fl ml20">温馨提示：产品是否回收成功，以最终下单为准哦，请尽快提交！</div>
+        <div  class="wdgwc fr ml20" style="font-size: 20px">
+            <a th:href="@{/retrieveBook/myCart}" >我的回收清单&nbsp;&nbsp;&nbsp;</a>
+            <a th:href="@{/retrieveBook/myOrder}" >我的回收订单</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="cart_line"></div>
+</div>
+</rheader>
+
+</body>
+<!-- jQuery -->
+<script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+<script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
+</html>

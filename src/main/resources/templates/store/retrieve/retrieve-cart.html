@@ -10,42 +10,36 @@
     <link rel="stylesheet" th:href="@{/admin/plugins/sweetalert/sweetalert.css}"/>
 </head>
 <body>
+<rheader th:replace="store/retrieve/rheader::rheader-fragment"></rheader>
 
-<div id="cart">
-    <div class="banner_x center">
-        <a th:href="@{/index}">
-            <div class="logo fl">
-                <img src="store/image/login-logo.png"/>
-            </div>
-        </a>
+<div class="cart_bg">
+    <th:block>
+        <div class="list center">
+            <div style="text-align: center">
+                <span>简单三步，即可卖书！</span><br>
+                <span>卖书第一步：输入ISBN，看您的图书价值多少</span><br>
+                <span>卖书第二步：提交订单，等快递免费上门取书</span><br>
+                <span>卖书第三步：等待审核，提现到账就是so easy</span>
 
-        <div class="wdgwc fl ml20">旧生书店--回收专区</div>
-        <div class="wxts fl ml20">温馨提示：产品是否回收成功，以最终下单为准哦，请尽快提交！</div>
-        <div class="clear"></div>
-    </div>
-    <div class="cart_line"></div>
-    <div class="cart_bg">
-        <th:block>
-            <div class="list center">
-                <div style="text-align: center">
-                    <a th:href="@{/retrieveBook/inputISBN}"><p>卖书第一步：输入ISBN，看您的图书价值多少</p></a><br>
-                    <a th:href="@{/retrieveBook/myCart}"><p>卖书第二步：提交订单，等快递免费上门取书</p></a><br>
-                    <a th:href="@{/retrieveBook/myOrder}"><p>卖书第三步：完成审核，提现到账就是so easy</p></a>
-                </div>
-                <div style="text-align: left;margin-left: 36%;color: red">
-                    <br><br><br><br>
-                    <p>点击回收即表示同意本书店回收书籍准则！！！</p><br>
-                    <p>旧生书店回收书籍准则：</p>
-                    <p>1、上传书籍与发快递书籍不对应，不予处理。</p>
-                    <p>2、书本毁坏验证的收货时不予处理。</p>
-                    <p>3、拒收到付快递。</p>
-                    <p>4、最终解释权归本店所有！</p>
-                    <br>
-                </div>
+                <form style="margin-top: 100px;" th:action="@{/retrieveBook/retrieveBookDetail}" method="get">
+                    请输入书本ISBN：<input id="isbn" name="isbn" type="text">
+                    <input type="submit" value="提交">
+                </form>
             </div>
-        </th:block>
-    </div>
+            <div style="text-align: left;margin-left: 36%;color: red">
+                <br><br><br><br>
+                <p>点击回收即表示同意本书店回收书籍准则！！！</p><br>
+                <p>旧生书店回收书籍准则：</p>
+                <p>1、上传书籍与发快递书籍不对应，不予处理。</p>
+                <p>2、书本毁坏验证的收货时不予处理。</p>
+                <p>3、拒收到付快递。</p>
+                <p>4、最终解释权归本店所有！</p>
+                <br>
+            </div>
+        </div>
+    </th:block>
 </div>
+
 <div th:replace="store/footer::footer-fragment"></div>
 
 </body>
