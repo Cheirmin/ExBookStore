@@ -51,7 +51,13 @@ public class RetrieveController {
         }
 
         //回收价
-        bookInfoByISBN.setSellingPrice(bookInfoByISBN.getOriginalPrice().divide(BigDecimal.valueOf(10)));
+        BigDecimal divide = bookInfoByISBN.getOriginalPrice().divide(BigDecimal.valueOf(10));
+        if (divide==null || divide.compareTo(BigDecimal.valueOf(0))==0){
+            request.setAttribute("booksMessage", "抱歉，该书暂未查询到加个，请试试其他书籍吧！！");
+            return "store/retrieve/message";
+        }
+        bookInfoByISBN.setSellingPrice(divide);
+
 
         //存入数据库开始
         RetrieveBook retrieveBook = new RetrieveBook();
@@ -66,7 +72,7 @@ public class RetrieveController {
         //存入数据库结束
 
         //简介太长
-        if (retrieveBook.getBookIntro().length()>200){
+        if (retrieveBook.getBookIntro()!=null && retrieveBook.getBookIntro().length()>200){
             retrieveBook.setBookIntro(retrieveBook.getBookIntro().substring(0,264).concat("..."));
         }
 
