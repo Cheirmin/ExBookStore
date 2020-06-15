@@ -2,6 +2,9 @@ package com.cheirmin.service;
 
 import com.cheirmin.pojo.Book;
 import com.cheirmin.pojo.RetrieveBook;
+import com.cheirmin.vo.ShoppingCartItemVO;
+
+import java.util.List;
 
 /**
  * @Copyright: Shanghai Definesys Company.All rights reserved.
@@ -17,4 +20,6 @@ public interface RetrieveBookService {
      * @return
      */
     Long addBook(RetrieveBook retrieveBook);
+
+    List<ShoppingCartItemVO> getMyCartItems(Long userId);
 }

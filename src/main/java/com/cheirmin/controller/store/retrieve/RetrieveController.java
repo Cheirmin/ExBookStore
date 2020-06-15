@@ -1,19 +1,25 @@
 package com.cheirmin.controller.store.retrieve;
 
+import com.cheirmin.common.Constants;
 import com.cheirmin.pojo.Book;
 import com.cheirmin.pojo.RetrieveBook;
 import com.cheirmin.service.RetrieveBookService;
 import com.cheirmin.util.BeanUtil;
 import com.cheirmin.util.IsbnUtil;
 import com.cheirmin.vo.BooksDetailVO;
+import com.cheirmin.vo.ShoppingCartItemVO;
+import com.cheirmin.vo.UserVO;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @Message:
@@ -58,7 +64,6 @@ public class RetrieveController {
         }
         bookInfoByISBN.setSellingPrice(divide);
 
-
         //存入数据库开始
         RetrieveBook retrieveBook = new RetrieveBook();
         BeanUtil.copyProperties(bookInfoByISBN, retrieveBook);
@@ -73,7 +78,7 @@ public class RetrieveController {
 
         //简介太长
         if (retrieveBook.getBookIntro()!=null && retrieveBook.getBookIntro().length()>200){
-            retrieveBook.setBookIntro(retrieveBook.getBookIntro().substring(0,264).concat("..."));
+            retrieveBook.setBookIntro(retrieveBook.getBookIntro().substring(0,200).concat("..."));
         }
 
         BooksDetailVO booksDetailVO = new BooksDetailVO();
@@ -82,5 +87,32 @@ public class RetrieveController {
         request.setAttribute("booksDetail", booksDetailVO);
 
         return "store/retrieve/detail";
+    }
+
+    @GetMapping("/myCart")
+    public String myCart(HttpServletRequest request, HttpSession session){
+        UserVO userVO = (UserVO) session.getAttribute(Constants.USER_SESSION_KEY);
+        int booksTotal = 0;
+        BigDecimal priceTotal = new BigDecimal(0);
+        List<ShoppingCartItemVO> myShoppingCartItems = retrieveBookService.getMyCartItems(userVO.getUserId());
+        if (!CollectionUtils.isEmpty(myShoppingCartItems)){
+            //订单项总数
+            booksTotal = myShoppingCartItems.stream().mapToInt(ShoppingCartItemVO::getBookCount).sum();
+
+            if (booksTotal < 1){
+                return "error/500";
+            }
+            //总价
+            for (ShoppingCartItemVO shoppingCartItemVO : myShoppingCartItems){
+                priceTotal = priceTotal.add(shoppingCartItemVO.getSellingPrice().multiply(BigDecimal.valueOf(shoppingCartItemVO.getBookCount())));
+            }
+            if (priceTotal.compareTo(BigDecimal.valueOf(1)) == -1){
+                return "error/500";
+            }
+        }
+        request.setAttribute("booksTotal",booksTotal);
+        request.setAttribute("priceTotal",priceTotal);
+        request.setAttribute("myShoppingCartItems",myShoppingCartItems);
+        return "store/retrieve/mycart";
     }
 }

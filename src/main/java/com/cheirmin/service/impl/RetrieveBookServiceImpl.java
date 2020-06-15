@@ -3,6 +3,7 @@ package com.cheirmin.service.impl;
 import com.cheirmin.mapper.RetrieveBookMapper;
 import com.cheirmin.pojo.RetrieveBook;
 import com.cheirmin.service.RetrieveBookService;
+import com.cheirmin.vo.ShoppingCartItemVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -41,5 +42,10 @@ public class RetrieveBookServiceImpl implements RetrieveBookService {
             }
         }
 
+    }
+
+    @Override
+    public List<ShoppingCartItemVO> getMyCartItems(Long userId) {
+        return null;
     }
 }

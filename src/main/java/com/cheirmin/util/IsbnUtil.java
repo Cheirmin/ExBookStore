@@ -23,6 +23,8 @@ public class IsbnUtil {
         //获取响应体
         String body = httpUtil.GetHttp(url,1);
 
+        System.out.println("body--"+body);
+
         if (body.length()<50){
             return null;
         }
